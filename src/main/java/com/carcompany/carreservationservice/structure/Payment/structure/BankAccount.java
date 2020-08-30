@@ -2,17 +2,17 @@ package com.carcompany.carreservationservice.structure.Payment.structure;
 
 
 /**
- * @author Sebastian
- * @version 1.0
+ * @author Sebastian, Kevin
+ * @version 1.1
  * @created 28-Aug-2020 17:10:54
  */
-public class SoulBankAccount extends Account {
+public class BankAccount extends Account {
 
-	public SoulBankAccount(){
+	public BankAccount(){
 
 	}
 
 	public void finalize() throws Throwable {
 
 	}
-}//end SoulBankAccount
+}//end BankAccount

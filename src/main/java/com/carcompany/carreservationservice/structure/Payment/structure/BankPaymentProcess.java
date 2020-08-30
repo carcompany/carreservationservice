@@ -2,13 +2,13 @@ package com.carcompany.carreservationservice.structure.Payment.structure;
 
 
 /**
- * @author Sebastian
- * @version 1.0
+ * @author Sebastian, Kevin
+ * @version 1.1
  * @created 28-Aug-2020 17:10:53
  */
-public class SacraficialPaymentProcess extends PaymentProcess {
+public class BankPaymentProcess extends PaymentProcess {
 
-	public SacraficialPaymentProcess(){
+	public BankPaymentProcess(){
 
 	}
 
@@ -18,4 +18,4 @@ public class SacraficialPaymentProcess extends PaymentProcess {
 	public void initiatePayment(){
 
 	}
-}//end SacraficialPaymentProcess
+}//end BankPaymentProcess
