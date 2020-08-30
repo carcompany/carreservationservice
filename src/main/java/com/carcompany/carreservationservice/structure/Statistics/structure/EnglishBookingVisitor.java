@@ -10,9 +10,9 @@ package com.carcompany.carreservationservice.structure.Statistics.structure;
  * @version 1.1
  * @created 28-Aug-2020 17:10:47
  */
-public class GermanBookingVisitor implements BookingVisitor {
+public class EnglishBookingVisitor implements BookingVisitor {
 
-	public GermanBookingVisitor(){
+	public EnglishBookingVisitor(){
 
 	}
 
@@ -50,4 +50,4 @@ public class GermanBookingVisitor implements BookingVisitor {
 	public void visit(BankExternalPaymentService externalPaymentService) {
 
 	}
-}//end GermanBookingVisitor
+}//end EnglishBookingVisitor
