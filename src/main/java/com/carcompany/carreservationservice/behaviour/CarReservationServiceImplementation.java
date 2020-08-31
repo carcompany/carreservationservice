@@ -43,7 +43,9 @@ public class CarReservationServiceImplementation implements CarReservationServic
 	 * 
 	 * @param names
 	 */
-	public void createPerson(String... names){
+	public Integer createPerson(String... names){
+		
+		return 0;
 
 	}
 
@@ -59,7 +61,9 @@ public class CarReservationServiceImplementation implements CarReservationServic
 	 * 
 	 * @param resourceEnumeration
 	 */
-	public void createResource(ResourceEnumeration... resourceEnumeration){
+	public Integer createResource(ResourceEnumeration... resourceEnumeration){
+		
+		return 0;
 
 	}
 
@@ -109,7 +113,8 @@ public class CarReservationServiceImplementation implements CarReservationServic
 	 * @param resourceId
 	 * @param language
 	 */
-	public void createBooking(int personId, int resourceId, Language language){
+	public Integer createBooking(int personId, int resourceId, Language language){
+		return 0;
 
 	}
 }//end CarReservationServiceImplementation
