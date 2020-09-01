@@ -1,53 +1,31 @@
 package com.carcompany.carreservationservice.structure.Content.structure;
 
+import java.util.HashMap;
 
 /**
- * @author Kevin
- * @version 1.0
+ * @author Kevin, Benjamin
+ * @version 1.1
  * @created 28-Aug-2020 17:10:46
  */
 public class Folder extends Content {
 
-	protected String name;
-	private Content[] contents;
-	public Content m_Content;
+	private HashMap<String, Content> contents = new HashMap<>();
 
-	public Folder(){
-
+	public HashMap<String, Content> getContents(){
+		return contents;
 	}
-
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
-	public String getName(){
-		return "";
-	}
-
-	/**
-	 * 
-	 * @param name
-	 */
-	public void setName(String name){
-
-	}
-
-	public Content[] getContents(){
-		return null;
-	}
-
 	/**
 	 * 
 	 * @param content
 	 */
 	public void addContent(Content content){
-
-	}
-
+		contents.put(content.getName(), content);
+		}
 	/**
 	 * 
 	 * @param content
 	 */
 	public void removeContent(Content content){
-
+		contents.remove(content.getName());
 	}
-}//end Folder
+}

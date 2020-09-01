@@ -1,29 +1,30 @@
 package com.carcompany.carreservationservice.structure.Content.behaviour;
 
-import com.carcompany.carreservationservice.structure.Content.structure.Content;
+import com.carcompany.carreservationservice.structure.Content.structure.File;
+import com.carcompany.carreservationservice.structure.Content.structure.Folder;
 
 /**
- * @author Kevin
- * @version 1.0
+ * @author Kevin, Benjamin
+ * @version 1.1
  * @created 28-Aug-2020 17:10:42
  */
 public class ContentServiceImplementation implements ContentService {
 
-	private Content content;
-	public Content m_Content;
+	private Folder folder;
 
-	public ContentServiceImplementation(){
-
-	}
-
-	public void finalize() throws Throwable {
-
+	public ContentServiceImplementation() {
+		folder = new Folder();
 	}
 	/**
 	 * 
 	 * @param object
 	 */
-	public void addContent(Object object){
+	public Boolean addContent(Object object) {
+		File file = new File();
+		file.setObject(object);
+		folder.addContent(file);
+		
+		return true;
 
 	}
-}//end ContentServiceImplementation
+}
