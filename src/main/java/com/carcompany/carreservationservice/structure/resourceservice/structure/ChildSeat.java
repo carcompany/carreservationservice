@@ -1,4 +1,4 @@
-package com.carcompany.carreservationservice.structure.Resource.structure;
+package com.carcompany.carreservationservice.structure.resourceservice.structure;
 
 /**
  * @author Kevin

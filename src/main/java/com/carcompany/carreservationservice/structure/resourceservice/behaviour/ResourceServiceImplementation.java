@@ -1,7 +1,7 @@
-package com.carcompany.carreservationservice.structure.Resource.behaviour;
+package com.carcompany.carreservationservice.structure.resourceservice.behaviour;
 
-import com.carcompany.carreservationservice.structure.Resource.structure.Resource;
-import com.carcompany.carreservationservice.structure.Resource.structure.ResourceEnumeration;
+import com.carcompany.carreservationservice.structure.resourceservice.structure.Resource;
+import com.carcompany.carreservationservice.structure.resourceservice.structure.ResourceEnumeration;
 
 /**
  * @author Kevin
