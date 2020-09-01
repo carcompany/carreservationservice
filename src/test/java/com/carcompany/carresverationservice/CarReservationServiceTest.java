@@ -17,9 +17,9 @@ public class CarReservationServiceTest {
 
 	public static CarReservationService carReservationService;
 
-	public static int testPersonId;
-	public static int testResourceId;
-	public static int testBookingId;
+	public static Person testPerson;
+	public static Resource testResource;
+	public static Booking testBooking;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -35,7 +35,7 @@ public class CarReservationServiceTest {
 	@Order(1)
 	public void canPersonBeCreated() {
 
-		assertDoesNotThrow(() -> testPersonId = carReservationService.createPerson("test", "name"));
+		assertDoesNotThrow(() -> testPerson = carReservationService.createPerson("test", "name"));
 
 	}
 
@@ -43,7 +43,7 @@ public class CarReservationServiceTest {
 	@Order(2)
 	public void canResourceBeCreated() {
 
-		assertDoesNotThrow(() -> testResourceId = carReservationService.createResource(ResourceEnumeration.CHILD_SEAT,
+		assertDoesNotThrow(() -> testResource = carReservationService.createResource(ResourceEnumeration.CHILD_SEAT,
 				ResourceEnumeration.SET_TOP_BOX));
 
 	}
@@ -52,7 +52,7 @@ public class CarReservationServiceTest {
 	@Order(3)
 	public void canBookingBeCreated() {
 
-		assertDoesNotThrow(() -> carReservationService.createBooking(testPersonId, testResourceId, Language.GERMAN));
+		assertDoesNotThrow(() -> carReservationService.createBooking(testPerson, testResource, Language.GERMAN));
 	}
 
 	@Test
@@ -64,7 +64,7 @@ public class CarReservationServiceTest {
 	@Test
 	@Order(5)
 	public void canResourceBeShown() {
-		assertDoesNotThrow(() -> carReservationService.showResource(testResourceId));
+		assertDoesNotThrow(() -> carReservationService.showResource(testResource));
 	}
 
 	@Test
@@ -76,25 +76,25 @@ public class CarReservationServiceTest {
 	@Test
 	@Order(7)
 	public void canPersonBeAuthenticated() {
-		assertDoesNotThrow(() -> carReservationService.authenticatePerson(testPersonId));
+		assertDoesNotThrow(() -> carReservationService.authenticatePerson(testPerson));
 	}
 
 	@Test
 	@Order(8)
 	public void canBookingBePaid() {
-		assertDoesNotThrow(() -> carReservationService.payBooking(testBookingId));
+		assertDoesNotThrow(() -> carReservationService.payBooking(testBooking));
 	}
 
 	@Test
 	@Order(9)
 	public void canPersonBeDeleted() {
-		assertDoesNotThrow(() -> carReservationService.deletePerson(testPersonId));
+		assertDoesNotThrow(() -> carReservationService.deletePerson(testPerson));
 	}
 
 	@Test
 	@Order(10)
 	public void canResourceBeDeleted() {
-		assertDoesNotThrow(() -> carReservationService.deleteResource(testResourceId));
+		assertDoesNotThrow(() -> carReservationService.deleteResource(testResource));
 	}
 
 }
