@@ -2,6 +2,8 @@ package com.carcompany.carreservationservice.structure.resourceservice.behaviour
 
 import com.carcompany.carreservationservice.structure.resourceservice.structure.Resource;
 import com.carcompany.carreservationservice.structure.resourceservice.structure.ResourceEnumeration;
+import com.carcompany.carreservationservice.structure.resourceservice.structure.exception.MoreThanOneDecoratableResourceException;
+import com.carcompany.carreservationservice.structure.resourceservice.structure.exception.NoDecoratableResourceException;
 
 /**
  * @author Kevin
@@ -14,6 +16,6 @@ public interface ResourceService {
 	 * 
 	 * @param resourceEnumeration
 	 */
-	public Resource getSelectedResource(ResourceEnumeration... resourceEnumeration);
+	public Resource getSelectedResource(ResourceEnumeration... resourceEnumeration) throws MoreThanOneDecoratableResourceException, NoDecoratableResourceException;
 
 }
