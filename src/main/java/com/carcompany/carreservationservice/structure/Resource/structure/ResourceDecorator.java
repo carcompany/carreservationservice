@@ -1,41 +1,19 @@
 package com.carcompany.carreservationservice.structure.Resource.structure;
 
-
 /**
  * @author Kevin
- * @version 1.0
+ * @version 1.1
  * @created 28-Aug-2020 17:10:52
  */
 public abstract class ResourceDecorator extends Resource {
 
-	protected double price;
-	protected Resource resource;
-	public Resource m_Resource;
+	private Resource resource;
 
-	public ResourceDecorator(){
-
+	public ResourceDecorator(Resource resource) {
+		this.resource = resource;
 	}
 
-	public void finalize() throws Throwable {
-		super.finalize();
+	public Resource getResource() {
+		return this.resource;
 	}
-	/**
-	 * 
-	 * @param resource
-	 */
-	public ResourceDecorator(Resource resource){
-
-	}
-
-	public double getPrice(){
-		return 0;
-	}
-
-	/**
-	 * 
-	 * @param price
-	 */
-	public void setPrice(double price){
-
-	}
-}//end ResourceDecorator
+}

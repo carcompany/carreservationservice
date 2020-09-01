@@ -1,6 +1,5 @@
 package com.carcompany.carreservationservice.structure.Resource.structure;
 
-
 /**
  * @author Kevin
  * @version 1.0
@@ -8,46 +7,21 @@ package com.carcompany.carreservationservice.structure.Resource.structure;
  */
 public class ChildSeat extends ResourceDecorator {
 
-	protected double price;
-	protected Resource resource;
 	private ChildSeatSize childSeatSize;
 
-	public ChildSeat(){
-
+	public ChildSeat(Resource resource) {
+		super(resource);
 	}
 
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
-	/**
-	 * 
-	 * @param resource
-	 */
-	public ChildSeat(Resource resource){
-
-	}
-
-	public double getPrice(){
-		return 0;
-	}
-
-	/**
-	 * 
-	 * @param price
-	 */
-	public void setPrice(double price){
-
-	}
-
-	public ChildSeatSize getChildSeatSize(){
-		return null;
+	public ChildSeatSize getChildSeatSize() {
+		return this.childSeatSize;
 	}
 
 	/**
 	 * 
 	 * @param childSeatSize
 	 */
-	public void setChildSeatSize(ChildSeatSize childSeatSize){
-
+	public void setChildSeatSize(ChildSeatSize childSeatSize) {
+		this.childSeatSize = childSeatSize;
 	}
-}//end ChildSeat
+}

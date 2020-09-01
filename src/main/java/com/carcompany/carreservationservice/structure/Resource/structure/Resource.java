@@ -1,6 +1,5 @@
 package com.carcompany.carreservationservice.structure.Resource.structure;
 
-
 /**
  * @author Kevin
  * @version 1.0
@@ -8,24 +7,17 @@ package com.carcompany.carreservationservice.structure.Resource.structure;
  */
 public abstract class Resource {
 
-	protected double price;
+	private double price;
 
-	public Resource(){
-
-	}
-
-	public void finalize() throws Throwable {
-
-	}
 	/**
 	 * 
 	 * @param price
 	 */
-	public void setPrice(double price){
-
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
-	public double getPrice(){
-		return 0;
+	public double getPrice() {
+		return this.price;
 	}
-}//end Resource
+}
