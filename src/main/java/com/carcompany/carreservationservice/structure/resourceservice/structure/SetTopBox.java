@@ -24,4 +24,4 @@ public class SetTopBox extends ResourceDecorator {
 	public void setVolume(double volume) {
 		this.volume = volume;
 	}
-}// end SetTopBox
+}
