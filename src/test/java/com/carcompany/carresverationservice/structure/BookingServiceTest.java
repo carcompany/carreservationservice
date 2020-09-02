@@ -11,7 +11,7 @@ import com.carcompany.carreservationservice.structure.bookingservice.behaviour.B
 import com.carcompany.carreservationservice.structure.bookingservice.behaviour.BookingServiceImplementation;
 import com.carcompany.carreservationservice.structure.bookingservice.structure.Booking;
 import com.carcompany.carreservationservice.structure.bookingservice.structure.Language;
-import com.carcompany.carreservationservice.structure.Person.structure.Person;
+import com.carcompany.carreservationservice.structure.personservice.structure.Person;
 import com.carcompany.carreservationservice.structure.resourceservice.structure.Car;
 import com.carcompany.carreservationservice.structure.resourceservice.structure.Resource;
 

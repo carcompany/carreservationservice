@@ -2,8 +2,8 @@ package com.carcompany.carreservationservice.behaviour;
 
 import com.carcompany.carreservationservice.structure.bookingservice.structure.Booking;
 import com.carcompany.carreservationservice.structure.bookingservice.structure.Language;
-import com.carcompany.carreservationservice.structure.Person.structure.Person;
-import com.carcompany.carreservationservice.structure.Person.structure.exception.PersonCreationFailedException;
+import com.carcompany.carreservationservice.structure.personservice.structure.Person;
+import com.carcompany.carreservationservice.structure.personservice.structure.exception.PersonCreationFailedException;
 import com.carcompany.carreservationservice.structure.resourceservice.structure.Resource;
 import com.carcompany.carreservationservice.structure.resourceservice.structure.ResourceEnumeration;
 
