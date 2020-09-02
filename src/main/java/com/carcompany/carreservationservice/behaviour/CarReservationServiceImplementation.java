@@ -1,13 +1,16 @@
 package com.carcompany.carreservationservice.behaviour;
 
-import com.carcompany.carreservationservice.structure.Payment.behaviour.PaymentService;
-import com.carcompany.carreservationservice.structure.Content.behaviour.ContentService;
-import com.carcompany.carreservationservice.structure.Resource.behaviour.ResourceService;
-import com.carcompany.carreservationservice.structure.Resource.structure.ResourceEnumeration;
-import com.carcompany.carreservationservice.structure.Person.behaviour.PersonService;
-import com.carcompany.carreservationservice.structure.Booking.behaviour.BookingService;
-import com.carcompany.carreservationservice.structure.Booking.structure.Language;
 import com.carcompany.carreservationservice.structure.Authentication.behaviour.AuthenticationService;
+import com.carcompany.carreservationservice.structure.bookingservice.behaviour.BookingService;
+import com.carcompany.carreservationservice.structure.bookingservice.structure.Booking;
+import com.carcompany.carreservationservice.structure.bookingservice.structure.Language;
+import com.carcompany.carreservationservice.structure.Content.behaviour.ContentService;
+import com.carcompany.carreservationservice.structure.Payment.behaviour.PaymentService;
+import com.carcompany.carreservationservice.structure.Person.behaviour.PersonService;
+import com.carcompany.carreservationservice.structure.Person.structure.Person;
+import com.carcompany.carreservationservice.structure.Resource.behaviour.ResourceService;
+import com.carcompany.carreservationservice.structure.Resource.structure.Resource;
+import com.carcompany.carreservationservice.structure.Resource.structure.ResourceEnumeration;
 import com.carcompany.carreservationservice.structure.Statistics.behaviour.StatisticsService;
 
 /**
@@ -24,27 +27,17 @@ public class CarReservationServiceImplementation implements CarReservationServic
 	private BookingService bookingService;
 	private AuthenticationService authenticationService;
 	private StatisticsService statisticsService;
-	public StatisticsService m_StatisticsService;
-	public AuthenticationService m_AuthenticationService;
-	public BookingService m_BookingService;
-	public PersonService m_PersonService;
-	public ResourceService m_ResourceService;
-	public ContentService m_ContentService;
-	public PaymentService m_PaymentService;
 
 	public CarReservationServiceImplementation(){
 
 	}
 
-	public void finalize() throws Throwable {
-
-	}
 	/**
 	 * 
 	 * @param names
 	 */
-	public void createPerson(String... names){
-
+	public Person createPerson(String... names) {
+		return null;
 	}
 
 	/**
@@ -59,8 +52,8 @@ public class CarReservationServiceImplementation implements CarReservationServic
 	 * 
 	 * @param resourceEnumeration
 	 */
-	public void createResource(ResourceEnumeration... resourceEnumeration){
-
+	public Resource createResource(ResourceEnumeration... resourceEnumeration){
+		return null;
 	}
 
 	/**
@@ -109,7 +102,7 @@ public class CarReservationServiceImplementation implements CarReservationServic
 	 * @param resourceId
 	 * @param language
 	 */
-	public void createBooking(int personId, int resourceId, Language language){
-
+	public Booking createBooking(int personId, int resourceId, Language language){
+		return null;
 	}
 }//end CarReservationServiceImplementation

@@ -1,4 +1,4 @@
-package com.carcompany.carreservationservice.structure.Booking.structure;
+package com.carcompany.carreservationservice.structure.bookingservice.structure;
 
 
 /**

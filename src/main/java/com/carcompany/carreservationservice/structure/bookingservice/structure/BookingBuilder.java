@@ -1,4 +1,4 @@
-package com.carcompany.carreservationservice.structure.Booking.structure;
+package com.carcompany.carreservationservice.structure.bookingservice.structure;
 
 import com.carcompany.carreservationservice.structure.Person.structure.Person;
 import com.carcompany.carreservationservice.structure.Resource.structure.Resource;
@@ -23,5 +23,7 @@ public interface BookingBuilder {
 	public void setBody(Resource ressource);
 
 	public void setFooter();
+
+	public Booking getBooking();
 
 }
