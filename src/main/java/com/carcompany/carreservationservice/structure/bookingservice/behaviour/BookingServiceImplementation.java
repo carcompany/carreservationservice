@@ -1,10 +1,10 @@
-package com.carcompany.carreservationservice.structure.Booking.behaviour;
+package com.carcompany.carreservationservice.structure.bookingservice.behaviour;
 
-import com.carcompany.carreservationservice.structure.Booking.structure.Booking;
-import com.carcompany.carreservationservice.structure.Booking.structure.BookingDirector;
-import com.carcompany.carreservationservice.structure.Booking.structure.EnglishBookingBuilder;
-import com.carcompany.carreservationservice.structure.Booking.structure.GermanBookingBuilder;
-import com.carcompany.carreservationservice.structure.Booking.structure.Language;
+import com.carcompany.carreservationservice.structure.bookingservice.structure.Booking;
+import com.carcompany.carreservationservice.structure.bookingservice.structure.BookingDirector;
+import com.carcompany.carreservationservice.structure.bookingservice.structure.EnglishBookingBuilder;
+import com.carcompany.carreservationservice.structure.bookingservice.structure.GermanBookingBuilder;
+import com.carcompany.carreservationservice.structure.bookingservice.structure.Language;
 import com.carcompany.carreservationservice.structure.Person.structure.Person;
 import com.carcompany.carreservationservice.structure.Resource.structure.Resource;
 
@@ -37,19 +37,19 @@ public class BookingServiceImplementation implements BookingService {
 			bookingDirector = new BookingDirector();
 
 			switch (language) {
-			case ENGLISH:
-				bookingDirector.setBookingBuilder(new EnglishBookingBuilder());
-				break;
-			case GERMAN:
-				bookingDirector.setBookingBuilder(new GermanBookingBuilder());
-				break;
+				case ENGLISH:
+					bookingDirector.setBookingBuilder(new EnglishBookingBuilder());
+					break;
+				case GERMAN:
+					bookingDirector.setBookingBuilder(new GermanBookingBuilder());
+					break;
 
-			default:
-				throw new IllegalArgumentException("Unsupported Language: " + language);
+				default:
+					throw new IllegalArgumentException("Unsupported Language: " + language);
 			}
 
 			return bookingDirector.build(person, resource);
-			
+
 		} else {
 			if (person == null) {
 				throw new IllegalArgumentException("Person is null");
@@ -58,4 +58,4 @@ public class BookingServiceImplementation implements BookingService {
 			}
 		}
 	}
-}// end BookingServiceImplementation
+}

@@ -1,4 +1,4 @@
-package com.carcompany.carreservationservice.structure.Booking.structure;
+package com.carcompany.carreservationservice.structure.bookingservice.structure;
 
 import com.carcompany.carreservationservice.structure.Resource.structure.Resource;
 
@@ -11,14 +11,11 @@ public class Body {
 
 	private Resource resource;
 
-	public Body(){
-
-	}
-
-
-	public void setResource(Resource resource) {
-		
+	public void setResource(Resource resource) {	
 		this.resource = resource;
-		
 	}
-}//end Body
+
+	public Resource getResource() {
+		return resource;
+	}
+}
