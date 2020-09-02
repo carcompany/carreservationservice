@@ -6,7 +6,7 @@ import com.carcompany.carreservationservice.structure.bookingservice.structure.E
 import com.carcompany.carreservationservice.structure.bookingservice.structure.GermanBookingBuilder;
 import com.carcompany.carreservationservice.structure.bookingservice.structure.Language;
 import com.carcompany.carreservationservice.structure.Person.structure.Person;
-import com.carcompany.carreservationservice.structure.Resource.structure.Resource;
+import com.carcompany.carreservationservice.structure.resourceservice.structure.Resource;
 
 /**
  * @author Kevin
@@ -16,14 +16,6 @@ import com.carcompany.carreservationservice.structure.Resource.structure.Resourc
 public class BookingServiceImplementation implements BookingService {
 
 	public BookingDirector bookingDirector;
-
-	public BookingServiceImplementation() {
-
-	}
-
-	public void finalize() throws Throwable {
-
-	}
 
 	/**
 	 * 

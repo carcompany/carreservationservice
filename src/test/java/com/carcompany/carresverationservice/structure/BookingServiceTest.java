@@ -12,8 +12,8 @@ import com.carcompany.carreservationservice.structure.bookingservice.behaviour.B
 import com.carcompany.carreservationservice.structure.bookingservice.structure.Booking;
 import com.carcompany.carreservationservice.structure.bookingservice.structure.Language;
 import com.carcompany.carreservationservice.structure.Person.structure.Person;
-import com.carcompany.carreservationservice.structure.Resource.structure.Car;
-import com.carcompany.carreservationservice.structure.Resource.structure.Resource;
+import com.carcompany.carreservationservice.structure.resourceservice.structure.Car;
+import com.carcompany.carreservationservice.structure.resourceservice.structure.Resource;
 
 class BookingServiceTest {
 

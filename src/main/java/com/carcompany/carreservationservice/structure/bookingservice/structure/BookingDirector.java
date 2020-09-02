@@ -1,6 +1,6 @@
 package com.carcompany.carreservationservice.structure.bookingservice.structure;
 
-import com.carcompany.carreservationservice.structure.Resource.structure.Resource;
+import com.carcompany.carreservationservice.structure.resourceservice.structure.Resource;
 import com.carcompany.carreservationservice.structure.Person.structure.Person;
 
 /**

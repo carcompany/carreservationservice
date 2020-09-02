@@ -4,9 +4,8 @@ import com.carcompany.carreservationservice.structure.bookingservice.structure.B
 import com.carcompany.carreservationservice.structure.bookingservice.structure.Language;
 import com.carcompany.carreservationservice.structure.Person.structure.Person;
 import com.carcompany.carreservationservice.structure.Person.structure.exception.PersonCreationFailedException;
-import com.carcompany.carreservationservice.structure.Resource.structure.Resource;
-import com.carcompany.carreservationservice.structure.Resource.structure.ResourceEnumeration;
-import com.carcompany.carreservationservice.structure.Resource.structure.exception.ResourceCreationFailedException;
+import com.carcompany.carreservationservice.structure.resourceservice.structure.Resource;
+import com.carcompany.carreservationservice.structure.resourceservice.structure.ResourceEnumeration;
 
 /**
  * @author Kevin
@@ -31,19 +30,7 @@ public interface CarReservationService {
 	 * 
 	 * @param resourceEnumeration
 	 */
-	public Resource createResource(ResourceEnumeration... resourceEnumeration) throws ResourceCreationFailedException;
-
-	/**
-	 * 
-	 * @param resourceId
-	 */
-	public void showResource(int resourceId);
-
-	/**
-	 * 
-	 * @param resourceId
-	 */
-	public void deleteResource(int resourceId);
+	public Resource createResource(ResourceEnumeration... resourceEnumeration);
 
 	/**
 	 * 
@@ -63,10 +50,10 @@ public interface CarReservationService {
 
 	/**
 	 * 
-	 * @param personId
-	 * @param resourceId
+	 * @param testPerson
+	 * @param testResource
 	 * @param language
 	 */
-	public Booking createBooking(int personId, int resourceId, Language language);
+	public Booking createBooking(Person testPerson, com.carcompany.carreservationservice.structure.resourceservice.structure.Resource testResource, Language language);
 
 }

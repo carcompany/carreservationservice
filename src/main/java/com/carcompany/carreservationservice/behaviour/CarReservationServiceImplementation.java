@@ -8,9 +8,9 @@ import com.carcompany.carreservationservice.structure.Content.behaviour.ContentS
 import com.carcompany.carreservationservice.structure.Payment.behaviour.PaymentService;
 import com.carcompany.carreservationservice.structure.Person.behaviour.PersonService;
 import com.carcompany.carreservationservice.structure.Person.structure.Person;
-import com.carcompany.carreservationservice.structure.Resource.behaviour.ResourceService;
-import com.carcompany.carreservationservice.structure.Resource.structure.Resource;
-import com.carcompany.carreservationservice.structure.Resource.structure.ResourceEnumeration;
+import com.carcompany.carreservationservice.structure.resourceservice.behaviour.ResourceService;
+import com.carcompany.carreservationservice.structure.resourceservice.structure.Resource;
+import com.carcompany.carreservationservice.structure.resourceservice.structure.ResourceEnumeration;
 import com.carcompany.carreservationservice.structure.Statistics.behaviour.StatisticsService;
 
 /**
@@ -28,7 +28,7 @@ public class CarReservationServiceImplementation implements CarReservationServic
 	private AuthenticationService authenticationService;
 	private StatisticsService statisticsService;
 
-	public CarReservationServiceImplementation(){
+	public CarReservationServiceImplementation() {
 
 	}
 
@@ -44,7 +44,7 @@ public class CarReservationServiceImplementation implements CarReservationServic
 	 * 
 	 * @param personId
 	 */
-	public void deletePerson(int personId){
+	public void deletePerson(int personId) {
 
 	}
 
@@ -52,35 +52,19 @@ public class CarReservationServiceImplementation implements CarReservationServic
 	 * 
 	 * @param resourceEnumeration
 	 */
-	public Resource createResource(ResourceEnumeration... resourceEnumeration){
+	public Resource createResource(ResourceEnumeration... resourceEnumeration) {
 		return null;
-	}
-
-	/**
-	 * 
-	 * @param resourceId
-	 */
-	public void showResource(int resourceId){
-
-	}
-
-	/**
-	 * 
-	 * @param resourceId
-	 */
-	public void deleteResource(int resourceId){
-
 	}
 
 	/**
 	 * 
 	 * @param personId
 	 */
-	public void authenticatePerson(int personId){
+	public void authenticatePerson(int personId) {
 
 	}
 
-	public void showStatistics(){
+	public void showStatistics() {
 
 	}
 
@@ -88,11 +72,11 @@ public class CarReservationServiceImplementation implements CarReservationServic
 	 * 
 	 * @param bookingId
 	 */
-	public void payBooking(int bookingId){
+	public void payBooking(int bookingId) {
 
 	}
 
-	public void showBookings(){
+	public void showBookings() {
 
 	}
 
@@ -102,7 +86,12 @@ public class CarReservationServiceImplementation implements CarReservationServic
 	 * @param resourceId
 	 * @param language
 	 */
-	public Booking createBooking(int personId, int resourceId, Language language){
+	public Booking createBooking(int personId, int resourceId, Language language) {
 		return null;
 	}
-}//end CarReservationServiceImplementation
+
+	@Override
+	public Booking createBooking(Person testPerson, Resource testResource, Language language) {
+		return null;
+	}
+}
