@@ -12,10 +12,16 @@ public class Head {
 	private Person person;
 
 	public Head(){
+		
 
 	}
 
 	public void finalize() throws Throwable {
 
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
+		
 	}
 }//end Head

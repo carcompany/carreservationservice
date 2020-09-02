@@ -11,22 +11,14 @@ import com.carcompany.carreservationservice.structure.Person.structure.Person;
 public class BookingDirector {
 
 	private BookingBuilder bookingBuilder;
-	public BookingBuilder m_BookingBuilder;
-
-
-
-	public void finalize() throws Throwable {
-
-	}
-	public BookingDirector(){
-
-	}
 
 	/**
 	 * 
 	 * @param bookingBuilder
 	 */
 	public void setBookingBuilder(BookingBuilder bookingBuilder){
+		
+		this.bookingBuilder = bookingBuilder;
 
 	}
 
@@ -36,6 +28,12 @@ public class BookingDirector {
 	 * @param ressource
 	 */
 	public Booking build(Person person, Resource ressource){
-		return null;
+		
+		bookingBuilder.setHead(person);
+		bookingBuilder.setBody(ressource);
+		bookingBuilder.setFooter();
+		
+		
+		return bookingBuilder.getBooking();
 	}
 }//end BookingDirector

@@ -9,31 +9,43 @@ import com.carcompany.carreservationservice.structure.Resource.structure.Resourc
  * @created 28-Aug-2020 17:10:47
  */
 public class GermanBookingBuilder implements BookingBuilder {
+	
+	private GermanBooking germanBooking;
 
 	public GermanBookingBuilder(){
+		
+		this.germanBooking = new GermanBooking();
 
 	}
 
-	public void finalize() throws Throwable {
-
-	}
 	/**
 	 * 
 	 * @param person
 	 */
 	public void setHead(Person person){
+		
+		this.germanBooking.head = new Head();
+		this.germanBooking.head.setPerson(person);
 
 	}
 
 	/**
 	 * 
-	 * @param ressource
+	 * @param resource
 	 */
-	public void setBody(Resource ressource){
+	public void setBody(Resource resource){
+		this.germanBooking.body = new Body();
+		this.germanBooking.body.setResource(resource);
 
 	}
 
 	public void setFooter(){
+		
+		this.germanBooking.footer = new Footer();
 
+	}
+
+	public Booking getBooking() {
+		return this.germanBooking;
 	}
 }//end GermanBookingBuilder

@@ -24,4 +24,6 @@ public interface BookingBuilder {
 
 	public void setFooter();
 
+	public Booking getBooking();
+
 }

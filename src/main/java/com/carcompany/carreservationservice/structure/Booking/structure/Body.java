@@ -9,13 +9,16 @@ import com.carcompany.carreservationservice.structure.Resource.structure.Resourc
  */
 public class Body {
 
-	private Resource ressource;
+	private Resource resource;
 
 	public Body(){
 
 	}
 
-	public void finalize() throws Throwable {
 
+	public void setResource(Resource resource) {
+		
+		this.resource = resource;
+		
 	}
 }//end Body
