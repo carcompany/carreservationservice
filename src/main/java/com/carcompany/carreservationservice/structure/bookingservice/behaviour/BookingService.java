@@ -2,8 +2,8 @@ package com.carcompany.carreservationservice.structure.bookingservice.behaviour;
 
 import com.carcompany.carreservationservice.structure.bookingservice.structure.Booking;
 import com.carcompany.carreservationservice.structure.bookingservice.structure.Language;
+import com.carcompany.carreservationservice.structure.personservice.structure.Person;
 import com.carcompany.carreservationservice.structure.resourceservice.structure.Resource;
-import com.carcompany.carreservationservice.structure.Person.structure.Person;
 
 /**
  * @author Kevin

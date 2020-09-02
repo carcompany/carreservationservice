@@ -5,7 +5,7 @@ import com.carcompany.carreservationservice.structure.bookingservice.structure.B
 import com.carcompany.carreservationservice.structure.bookingservice.structure.EnglishBookingBuilder;
 import com.carcompany.carreservationservice.structure.bookingservice.structure.GermanBookingBuilder;
 import com.carcompany.carreservationservice.structure.bookingservice.structure.Language;
-import com.carcompany.carreservationservice.structure.Person.structure.Person;
+import com.carcompany.carreservationservice.structure.personservice.structure.Person;
 import com.carcompany.carreservationservice.structure.resourceservice.structure.Resource;
 
 /**
