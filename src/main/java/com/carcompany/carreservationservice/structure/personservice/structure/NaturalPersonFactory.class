@@ -1,7 +1,0 @@
-package com.carcompany.carreservationservice.structure.Person.structure;
-
-public class NaturalPersonFactory extends PersonFactory {
-    public Person create(String...) {
-        return null;
-    }
-}
