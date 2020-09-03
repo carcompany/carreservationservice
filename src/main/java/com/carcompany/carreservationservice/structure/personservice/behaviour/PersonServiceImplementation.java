@@ -1,8 +1,12 @@
 package com.carcompany.carreservationservice.structure.personservice.behaviour;
 
+import java.util.ArrayList;
+
+import com.carcompany.carreservationservice.structure.personservice.structure.LegalPersonFactory;
+import com.carcompany.carreservationservice.structure.personservice.structure.NaturalPersonFactory;
 import com.carcompany.carreservationservice.structure.personservice.structure.Person;
 import com.carcompany.carreservationservice.structure.personservice.structure.PersonFactory;
-import com.carcompany.carreservationservice.structure.personservice.structure.PersonType;
+import com.carcompany.carreservationservice.structure.personservice.structure.exception.TooFewOrLessParametersForPersonCreationException;
 
 /**
  * @author Kevin
@@ -11,21 +15,33 @@ import com.carcompany.carreservationservice.structure.personservice.structure.Pe
  */
 public class PersonServiceImplementation implements PersonService {
 
-	public PersonType m_PersonType;
-	public PersonFactory m_PersonFactory;
+	private ArrayList<Person> persons;
 
-	public PersonServiceImplementation(){
-
+	public PersonServiceImplementation() {
+		this.persons = new ArrayList<>();
 	}
 
-	public void finalize() throws Throwable {
-
-	}
 	/**
 	 * 
 	 * @param parameters
 	 */
-	public Person createPerson(String... parameters){
-		return null;
+	public Person createPerson(String... parameters) throws TooFewOrLessParametersForPersonCreationException {
+		Person person;
+		PersonFactory personFactory;
+
+		switch(parameters.length) {
+			case 1:
+				personFactory = new LegalPersonFactory();
+				break;
+			case 2:
+				personFactory = new NaturalPersonFactory();
+				break;
+			default:
+				throw new TooFewOrLessParametersForPersonCreationException();
+		}
+
+		person = personFactory.create(parameters);
+
+		return person;
 	}
-}//end PersonServiceImplementation
+}

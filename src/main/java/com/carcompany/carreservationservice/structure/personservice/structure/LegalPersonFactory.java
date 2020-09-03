@@ -8,18 +8,11 @@ package com.carcompany.carreservationservice.structure.personservice.structure;
  */
 public class LegalPersonFactory extends PersonFactory {
 
-	public LegalPersonFactory() {
-
-	}
-
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
 	/**
 	 * 
 	 * @param parameters
 	 */
 	public Person create(String... parameters){
-		return null;
+		return new LegalPerson(parameters[0]);
 	}
 }//end LegalPersonFactory

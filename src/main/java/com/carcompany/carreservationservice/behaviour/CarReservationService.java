@@ -3,7 +3,7 @@ package com.carcompany.carreservationservice.behaviour;
 import com.carcompany.carreservationservice.structure.bookingservice.structure.Booking;
 import com.carcompany.carreservationservice.structure.bookingservice.structure.Language;
 import com.carcompany.carreservationservice.structure.personservice.structure.Person;
-import com.carcompany.carreservationservice.structure.personservice.structure.exception.PersonCreationFailedException;
+import com.carcompany.carreservationservice.structure.personservice.structure.exception.TooFewOrLessParametersForPersonCreationException;
 import com.carcompany.carreservationservice.structure.resourceservice.structure.Resource;
 import com.carcompany.carreservationservice.structure.resourceservice.structure.ResourceEnumeration;
 
@@ -18,7 +18,7 @@ public interface CarReservationService {
 	 * 
 	 * @param names
 	 */
-	public Person createPerson(String... names) throws PersonCreationFailedException;
+	public Person createPerson(String... names) throws TooFewOrLessParametersForPersonCreationException;
 
 	/**
 	 * 

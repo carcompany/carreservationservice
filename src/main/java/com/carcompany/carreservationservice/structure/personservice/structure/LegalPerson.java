@@ -1,6 +1,5 @@
 package com.carcompany.carreservationservice.structure.personservice.structure;
 
-
 /**
  * @author Sebastian
  * @version 1.0
@@ -10,11 +9,11 @@ public class LegalPerson extends Person {
 
 	private String name;
 
-	public LegalPerson(){
-
+	public LegalPerson(String name) {
+		this.name = name;
 	}
 
-	public void finalize() throws Throwable {
-		super.finalize();
+	public String getName() {
+		return this.name;
 	}
-}//end LegalPerson
+}
