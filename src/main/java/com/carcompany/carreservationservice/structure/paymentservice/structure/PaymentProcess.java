@@ -1,5 +1,6 @@
 package com.carcompany.carreservationservice.structure.paymentservice.structure;
 
+import com.carcompany.carreservationservice.structure.personservice.structure.Person;
 
 /**
  * @author Sebastian
@@ -8,20 +9,13 @@ package com.carcompany.carreservationservice.structure.paymentservice.structure;
  */
 public abstract class PaymentProcess {
 
-	public PaymentProcess(){
-
-	}
-
-	public void finalize() throws Throwable {
-
-	}
-	public boolean authenticateCustomer(){
+	public boolean authenticateCustomer(Person person) {
 		return false;
 	}
 
 	public abstract void initiatePayment();
 
-	public void generateBillingReceipt(){
+	public void generateBillingReceipt() {
 
 	}
-}//end PaymentProcess
+}// end PaymentProcess

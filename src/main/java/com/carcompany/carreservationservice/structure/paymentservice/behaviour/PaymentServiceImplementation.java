@@ -1,5 +1,7 @@
 package com.carcompany.carreservationservice.structure.paymentservice.behaviour;
 
+import javax.security.sasl.AuthenticationException;
+
 import com.carcompany.carreservationservice.structure.paymentservice.domainvalue.CurrencyAmount;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.Account;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.ApplePayPaymentProcess;
@@ -7,6 +9,7 @@ import com.carcompany.carreservationservice.structure.paymentservice.structure.G
 import com.carcompany.carreservationservice.structure.paymentservice.structure.PayPalPaymentProcess;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.PaymentProcess;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.PaymentType;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.exception.UnsupportedPaymentTypeException;
 
 /**
  * @author Sebastian
@@ -25,9 +28,10 @@ public class PaymentServiceImplementation implements PaymentService {
 	 * @param receiverAccount
 	 * @param currencyAmount
 	 * @param paymentType
+	 * @throws UnsupportedPaymentTypeException 
 	 */
 	public void payAmount(Account senderAccount, Account receiverAccount, CurrencyAmount currencyAmount,
-			PaymentType paymentType) {
+			PaymentType paymentType) throws UnsupportedPaymentTypeException {
 		PaymentProcess paymentProcess;
 		switch (paymentType) {
 		case APPLE_PAY:
@@ -48,9 +52,12 @@ public class PaymentServiceImplementation implements PaymentService {
 			throw new UnsupportedPaymentTypeException();
 			break;
 		}
-		
-		paymentProcess.authenticateCustomer();
-		paymentProcess.initiatePayment();
-		paymentProcess.generateBillingReceipt();
+
+		if (paymentProcess.authenticateCustomer(senderAccount.getPerson())) {
+			paymentProcess.initiatePayment();
+			paymentProcess.generateBillingReceipt();
+		} else {
+			throw new AuthenticationException("Authentication failed");
+		}
 	}
 }// end PaymentServiceImplementation
