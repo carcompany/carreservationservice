@@ -2,6 +2,9 @@ package com.carcompany.carreservationservice.structure.paymentservice.behaviour;
 
 import com.carcompany.carreservationservice.structure.paymentservice.domainvalue.CurrencyAmount;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.Account;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.ApplePayPaymentProcess;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.GooglePayPaymentProcess;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.PayPalPaymentProcess;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.PaymentProcess;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.PaymentType;
 
@@ -12,13 +15,10 @@ import com.carcompany.carreservationservice.structure.paymentservice.structure.P
  */
 public class PaymentServiceImplementation implements PaymentService {
 
-	public PaymentServiceImplementation(){
+	public PaymentServiceImplementation() {
 
 	}
 
-	public void finalize() throws Throwable {
-
-	}
 	/**
 	 * 
 	 * @param senderAccount
@@ -26,7 +26,31 @@ public class PaymentServiceImplementation implements PaymentService {
 	 * @param currencyAmount
 	 * @param paymentType
 	 */
-	public void payAmount(Account senderAccount, Account receiverAccount, CurrencyAmount currencyAmount, PaymentType paymentType){
+	public void payAmount(Account senderAccount, Account receiverAccount, CurrencyAmount currencyAmount,
+			PaymentType paymentType) {
+		PaymentProcess paymentProcess;
+		switch (paymentType) {
+		case APPLE_PAY:
+			paymentProcess = new ApplePayPaymentProcess();
+			break;
+		case GOOGLE_PAY:
+			paymentProcess = new GooglePayPaymentProcess();
+			break;
 
+		case PAYPAL:
+			paymentProcess = new PayPalPaymentProcess();
+			break;
+		case BANK:
+			paymentProcess = new ApplePayPaymentProcess();
+			break;
+
+		default:
+			throw new UnsupportedPaymentTypeException();
+			break;
+		}
+		
+		paymentProcess.authenticateCustomer();
+		paymentProcess.initiatePayment();
+		paymentProcess.generateBillingReceipt();
 	}
-}//end PaymentServiceImplementation
+}// end PaymentServiceImplementation
