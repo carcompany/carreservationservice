@@ -35,9 +35,10 @@ public class PaymentServiceImplementation implements PaymentService {
 	 * @param paymentType
 	 * @return 
 	 * @throws UnsupportedPaymentTypeException 
+	 * @throws AuthenticationException 
 	 */
 	public Payment payAmount(Account senderAccount, Account receiverAccount, CurrencyAmount currencyAmount,
-			PaymentType paymentType) throws UnsupportedPaymentTypeException {
+			PaymentType paymentType) throws UnsupportedPaymentTypeException, AuthenticationException {
 		PaymentProcess paymentProcess;
 		switch (paymentType) {
 		case APPLE_PAY:
@@ -56,7 +57,6 @@ public class PaymentServiceImplementation implements PaymentService {
 
 		default:
 			throw new UnsupportedPaymentTypeException();
-			break;
 		}
 		
 		AuthenticationService authenticationService = new AuthenticationServiceImplementation();
@@ -74,7 +74,7 @@ public class PaymentServiceImplementation implements PaymentService {
 
 		} else {
 			throw new AuthenticationException("Authentication failed");
-			return null;
 		}
+		return null;
 	}
 }// end PaymentServiceImplementation
