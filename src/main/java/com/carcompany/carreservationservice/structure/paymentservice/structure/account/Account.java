@@ -1,5 +1,6 @@
-package com.carcompany.carreservationservice.structure.paymentservice.structure;
+package com.carcompany.carreservationservice.structure.paymentservice.structure.account;
 
+import com.carcompany.carreservationservice.structure.authenticationservice.structure.subject.Subject;
 import com.carcompany.carreservationservice.structure.personservice.structure.Person;
 
 /**
@@ -9,14 +10,14 @@ import com.carcompany.carreservationservice.structure.personservice.structure.Pe
  */
 public abstract class Account {
 
-	protected Person person;
+	protected Subject subject;
 
-
-	public Account(Person person){
-
+	public Account(Subject subject) {
+		this.subject = subject;
+		
 	}
 
-	public Person getPerson() {
-		return this.person;
+	public Subject getSubject() {
+		return this.subject;
 	}
-}//end Account
+}// end Account
