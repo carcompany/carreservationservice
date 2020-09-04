@@ -8,14 +8,14 @@ import com.carcompany.carreservationservice.structure.personservice.structure.Pe
  * @created 28-Aug-2020 17:10:51
  */
 public class PersonSubject extends Subject {
-	
+
 	private Person person;
 
-	public PersonSubject(){
-
+	public void setPerson(Person person) {
+		this.person = person;
 	}
 
-	public void finalize() throws Throwable {
-		super.finalize();
+	public Person getPerson() {
+		return this.person;
 	}
-}//end PersonSubject
+}
