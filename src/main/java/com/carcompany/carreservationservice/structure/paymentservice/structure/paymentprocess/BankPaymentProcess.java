@@ -1,4 +1,4 @@
-package com.carcompany.carreservationservice.structure.paymentservice.structure;
+package com.carcompany.carreservationservice.structure.paymentservice.structure.paymentprocess;
 
 
 /**
@@ -8,7 +8,7 @@ package com.carcompany.carreservationservice.structure.paymentservice.structure;
  */
 public class BankPaymentProcess extends PaymentProcess {
 
-	public boolean initiatePayment(){
+	public boolean executePayment(){
 		
 
 		// PAYMENT DUMMY

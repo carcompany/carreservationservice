@@ -1,4 +1,4 @@
-package com.carcompany.carreservationservice.structure.paymentservice.structure;
+package com.carcompany.carreservationservice.structure.paymentservice.structure.paymentprocess;
 
 
 /**
@@ -9,7 +9,7 @@ package com.carcompany.carreservationservice.structure.paymentservice.structure;
 public class ApplePayPaymentProcess extends PaymentProcess {
 
 	
-	public boolean initiatePayment(){
+	public boolean executePayment(){
 
 		// PAYMENT DUMMY
 		
