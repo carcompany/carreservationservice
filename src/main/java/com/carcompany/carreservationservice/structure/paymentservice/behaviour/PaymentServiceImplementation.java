@@ -34,7 +34,7 @@ public class PaymentServiceImplementation implements PaymentService {
 	 * @param currencyAmount
 	 * @param paymentType
 	 * @return 
-	 * @throws UnsupportedPaymentTypeException
+	 * @throws UnsupportedPaymentTypeException 
 	 */
 	public Payment payAmount(Account senderAccount, Account receiverAccount, CurrencyAmount currencyAmount,
 			PaymentType paymentType) throws UnsupportedPaymentTypeException {
@@ -74,6 +74,7 @@ public class PaymentServiceImplementation implements PaymentService {
 
 		} else {
 			throw new AuthenticationException("Authentication failed");
+			return null;
 		}
 	}
 }// end PaymentServiceImplementation

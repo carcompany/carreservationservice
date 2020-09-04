@@ -1,6 +1,7 @@
 package com.carcompany.carreservationservice.structure.paymentservice.behaviour;
 
 import com.carcompany.carreservationservice.structure.paymentservice.domainvalue.CurrencyAmount;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.Payment;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.PaymentType;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.account.Account;
 
@@ -18,6 +19,6 @@ public interface PaymentService {
 	 * @param currencyAmount
 	 * @param paymentType
 	 */
-	public void payAmount(Account senderAccount, Account receiverAccount, CurrencyAmount currencyAmount, PaymentType paymentType);
+	public Payment payAmount(Account senderAccount, Account receiverAccount, CurrencyAmount currencyAmount, PaymentType paymentType);
 
 }
