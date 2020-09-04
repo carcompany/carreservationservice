@@ -4,6 +4,7 @@ import com.carcompany.carreservationservice.structure.authenticationservice.beha
 import com.carcompany.carreservationservice.structure.authenticationservice.behaviour.AuthenticationServiceImplementation;
 import com.carcompany.carreservationservice.structure.authenticationservice.structure.subject.Subject;
 import com.carcompany.carreservationservice.structure.paymentservice.domainvalue.CurrencyAmount;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.Payment;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.account.Account;
 
 /**
@@ -23,7 +24,9 @@ public abstract class PaymentProcess {
 
 	public abstract boolean executePayment();
 
-	public void getPayment(Account sender, Account receiver, CurrencyAmount amount) {
+	public Payment getPayment(Account sender, Account receiver, CurrencyAmount amount) {
+		
+		return new Payment(sender, receiver, amount);
 
 	}
 }// end PaymentProcess

@@ -8,7 +8,7 @@ package com.carcompany.carreservationservice.structure.paymentservice.structure.
  */
 public class GooglePayPaymentProcess extends PaymentProcess {
 
-	public boolean initiatePayment(){
+	public boolean executePayment(){
 		
 		// PAYMENT DUMMY
 		

@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 import com.carcompany.carreservationservice.structure.paymentservice.behaviour.PaymentService;
 import com.carcompany.carreservationservice.structure.paymentservice.behaviour.PaymentServiceImplementation;
 import com.carcompany.carreservationservice.structure.paymentservice.domainvalue.CurrencyAmount;
-import com.carcompany.carreservationservice.structure.paymentservice.structure.Account;
-import com.carcompany.carreservationservice.structure.paymentservice.structure.AppleAccount;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.PaymentType;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.account.Account;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.account.AppleAccount;
 
 class PaymentServiceTest {
 	

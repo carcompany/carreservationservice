@@ -1,6 +1,6 @@
-package com.carcompany.carreservationservice.structure.paymentservice.structure;
+package com.carcompany.carreservationservice.structure.paymentservice.structure.account;
 
-import com.carcompany.carreservationservice.structure.personservice.structure.Person;
+import com.carcompany.carreservationservice.structure.authenticationservice.structure.subject.Subject;
 
 /**
  * @author Sebastian
@@ -9,10 +9,9 @@ import com.carcompany.carreservationservice.structure.personservice.structure.Pe
  */
 public class PayPalAccount extends Account {
 
-	public PayPalAccount(Person person) {
-		super(person);
+	public PayPalAccount(Subject subject) {
+		super(subject);
 	}
 
-
-
+	
 }//end PayPalAccount

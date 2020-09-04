@@ -1,5 +1,6 @@
-package com.carcompany.carreservationservice.structure.paymentservice.structure;
+package com.carcompany.carreservationservice.structure.paymentservice.structure.account;
 
+import com.carcompany.carreservationservice.structure.authenticationservice.structure.subject.Subject;
 
 /**
  * @author Sebastian, Kevin
@@ -8,11 +9,9 @@ package com.carcompany.carreservationservice.structure.paymentservice.structure;
  */
 public class BankAccount extends Account {
 
-	public BankAccount(){
-
+	public BankAccount(Subject subject) {
+		super(subject);
 	}
 
-	public void finalize() throws Throwable {
-
-	}
+	
 }//end BankAccount

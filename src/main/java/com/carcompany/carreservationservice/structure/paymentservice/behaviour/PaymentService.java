@@ -1,8 +1,8 @@
 package com.carcompany.carreservationservice.structure.paymentservice.behaviour;
 
 import com.carcompany.carreservationservice.structure.paymentservice.domainvalue.CurrencyAmount;
-import com.carcompany.carreservationservice.structure.paymentservice.structure.Account;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.PaymentType;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.account.Account;
 
 /**
  * @author Sebastian

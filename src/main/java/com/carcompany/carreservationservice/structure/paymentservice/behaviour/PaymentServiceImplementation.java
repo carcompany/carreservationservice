@@ -3,14 +3,14 @@ package com.carcompany.carreservationservice.structure.paymentservice.behaviour;
 import javax.security.sasl.AuthenticationException;
 
 import com.carcompany.carreservationservice.structure.paymentservice.domainvalue.CurrencyAmount;
-import com.carcompany.carreservationservice.structure.paymentservice.structure.Account;
-import com.carcompany.carreservationservice.structure.paymentservice.structure.ApplePayPaymentProcess;
-import com.carcompany.carreservationservice.structure.paymentservice.structure.GooglePayPaymentProcess;
-import com.carcompany.carreservationservice.structure.paymentservice.structure.PayPalPaymentProcess;
-import com.carcompany.carreservationservice.structure.paymentservice.structure.PaymentProcess;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.PaymentType;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.account.Account;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.exception.PaymentProcessException;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.exception.UnsupportedPaymentTypeException;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.paymentprocess.ApplePayPaymentProcess;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.paymentprocess.GooglePayPaymentProcess;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.paymentprocess.PayPalPaymentProcess;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.paymentprocess.PaymentProcess;
 
 /**
  * @author Sebastian
@@ -57,7 +57,7 @@ public class PaymentServiceImplementation implements PaymentService {
 		if (paymentProcess.authenticateCustomer(senderAccount.getPerson())) {
 
 			try {
-				paymentProcess.initiatePayment();
+				paymentProcess.executePayment();
 				paymentProcess.generateBillingReceipt();
 			} catch (PaymentProcessException paymentProcessException) {
 				
