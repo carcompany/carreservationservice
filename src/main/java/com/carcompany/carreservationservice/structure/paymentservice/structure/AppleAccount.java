@@ -1,5 +1,6 @@
 package com.carcompany.carreservationservice.structure.paymentservice.structure;
 
+import com.carcompany.carreservationservice.structure.personservice.structure.Person;
 
 /**
  * @author Sebastian
@@ -8,11 +9,9 @@ package com.carcompany.carreservationservice.structure.paymentservice.structure;
  */
 public class AppleAccount extends Account {
 
-	public AppleAccount(){
-
+	public AppleAccount(Person person) {
+		super(person);
 	}
 
-	public void finalize() throws Throwable {
 
-	}
 }//end AppleAccount

@@ -8,14 +8,12 @@ package com.carcompany.carreservationservice.structure.paymentservice.structure;
  */
 public class PayPalPaymentProcess extends PaymentProcess {
 
-	public PayPalPaymentProcess(){
+	
+	public boolean initiatePayment(){
 
-	}
-
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
-	public void initiatePayment(){
+		// PAYMENT DUMMY
+		
+		return true;
 
 	}
 }//end PayPalPaymentProcess

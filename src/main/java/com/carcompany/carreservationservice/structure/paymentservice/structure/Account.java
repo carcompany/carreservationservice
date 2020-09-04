@@ -11,18 +11,12 @@ public abstract class Account {
 
 	protected Person person;
 
-	public Account(){
 
-	}
-
-	public void finalize() throws Throwable {
-
-	}
-	/**
-	 * 
-	 * @param person
-	 */
 	public Account(Person person){
 
+	}
+
+	public Person getPerson() {
+		return this.person;
 	}
 }//end Account

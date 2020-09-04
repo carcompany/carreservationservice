@@ -8,14 +8,11 @@ package com.carcompany.carreservationservice.structure.paymentservice.structure;
  */
 public class GooglePayPaymentProcess extends PaymentProcess {
 
-	public GooglePayPaymentProcess(){
-
-	}
-
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
-	public void initiatePayment(){
+	public boolean initiatePayment(){
+		
+		// PAYMENT DUMMY
+		
+		return true;
 
 	}
 }//end GooglePayPaymentProcess

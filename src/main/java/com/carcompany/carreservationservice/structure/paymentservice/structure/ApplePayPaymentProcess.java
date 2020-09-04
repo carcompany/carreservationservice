@@ -8,14 +8,12 @@ package com.carcompany.carreservationservice.structure.paymentservice.structure;
  */
 public class ApplePayPaymentProcess extends PaymentProcess {
 
-	public ApplePayPaymentProcess(){
+	
+	public boolean initiatePayment(){
 
-	}
-
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
-	public void initiatePayment(){
+		// PAYMENT DUMMY
+		
+		return true;
 
 	}
 }//end ApplePayPaymentProcess
