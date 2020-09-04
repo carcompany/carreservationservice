@@ -5,7 +5,6 @@ import javax.security.sasl.AuthenticationException;
 import com.carcompany.carreservationservice.structure.paymentservice.domainvalue.CurrencyAmount;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.PaymentType;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.account.Account;
-import com.carcompany.carreservationservice.structure.paymentservice.structure.exception.PaymentProcessException;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.exception.UnsupportedPaymentTypeException;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.paymentprocess.ApplePayPaymentProcess;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.paymentprocess.GooglePayPaymentProcess;
@@ -53,13 +52,14 @@ public class PaymentServiceImplementation implements PaymentService {
 			throw new UnsupportedPaymentTypeException();
 			break;
 		}
+		
+		
 
-		if (paymentProcess.authenticateCustomer(senderAccount.getPerson())) {
+		if (paymentProcess.authenticateCustomer(senderAccount.getSubject(), secret) {
 
-			try {
-				paymentProcess.executePayment();
-				paymentProcess.generateBillingReceipt();
-			} catch (PaymentProcessException paymentProcessException) {
+			if(paymentProcess.executePayment(sender, receiver, amount)) {
+				
+				return paymentProcess.getPayment(sender, receiver, amount);
 				
 			}
 
