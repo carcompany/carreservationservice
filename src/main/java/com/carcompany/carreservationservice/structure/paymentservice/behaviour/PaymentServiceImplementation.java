@@ -2,6 +2,10 @@ package com.carcompany.carreservationservice.structure.paymentservice.behaviour;
 
 import javax.security.sasl.AuthenticationException;
 
+import com.carcompany.carreservationservice.structure.authenticationservice.behaviour.AuthenticationService;
+import com.carcompany.carreservationservice.structure.authenticationservice.behaviour.AuthenticationServiceImplementation;
+import com.carcompany.carreservationservice.structure.authenticationservice.structure.credential.Credential;
+import com.carcompany.carreservationservice.structure.authenticationservice.structure.credential.CredentialEnumeration;
 import com.carcompany.carreservationservice.structure.paymentservice.domainvalue.CurrencyAmount;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.Payment;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.PaymentType;
@@ -55,9 +59,12 @@ public class PaymentServiceImplementation implements PaymentService {
 			break;
 		}
 		
+		AuthenticationService authenticationService = new AuthenticationServiceImplementation();
+		Credential secret = authenticationService.createCredential(CredentialEnumeration.PASSWORD, "AAAAAAAAAA");
+		
 		
 
-		if (paymentProcess.authenticateCustomer(senderAccount.getSubject(), secret) {
+		if (paymentProcess.authenticateCustomer(senderAccount.getSubject(), secret )) {
 
 			if(paymentProcess.executePayment(senderAccount, receiverAccount, currencyAmount)) {
 				
