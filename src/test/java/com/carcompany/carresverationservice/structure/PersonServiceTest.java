@@ -8,7 +8,7 @@ import com.carcompany.carreservationservice.structure.personservice.behaviour.Pe
 import com.carcompany.carreservationservice.structure.personservice.behaviour.PersonServiceImplementation;
 import com.carcompany.carreservationservice.structure.personservice.structure.LegalPerson;
 import com.carcompany.carreservationservice.structure.personservice.structure.NaturalPerson;
-import com.carcompany.carreservationservice.structure.personservice.structure.exception.TooFewOrLessParametersForPersonCreationException;
+import com.carcompany.carreservationservice.structure.personservice.structure.exception.TooFewOrManyParametersForPersonCreationException;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -43,7 +43,7 @@ public class PersonServiceTest {
             personService.createPerson(companyName);
         });
 
-        assertThrows(TooFewOrLessParametersForPersonCreationException.class, () -> {
+        assertThrows(TooFewOrManyParametersForPersonCreationException.class, () -> {
             personService.createPerson();
         });
 
@@ -56,7 +56,7 @@ public class PersonServiceTest {
             personService.createPerson(firstname, lastname);
         });
 
-        assertThrows(TooFewOrLessParametersForPersonCreationException.class, () -> {
+        assertThrows(TooFewOrManyParametersForPersonCreationException.class, () -> {
             personService.createPerson(firstname, lastname, null);
         });
 
