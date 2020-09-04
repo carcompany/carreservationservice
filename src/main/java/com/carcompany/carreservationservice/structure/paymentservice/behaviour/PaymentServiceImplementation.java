@@ -3,6 +3,7 @@ package com.carcompany.carreservationservice.structure.paymentservice.behaviour;
 import javax.security.sasl.AuthenticationException;
 
 import com.carcompany.carreservationservice.structure.paymentservice.domainvalue.CurrencyAmount;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.Payment;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.PaymentType;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.account.Account;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.exception.UnsupportedPaymentTypeException;
@@ -28,9 +29,10 @@ public class PaymentServiceImplementation implements PaymentService {
 	 * @param receiverAccount
 	 * @param currencyAmount
 	 * @param paymentType
+	 * @return 
 	 * @throws UnsupportedPaymentTypeException
 	 */
-	public void payAmount(Account senderAccount, Account receiverAccount, CurrencyAmount currencyAmount,
+	public Payment payAmount(Account senderAccount, Account receiverAccount, CurrencyAmount currencyAmount,
 			PaymentType paymentType) throws UnsupportedPaymentTypeException {
 		PaymentProcess paymentProcess;
 		switch (paymentType) {
@@ -57,9 +59,9 @@ public class PaymentServiceImplementation implements PaymentService {
 
 		if (paymentProcess.authenticateCustomer(senderAccount.getSubject(), secret) {
 
-			if(paymentProcess.executePayment(sender, receiver, amount)) {
+			if(paymentProcess.executePayment(senderAccount, receiverAccount, currencyAmount)) {
 				
-				return paymentProcess.getPayment(sender, receiver, amount);
+				return paymentProcess.getPayment(senderAccount, receiverAccount, currencyAmount);
 				
 			}
 

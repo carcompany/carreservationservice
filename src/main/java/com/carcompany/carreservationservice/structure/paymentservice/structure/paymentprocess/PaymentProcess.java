@@ -24,7 +24,7 @@ public abstract class PaymentProcess {
 
 	}
 
-	public abstract boolean executePayment();
+	public abstract boolean executePayment(Account senderAccount, Account receiverAccount, CurrencyAmount currencyAmount);
 
 	public Payment getPayment(Account sender, Account receiver, CurrencyAmount amount) {
 
