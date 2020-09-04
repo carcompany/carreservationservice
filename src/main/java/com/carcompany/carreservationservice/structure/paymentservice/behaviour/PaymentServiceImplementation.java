@@ -9,6 +9,7 @@ import com.carcompany.carreservationservice.structure.paymentservice.structure.G
 import com.carcompany.carreservationservice.structure.paymentservice.structure.PayPalPaymentProcess;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.PaymentProcess;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.PaymentType;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.exception.PaymentProcessException;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.exception.UnsupportedPaymentTypeException;
 
 /**
@@ -28,7 +29,7 @@ public class PaymentServiceImplementation implements PaymentService {
 	 * @param receiverAccount
 	 * @param currencyAmount
 	 * @param paymentType
-	 * @throws UnsupportedPaymentTypeException 
+	 * @throws UnsupportedPaymentTypeException
 	 */
 	public void payAmount(Account senderAccount, Account receiverAccount, CurrencyAmount currencyAmount,
 			PaymentType paymentType) throws UnsupportedPaymentTypeException {
@@ -54,8 +55,14 @@ public class PaymentServiceImplementation implements PaymentService {
 		}
 
 		if (paymentProcess.authenticateCustomer(senderAccount.getPerson())) {
-			paymentProcess.initiatePayment();
-			paymentProcess.generateBillingReceipt();
+
+			try {
+				paymentProcess.initiatePayment();
+				paymentProcess.generateBillingReceipt();
+			} catch (PaymentProcessException paymentProcessException) {
+				
+			}
+
 		} else {
 			throw new AuthenticationException("Authentication failed");
 		}

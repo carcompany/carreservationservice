@@ -8,14 +8,13 @@ package com.carcompany.carreservationservice.structure.paymentservice.structure;
  */
 public class BankPaymentProcess extends PaymentProcess {
 
-	public BankPaymentProcess(){
+	public boolean initiatePayment(){
+		
 
-	}
+		// PAYMENT DUMMY
+		
+		return true;
 
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
-	public void initiatePayment(){
 
 	}
 }//end BankPaymentProcess

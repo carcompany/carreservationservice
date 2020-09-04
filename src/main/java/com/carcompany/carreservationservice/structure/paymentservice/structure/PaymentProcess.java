@@ -11,15 +11,13 @@ import com.carcompany.carreservationservice.structure.personservice.structure.Pe
  * @created 28-Aug-2020 17:10:49
  */
 public abstract class PaymentProcess {
-	 private AuthenticationService authenticationService;
+	private AuthenticationService authenticationService;
 
 	public boolean authenticateCustomer(Person person) {
 		authenticationService = new AuthenticationServiceImplementation();
-		
-		return authenticationService.authenticateSubject(subject, credential, role);
 	}
 
-	public abstract void initiatePayment();
+	public abstract boolean initiatePayment();
 
 	public void generateBillingReceipt() {
 
