@@ -29,7 +29,7 @@ public class PersonServiceImplementation implements PersonService {
 		Person person;
 		PersonFactory personFactory;
 
-		switch(parameters.length) {
+		switch (parameters.length) {
 			case 1:
 				personFactory = new LegalPersonFactory();
 				break;
@@ -41,6 +41,8 @@ public class PersonServiceImplementation implements PersonService {
 		}
 
 		person = personFactory.create(parameters);
+
+		persons.add(person);
 
 		return person;
 	}
