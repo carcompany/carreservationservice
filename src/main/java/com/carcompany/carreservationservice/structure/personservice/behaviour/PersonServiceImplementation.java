@@ -6,7 +6,7 @@ import com.carcompany.carreservationservice.structure.personservice.structure.Le
 import com.carcompany.carreservationservice.structure.personservice.structure.NaturalPersonFactory;
 import com.carcompany.carreservationservice.structure.personservice.structure.Person;
 import com.carcompany.carreservationservice.structure.personservice.structure.PersonFactory;
-import com.carcompany.carreservationservice.structure.personservice.structure.exception.TooFewOrLessParametersForPersonCreationException;
+import com.carcompany.carreservationservice.structure.personservice.structure.exception.TooFewOrManyParametersForPersonCreationException;
 
 /**
  * @author Kevin
@@ -25,7 +25,7 @@ public class PersonServiceImplementation implements PersonService {
 	 * 
 	 * @param parameters
 	 */
-	public Person createPerson(String... parameters) throws TooFewOrLessParametersForPersonCreationException {
+	public Person createPerson(String... parameters) throws TooFewOrManyParametersForPersonCreationException {
 		Person person;
 		PersonFactory personFactory;
 
@@ -37,7 +37,7 @@ public class PersonServiceImplementation implements PersonService {
 				personFactory = new NaturalPersonFactory();
 				break;
 			default:
-				throw new TooFewOrLessParametersForPersonCreationException();
+				throw new TooFewOrManyParametersForPersonCreationException();
 		}
 
 		person = personFactory.create(parameters);

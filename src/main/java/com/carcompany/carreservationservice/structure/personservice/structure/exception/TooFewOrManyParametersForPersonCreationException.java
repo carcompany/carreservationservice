@@ -1,12 +1,12 @@
 package com.carcompany.carreservationservice.structure.personservice.structure.exception;
 
-public class TooFewOrLessParametersForPersonCreationException extends RuntimeException {
+public class TooFewOrManyParametersForPersonCreationException extends RuntimeException {
     /**
      *
      */
     private static final long serialVersionUID = 1L;
 
-    public TooFewOrLessParametersForPersonCreationException() {
+    public TooFewOrManyParametersForPersonCreationException() {
         super();
     }
 }
