@@ -1,4 +1,4 @@
-package com.carcompany.carreservationservice.structure.authenticationservice.structure;
+package com.carcompany.carreservationservice.structure.authenticationservice.structure.subject;
 
 import com.carcompany.carreservationservice.structure.personservice.structure.Person;
 
