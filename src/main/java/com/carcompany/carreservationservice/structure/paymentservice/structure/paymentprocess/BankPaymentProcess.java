@@ -1,5 +1,7 @@
 package com.carcompany.carreservationservice.structure.paymentservice.structure.paymentprocess;
 
+import com.carcompany.carreservationservice.structure.paymentservice.domainvalue.CurrencyAmount;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.account.Account;
 
 /**
  * @author Sebastian, Kevin
@@ -8,13 +10,11 @@ package com.carcompany.carreservationservice.structure.paymentservice.structure.
  */
 public class BankPaymentProcess extends PaymentProcess {
 
-	public boolean executePayment(){
-		
 
+	@Override
+	public boolean executePayment(Account senderAccount, Account receiverAccount, CurrencyAmount currencyAmount) {
+		
 		// PAYMENT DUMMY
-		
 		return true;
-
-
 	}
 }//end BankPaymentProcess

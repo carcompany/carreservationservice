@@ -6,6 +6,8 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import com.carcompany.carreservationservice.structure.authenticationservice.behaviour.AuthenticationService;
+import com.carcompany.carreservationservice.structure.authenticationservice.structure.subject.Subject;
 import com.carcompany.carreservationservice.structure.paymentservice.behaviour.PaymentService;
 import com.carcompany.carreservationservice.structure.paymentservice.behaviour.PaymentServiceImplementation;
 import com.carcompany.carreservationservice.structure.paymentservice.domainvalue.CurrencyAmount;
@@ -27,13 +29,13 @@ class PaymentServiceTest {
 		
 		paymentService = new PaymentServiceImplementation();
 		
-		senderAccount = new AppleAccount();
-		receiverAccount = new AppleAccount();
+		
 		
 		currencyAmount = new CurrencyAmount();
 		paymentType = PaymentType.APPLE_PAY;
 	}
 
+	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 	}
