@@ -1,4 +1,4 @@
-package com.carcompany.carreservationservice.structure.paymentservice.structure;
+package com.carcompany.carreservationservice.structure.paymentservice.structure.paymentprocess;
 
 
 /**
