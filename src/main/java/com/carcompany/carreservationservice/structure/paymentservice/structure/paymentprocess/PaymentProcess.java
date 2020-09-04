@@ -1,9 +1,10 @@
-package com.carcompany.carreservationservice.structure.paymentservice.structure;
+package com.carcompany.carreservationservice.structure.paymentservice.structure.paymentprocess;
 
 import com.carcompany.carreservationservice.structure.authenticationservice.behaviour.AuthenticationService;
 import com.carcompany.carreservationservice.structure.authenticationservice.behaviour.AuthenticationServiceImplementation;
-import com.carcompany.carreservationservice.structure.authenticationservice.structure.Role;
-import com.carcompany.carreservationservice.structure.personservice.structure.Person;
+import com.carcompany.carreservationservice.structure.authenticationservice.structure.subject.Subject;
+import com.carcompany.carreservationservice.structure.paymentservice.domainvalue.CurrencyAmount;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.account.Account;
 
 /**
  * @author Sebastian
@@ -13,13 +14,16 @@ import com.carcompany.carreservationservice.structure.personservice.structure.Pe
 public abstract class PaymentProcess {
 	private AuthenticationService authenticationService;
 
-	public boolean authenticateCustomer(Person person) {
+	public boolean authenticateCustomer(Subject subject) {
 		authenticationService = new AuthenticationServiceImplementation();
+		
+		
+		return true;
 	}
 
-	public abstract boolean initiatePayment();
+	public abstract boolean executePayment();
 
-	public void generateBillingReceipt() {
+	public void getPayment(Account sender, Account receiver, CurrencyAmount amount) {
 
 	}
 }// end PaymentProcess
