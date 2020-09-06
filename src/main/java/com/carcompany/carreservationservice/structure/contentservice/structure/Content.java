@@ -1,31 +1,24 @@
 package com.carcompany.carreservationservice.structure.contentservice.structure;
 
-
 /**
- * @author Kevin
- * @version 1.0
+ * @author Kevin, Benjamin
+ * @version 1.1
  * @created 28-Aug-2020 17:10:42
  */
 public abstract class Content {
 
-	protected String name;
+	private String name;
 
-	public Content(){
-
-	}
-
-	public void finalize() throws Throwable {
-
-	}
-	public String getName(){
-		return "";
+	public String getName() {
+		return name;
 	}
 
 	/**
 	 * 
 	 * @param name
 	 */
-	public void setName(String name){
 
+	public void setName(String name) {
+		this.name = name;
 	}
-}//end Content
+}
