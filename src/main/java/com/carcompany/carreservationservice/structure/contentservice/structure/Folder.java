@@ -14,16 +14,16 @@ public class Folder extends Content {
 	public HashMap<String, Content> getContents() {
 		return contents;
 	}
+
 	/**
 	 * 
 	 * @param content
 	 */
-	public Boolean addContent(Content content){
+	public Boolean addContent(Content content) {
 		contents.put(content.getName(), content);
-		if(contents.containsKey(content.getName())) {
+		if (contents.containsKey(content.getName())) {
 			return true;
-		} 
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -34,7 +34,7 @@ public class Folder extends Content {
 	 */
 	public Boolean removeContent(String key) {
 		contents.remove(key);
-		if(contents.containsKey(key)) {
+		if (contents.containsKey(key)) {
 			return false;
 		} else {
 			return true;

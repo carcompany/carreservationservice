@@ -1,6 +1,5 @@
 package com.carcompany.carreservationservice.structure.contentservice.structure;
 
-
 /**
  * @author Kevin, Benjamin
  * @version 1.1
@@ -9,15 +8,16 @@ package com.carcompany.carreservationservice.structure.contentservice.structure;
 public class File extends Content {
 
 	private Object object;
-	
-	public Object getObject(){
+
+	public Object getObject() {
 		return object;
 	}
+
 	/**
 	 * 
 	 * @param object
 	 */
-	public void setObject(Object object){
+	public void setObject(Object object) {
 		this.object = object;
 	}
 }

@@ -14,10 +14,12 @@ public interface ContentService {
 	/**
 	 * 
 	 * @param object
-	 * @return 
-	 * @throws Exception 
+	 * @return
+	 * @throws Exception
 	 */
 	public Boolean addContent(Object object, String name);
+
 	public Map<String, Content> getContents();
+
 	public Boolean removeContent(String string);
-} 
+}

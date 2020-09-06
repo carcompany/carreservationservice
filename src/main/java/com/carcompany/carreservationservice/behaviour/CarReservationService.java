@@ -1,7 +1,11 @@
 package com.carcompany.carreservationservice.behaviour;
 
-import com.carcompany.carreservationservice.structure.Booking.structure.Language;
-import com.carcompany.carreservationservice.structure.Resource.structure.ResourceEnumeration;
+import com.carcompany.carreservationservice.structure.bookingservice.structure.Booking;
+import com.carcompany.carreservationservice.structure.bookingservice.structure.Language;
+import com.carcompany.carreservationservice.structure.personservice.structure.Person;
+import com.carcompany.carreservationservice.structure.personservice.structure.exception.TooFewOrLessParametersForPersonCreationException;
+import com.carcompany.carreservationservice.structure.resourceservice.structure.Resource;
+import com.carcompany.carreservationservice.structure.resourceservice.structure.ResourceEnumeration;
 
 /**
  * @author Kevin
@@ -14,7 +18,7 @@ public interface CarReservationService {
 	 * 
 	 * @param names
 	 */
-	public void createPerson(String... names);
+	public Person createPerson(String... names) throws TooFewOrLessParametersForPersonCreationException;
 
 	/**
 	 * 
@@ -26,19 +30,7 @@ public interface CarReservationService {
 	 * 
 	 * @param resourceEnumeration
 	 */
-	public void createResource(ResourceEnumeration... resourceEnumeration);
-
-	/**
-	 * 
-	 * @param resourceId
-	 */
-	public void showResource(int resourceId);
-
-	/**
-	 * 
-	 * @param resourceId
-	 */
-	public void deleteResource(int resourceId);
+	public Resource createResource(ResourceEnumeration... resourceEnumeration);
 
 	/**
 	 * 
@@ -58,10 +50,10 @@ public interface CarReservationService {
 
 	/**
 	 * 
-	 * @param personId
-	 * @param resourceId
+	 * @param testPerson
+	 * @param testResource
 	 * @param language
 	 */
-	public void createBooking(int personId, int resourceId, Language language);
+	public Booking createBooking(Person testPerson, com.carcompany.carreservationservice.structure.resourceservice.structure.Resource testResource, Language language);
 
 }

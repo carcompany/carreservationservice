@@ -1,6 +1,5 @@
 package com.carcompany.carreservationservice.structure.contentservice.structure;
 
-
 /**
  * @author Kevin, Benjamin
  * @version 1.1
@@ -9,17 +8,17 @@ package com.carcompany.carreservationservice.structure.contentservice.structure;
 public abstract class Content {
 
 	private String name;
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	/**
 	 * 
 	 * @param name
 	 */
-	
-	public void setName(String name){
+
+	public void setName(String name) {
 		this.name = name;
 	}
 }

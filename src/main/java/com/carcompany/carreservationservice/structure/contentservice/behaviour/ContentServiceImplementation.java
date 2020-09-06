@@ -16,39 +16,37 @@ public class ContentServiceImplementation implements ContentService {
 	private Folder folder;
 	private File file;
 
-
 	public ContentServiceImplementation() {
 		folder = new Folder();
 	}
+
 	/**
 	 * 
 	 * @param object
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public Boolean addContent(Object object, String name) {
 		file = new File();
 		file.setName(name);
 		file.setObject(object);
 		folder.addContent(file);
-		if(folder.addContent(file)==true) {
+		if (folder.addContent(file) == true) {
 			return true;
-		} 
-		else {
+		} else {
 			return false;
 		}
 	}
-	
+
 	public Boolean removeContent(String key) {
 		folder.removeContent(key);
-		if(folder.removeContent(key)==true) {
-			return true; 
-		}
-		else {
+		if (folder.removeContent(key) == true) {
+			return true;
+		} else {
 			return false;
 		}
 	}
 
 	public Map<String, Content> getContents() {
-		return folder.getContents();		
+		return folder.getContents();
 	}
 }
