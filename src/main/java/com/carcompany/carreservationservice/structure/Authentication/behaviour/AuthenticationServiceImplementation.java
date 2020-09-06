@@ -1,9 +1,9 @@
 package com.carcompany.carreservationservice.structure.Authentication.behaviour;
 
-import com.carcompany.carreservationservice.structure.Authentication.structure.Subject;
 import com.carcompany.carreservationservice.structure.Authentication.structure.Credential;
 import com.carcompany.carreservationservice.structure.Authentication.structure.CredentialStrategy;
 import com.carcompany.carreservationservice.structure.Authentication.structure.Role;
+import com.carcompany.carreservationservice.structure.Authentication.structure.Subject;
 
 /**
  * @author Leo

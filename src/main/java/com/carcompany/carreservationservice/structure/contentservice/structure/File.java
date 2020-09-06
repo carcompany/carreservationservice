@@ -1,4 +1,4 @@
-package com.carcompany.carreservationservice.structure.Content.structure;
+package com.carcompany.carreservationservice.structure.contentservice.structure;
 
 
 /**
@@ -9,11 +9,10 @@ package com.carcompany.carreservationservice.structure.Content.structure;
 public class File extends Content {
 
 	private Object object;
-
+	
 	public Object getObject(){
 		return object;
 	}
-
 	/**
 	 * 
 	 * @param object

@@ -1,14 +1,14 @@
 package com.carcompany.carreservationservice.behaviour;
 
-import com.carcompany.carreservationservice.structure.Payment.behaviour.PaymentService;
-import com.carcompany.carreservationservice.structure.Content.behaviour.ContentService;
-import com.carcompany.carreservationservice.structure.Resource.behaviour.ResourceService;
-import com.carcompany.carreservationservice.structure.Resource.structure.ResourceEnumeration;
-import com.carcompany.carreservationservice.structure.Person.behaviour.PersonService;
+import com.carcompany.carreservationservice.structure.Authentication.behaviour.AuthenticationService;
 import com.carcompany.carreservationservice.structure.Booking.behaviour.BookingService;
 import com.carcompany.carreservationservice.structure.Booking.structure.Language;
-import com.carcompany.carreservationservice.structure.Authentication.behaviour.AuthenticationService;
+import com.carcompany.carreservationservice.structure.Payment.behaviour.PaymentService;
+import com.carcompany.carreservationservice.structure.Person.behaviour.PersonService;
+import com.carcompany.carreservationservice.structure.Resource.behaviour.ResourceService;
+import com.carcompany.carreservationservice.structure.Resource.structure.ResourceEnumeration;
 import com.carcompany.carreservationservice.structure.Statistics.behaviour.StatisticsService;
+import com.carcompany.carreservationservice.structure.contentservice.behaviour.ContentService;
 
 /**
  * @author Kevin

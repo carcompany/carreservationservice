@@ -1,4 +1,4 @@
-package com.carcompany.carreservationservice.structure.Content.structure;
+package com.carcompany.carreservationservice.structure.contentservice.structure;
 
 
 /**
@@ -9,7 +9,7 @@ package com.carcompany.carreservationservice.structure.Content.structure;
 public abstract class Content {
 
 	private String name;
-
+	
 	public String getName() {
 		return name;
 	}
