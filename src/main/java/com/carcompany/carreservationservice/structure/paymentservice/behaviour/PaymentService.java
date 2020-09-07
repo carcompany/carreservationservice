@@ -2,6 +2,7 @@ package com.carcompany.carreservationservice.structure.paymentservice.behaviour;
 
 import javax.security.sasl.AuthenticationException;
 
+import com.carcompany.carreservationservice.structure.authenticationservice.structure.credential.Credential;
 import com.carcompany.carreservationservice.structure.paymentservice.domainvalue.CurrencyAmount;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.Payment;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.PaymentType;
@@ -24,6 +25,6 @@ public interface PaymentService {
 	 * @throws UnsupportedPaymentTypeException 
 	 * @throws AuthenticationException 
 	 */
-	public Payment payAmount(Account senderAccount, Account receiverAccount, CurrencyAmount currencyAmount, PaymentType paymentType) throws UnsupportedPaymentTypeException, AuthenticationException;
+	public Payment payAmount(Account senderAccount, Account receiverAccount, CurrencyAmount currencyAmount, PaymentType paymentType, Credential secret) throws UnsupportedPaymentTypeException, AuthenticationException;
 
 }

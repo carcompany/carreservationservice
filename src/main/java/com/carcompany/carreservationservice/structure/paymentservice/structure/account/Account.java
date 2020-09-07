@@ -1,7 +1,6 @@
 package com.carcompany.carreservationservice.structure.paymentservice.structure.account;
 
 import com.carcompany.carreservationservice.structure.authenticationservice.structure.subject.Subject;
-import com.carcompany.carreservationservice.structure.personservice.structure.Person;
 
 /**
  * @author Sebastian

@@ -6,6 +6,7 @@ import com.carcompany.carreservationservice.structure.authenticationservice.beha
 import com.carcompany.carreservationservice.structure.authenticationservice.behaviour.AuthenticationServiceImplementation;
 import com.carcompany.carreservationservice.structure.authenticationservice.structure.credential.Credential;
 import com.carcompany.carreservationservice.structure.authenticationservice.structure.credential.CredentialEnumeration;
+import com.carcompany.carreservationservice.structure.contentservice.behaviour.ContentService;
 import com.carcompany.carreservationservice.structure.paymentservice.domainvalue.CurrencyAmount;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.Payment;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.PaymentType;
@@ -23,6 +24,8 @@ import com.carcompany.carreservationservice.structure.paymentservice.structure.p
  */
 public class PaymentServiceImplementation implements PaymentService {
 
+
+
 	public PaymentServiceImplementation() {
 
 	}
@@ -38,7 +41,7 @@ public class PaymentServiceImplementation implements PaymentService {
 	 * @throws AuthenticationException 
 	 */
 	public Payment payAmount(Account senderAccount, Account receiverAccount, CurrencyAmount currencyAmount,
-			PaymentType paymentType) throws UnsupportedPaymentTypeException, AuthenticationException {
+			PaymentType paymentType, Credential secret) throws UnsupportedPaymentTypeException, AuthenticationException {
 		PaymentProcess paymentProcess;
 		switch (paymentType) {
 		case APPLE_PAY:
@@ -59,17 +62,15 @@ public class PaymentServiceImplementation implements PaymentService {
 			throw new UnsupportedPaymentTypeException();
 		}
 		
-		AuthenticationService authenticationService = new AuthenticationServiceImplementation();
-		Credential secret = authenticationService.createCredential(CredentialEnumeration.PASSWORD, "AAAAAAAAAA");
 		
 		
 
 		if (paymentProcess.authenticateCustomer(senderAccount.getSubject(), secret )) {
 
 			if(paymentProcess.executePayment(senderAccount, receiverAccount, currencyAmount)) {
-				
+
+
 				return paymentProcess.getPayment(senderAccount, receiverAccount, currencyAmount);
-				
 			}
 
 		} else {
