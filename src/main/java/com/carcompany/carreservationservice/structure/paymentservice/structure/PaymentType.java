@@ -10,5 +10,5 @@ public enum PaymentType {
 	GOOGLE_PAY,
 	APPLE_PAY,
 	PAYPAL,
-	SACRAFICE_OF_FIRST_BORN
+	BANK
 }
