@@ -14,6 +14,7 @@ import com.carcompany.carreservationservice.structure.bookingservice.structure.B
 import com.carcompany.carreservationservice.structure.bookingservice.structure.Language;
 import com.carcompany.carreservationservice.structure.contentservice.behaviour.ContentService;
 import com.carcompany.carreservationservice.structure.contentservice.structure.ContentType;
+import com.carcompany.carreservationservice.structure.contentservice.structure.Report;
 import com.carcompany.carreservationservice.structure.paymentservice.behaviour.PaymentService;
 import com.carcompany.carreservationservice.structure.paymentservice.domainvalue.CurrencyAmount;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.Payment;
@@ -67,17 +68,14 @@ class ContentServiceTest {
 
 		Person personB = personService.createPerson("Goerg", "VonVerkauf");
 		Credential credentialB = authenticationService.createCredential(CredentialEnumeration.PASSWORD, "CBA");
-		Subject subjectB = authenticationService.createSubject(personB, credentialB, Role.STAFF);
+		Subject subjectB = authenticationService.createSubject(personB, credentialB, Role.CUSTOMER);
 		Account accountB = new AppleAccount(subjectB);
 
 		CurrencyAmount currencyAmount = new CurrencyAmount();
 		currencyAmount.setAmount(120);
 
-		try {
-			payment = paymentService.payAmount(accountA, accountB, currencyAmount, PaymentType.APPLE_PAY, credentialA);
-		} catch (Exception err) {
-
-		}
+		payment = paymentService.payAmount(accountA, accountB, currencyAmount, PaymentType.APPLE_PAY, credentialA);
+		booking.getFooter().setPayment(payment);
 
 	}
 
@@ -91,20 +89,30 @@ class ContentServiceTest {
 	@Order(2)
 	public void canBookingBeObtained() {
 		contentService.addContent(booking, ContentType.BOOKING);
-		assertEquals("Booking_"+ booking.getId(),
-				contentService.getSelectedContent("/09-2020/Booking_"+ booking.getId()).getName());
+		assertEquals("Booking_" + booking.getId(),
+				contentService.getSelectedContent("/09-2020/Booking_" + booking.getId()).getName());
 	}
 
 	@Test
-	@Order(2)
+	@Order(3)
 	public void canPaymentBeObtained() {
 		contentService.addContent(payment, ContentType.PAYMENT);
+		contentService.addContent(payment, ContentType.PAYMENT);
+
 		assertEquals("Payment_" + payment.getId(),
 				contentService.getSelectedContent("/09-2020/Payment_" + payment.getId()).getName());
 	}
 
 	@Test
-	@Order(3)
+	@Order(4)
+	public void canReportBeObtained() {
+		Report report = (Report) contentService.getSelectedContent("/09-2020/Report");
+		assertTrue(report.getBookingNumbers(PaymentType.APPLE_PAY) > 0);
+		assertTrue(report.getPaymentNumbers(PaymentType.APPLE_PAY) > 0);
+	}
+
+	@Test
+	@Order(5)
 	public void canContentBeRemoved() {
 		contentService.addContent(booking, ContentType.BOOKING);
 		contentService.removeContent("09-2020");
