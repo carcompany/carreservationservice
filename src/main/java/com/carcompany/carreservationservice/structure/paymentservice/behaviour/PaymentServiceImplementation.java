@@ -63,7 +63,7 @@ public class PaymentServiceImplementation extends PaymentService {
 			if(paymentProcess.executePayment(senderAccount, receiverAccount, currencyAmount)) {
 
 
-				return paymentProcess.getPayment(senderAccount, receiverAccount, currencyAmount);
+				return paymentProcess.getPayment(senderAccount, receiverAccount, currencyAmount, paymentType);
 			}
 
 		} else {

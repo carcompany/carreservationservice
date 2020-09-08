@@ -11,12 +11,14 @@ public class Payment {
 	private Account senderAccount;
 	private Account receiverAccount;
 	private CurrencyAmount currencyAmount;
+	private PaymentType paymentType;
 
-	public Payment(Account sender, Account receiver, CurrencyAmount amount) {
+	public Payment(Account sender, Account receiver, CurrencyAmount amount, PaymentType paymentType){
 		
 		this.setSenderAccount(sender);
 		this.setReceiverAccount(receiver);
 		this.setCurrencyAmount(amount);
+		this.setPaymentType(paymentType);
 		this.setId(numberOfPayments);
 
 		
@@ -63,6 +65,15 @@ public class Payment {
 	private void setId(int id) {
 		this.id = id;
 	}
+
+	public PaymentType getPaymentType() {
+		return paymentType;
+	}
+
+	public void setPaymentType(PaymentType paymentType) {
+		this.paymentType = paymentType;
+	}
+	
 	
 	
 	
