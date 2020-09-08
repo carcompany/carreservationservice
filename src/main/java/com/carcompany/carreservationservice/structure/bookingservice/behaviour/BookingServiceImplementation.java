@@ -13,18 +13,16 @@ import com.carcompany.carreservationservice.structure.resourceservice.structure.
  * @version 1.0
  * @created 28-Aug-2020 17:10:39
  */
-public class BookingServiceImplementation implements BookingService {
+public class BookingServiceImplementation extends BookingService {
 
-	private static BookingServiceImplementation bookingServiceImplementation;
+
 
 	public BookingDirector bookingDirector;
 
 
 
 
-	private BookingServiceImplementation(){
-
-	}
+	
 
 	/**
 	 * 
@@ -61,11 +59,12 @@ public class BookingServiceImplementation implements BookingService {
 		}
 	}
 
-	public BookingServiceImplementation getInstance(){
-		if(bookingServiceImplementation == null) bookingServiceImplementation = new BookingServiceImplementation();
-
-		return bookingServiceImplementation;
+	@Override
+	public BookingService getInstance() {
+		if(bookingService == null) bookingService = new BookingServiceImplementation();
+		return bookingService;
 	}
+
 }
 
 
