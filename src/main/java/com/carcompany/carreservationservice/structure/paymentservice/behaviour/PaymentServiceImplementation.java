@@ -21,8 +21,11 @@ import com.carcompany.carreservationservice.structure.paymentservice.structure.p
 public class PaymentServiceImplementation implements PaymentService {
 
 
+	private static PaymentServiceImplementation paymentServiceImplementation;
 
-	public PaymentServiceImplementation() {
+
+
+	private PaymentServiceImplementation() {
 
 	}
 
@@ -73,5 +76,10 @@ public class PaymentServiceImplementation implements PaymentService {
 			throw new AuthenticationException("Authentication failed");
 		}
 		return null;
+	}
+
+	public PaymentServiceImplementation getInstance(){
+		if(paymentServiceImplementation == null) paymentServiceImplementation = new PaymentServiceImplementation();
+		return paymentServiceImplementation;
 	}
 }// end PaymentServiceImplementation
