@@ -31,7 +31,7 @@ public class AuthenticationServiceTest {
 
     @BeforeAll
     static void setUpBeforClass() {
-        authenticationService = new AuthenticationServiceImplementation();
+        authenticationService = AuthenticationServiceImplementation.getInstance();
 
         person = new Person();
 
