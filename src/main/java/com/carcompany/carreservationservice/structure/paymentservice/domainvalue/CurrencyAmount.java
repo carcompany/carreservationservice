@@ -16,30 +16,22 @@ public class CurrencyAmount {
 
 	}
 
-	public void finalize() throws Throwable {
-
-	}
-	public Currency getCurrency(){
-		return null;
+	public Currency getCurrency() {
+		return currency;
 	}
 
-	/**
-	 * 
-	 * @param currency
-	 */
-	public void setCurrency(Currency currency){
-
+	public void setCurrency(Currency currency) {
+		this.currency = currency;
 	}
 
-	public double getAmount(){
-		return 0;
+	public double getAmount() {
+		return amount;
 	}
 
-	/**
-	 * 
-	 * @param amount
-	 */
-	public void setAmount(double amount){
-
+	public void setAmount(double amount) {
+		this.amount = amount;
 	}
+	
+
+
 }//end CurrencyAmount

@@ -10,6 +10,7 @@ import com.carcompany.carreservationservice.structure.authenticationservice.stru
 import com.carcompany.carreservationservice.structure.authenticationservice.structure.credential.FingerprintCredential;
 import com.carcompany.carreservationservice.structure.authenticationservice.structure.credential.IrisScanCredential;
 import com.carcompany.carreservationservice.structure.authenticationservice.structure.credential.PasswordCredential;
+import com.carcompany.carreservationservice.structure.authenticationservice.structure.subject.Subject;
 import com.carcompany.carreservationservice.structure.personservice.structure.Person;
 
 import org.junit.jupiter.api.AfterAll;
@@ -92,20 +93,21 @@ public class AuthenticationServiceTest {
     @Test
     @Order(3)
     public void canAuthenticateSubject() {
-        authenticationService.createSubject(person, passwordCredential, Role.CUSTOMER);
-        authenticationService.createSubject(person, irisScanCredential, Role.CUSTOMER);
-        authenticationService.createSubject(person, fingerprintCredential, Role.CUSTOMER);
+        Subject subjectA = authenticationService.createSubject(person, passwordCredential, Role.CUSTOMER);
+        Subject subjectB = authenticationService.createSubject(person, irisScanCredential, Role.CUSTOMER);
+        Subject subjectC = authenticationService.createSubject(person, fingerprintCredential, Role.CUSTOMER);
 
-        assertFalse(authenticationService.authenticateSubject(0, passwordCredential, Role.STAFF));
+        assertTrue(authenticationService.authenticateSubject(subjectA.getId(), passwordCredential, Role.CUSTOMER));
+        assertFalse(
+                authenticationService.authenticateSubject(subjectA.getId(), invalidPasswordCredential, Role.CUSTOMER));
 
-        assertTrue(authenticationService.authenticateSubject(0, passwordCredential, Role.CUSTOMER));
-        assertFalse(authenticationService.authenticateSubject(0, invalidPasswordCredential, Role.CUSTOMER));
+        assertTrue(authenticationService.authenticateSubject(subjectB.getId(), irisScanCredential, Role.CUSTOMER));
+        assertFalse(
+                authenticationService.authenticateSubject(subjectB.getId(), invalidIrisScanCredential, Role.CUSTOMER));
 
-        assertTrue(authenticationService.authenticateSubject(1, irisScanCredential, Role.CUSTOMER));
-        assertFalse(authenticationService.authenticateSubject(1, invalidIrisScanCredential, Role.CUSTOMER));
-
-        assertTrue(authenticationService.authenticateSubject(2, fingerprintCredential, Role.CUSTOMER));
-        assertFalse(authenticationService.authenticateSubject(2, invalidFingerprintCredential, Role.CUSTOMER));
+        assertTrue(authenticationService.authenticateSubject(subjectC.getId(), fingerprintCredential, Role.CUSTOMER));
+        assertFalse(authenticationService.authenticateSubject(subjectC.getId(), invalidFingerprintCredential,
+                Role.CUSTOMER));
 
     }
 }
