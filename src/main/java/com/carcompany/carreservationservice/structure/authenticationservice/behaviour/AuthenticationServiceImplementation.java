@@ -26,17 +26,7 @@ import com.carcompany.carreservationservice.structure.personservice.structure.Pe
  * @version 1.0
  * @created 28-Aug-2020 17:10:35
  */
-public class AuthenticationServiceImplementation implements AuthenticationService {
-
-	private static AuthenticationService instance;
-
-	public static AuthenticationService getInstance() {
-		if (instance == null) {
-			instance = new AuthenticationServiceImplementation();
-		}
-
-		return instance;
-	};
+public class AuthenticationServiceImplementation extends AuthenticationService {
 
 	private ArrayList<Subject> subjects;
 
