@@ -18,16 +18,11 @@ import com.carcompany.carreservationservice.structure.paymentservice.structure.p
  * @version 1.0
  * @created 28-Aug-2020 17:10:50
  */
-public class PaymentServiceImplementation implements PaymentService {
-
-
-	private static PaymentServiceImplementation paymentServiceImplementation;
+public class PaymentServiceImplementation extends PaymentService {
 
 
 
-	private PaymentServiceImplementation() {
 
-	}
 
 	/**
 	 * 
@@ -77,9 +72,11 @@ public class PaymentServiceImplementation implements PaymentService {
 		}
 		return null;
 	}
+	public PaymentService getInstance(){
+		if(paymentService == null) paymentService = new PaymentServiceImplementation();
 
-	public PaymentServiceImplementation getInstance(){
-		if(paymentServiceImplementation == null) paymentServiceImplementation = new PaymentServiceImplementation();
-		return paymentServiceImplementation;
+		return paymentService;
 	}
+
+
 }// end PaymentServiceImplementation

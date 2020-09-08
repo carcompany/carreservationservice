@@ -10,7 +10,13 @@ import com.carcompany.carreservationservice.structure.resourceservice.structure.
  * @version 1.0
  * @created 28-Aug-2020 17:10:39
  */
-public interface BookingService {
+public abstract class BookingService {
+
+
+	protected static BookingService bookingService;
+
+	public abstract BookingService getInstance();
+
 
 	/**
 	 * 
@@ -18,6 +24,6 @@ public interface BookingService {
 	 * @param resource
 	 * @param language
 	 */
-	public Booking createBooking(Person person, Resource resource, Language language);
+	public abstract Booking createBooking(Person person, Resource resource, Language language);
 
 }
