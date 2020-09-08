@@ -28,8 +28,6 @@ class PaymentServiceTest {
 	private static Person personA;
 	private static Person personB;
 
-	
-
 	private static Account senderAccount;
 	private static Account receiverAccount;
 	private static CurrencyAmount currencyAmount;
@@ -40,11 +38,10 @@ class PaymentServiceTest {
 	static void setUpBeforeClass() throws Exception {
 
 		paymentService = new PaymentServiceImplementation();
-		authenticationService = new AuthenticationServiceImplementation();
+		authenticationService = AuthenticationServiceImplementation.getInstance();
 
 		personA = new PersonServiceImplementation().createPerson("Rainer", "Zufall");
 		personB = new PersonServiceImplementation().createPerson("Renate", "Zufall");
-
 
 		currencyAmount = new CurrencyAmount();
 		paymentType = PaymentType.APPLE_PAY;
@@ -52,18 +49,15 @@ class PaymentServiceTest {
 
 		senderAccount = new BankAccount(authenticationService.createSubject(personA, secret, Role.CUSTOMER));
 
-
-
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 	}
 
-
-
 	@Test
 	void canAmountBePaid() {
-		assertDoesNotThrow(() -> paymentService.payAmount(senderAccount, receiverAccount, currencyAmount, paymentType, secret));
+		assertDoesNotThrow(
+				() -> paymentService.payAmount(senderAccount, receiverAccount, currencyAmount, paymentType, secret));
 	}
 }
