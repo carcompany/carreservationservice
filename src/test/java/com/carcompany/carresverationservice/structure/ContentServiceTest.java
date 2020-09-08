@@ -49,10 +49,8 @@ class ContentServiceTest {
 	private static ResourceService resourceService;
 	private static AuthenticationService authenticationService;
 
-
 	private static Booking booking;
 	private static Payment payment;
-
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -67,23 +65,26 @@ class ContentServiceTest {
 		Person personA = personService.createPerson("Hans", "KaufGern");
 		Resource resourceA = resourceService.getSelectedResource(ResourceEnumeration.CAR);
 		booking = bookingService.createBooking(personA, resourceA, Language.GERMAN);
-	
-		
+
 		// CREATE PAYMENT
 		Credential credentialA = authenticationService.createCredential(CredentialEnumeration.PASSWORD, "ABC");
 		Subject subjectA = authenticationService.createSubject(personA, credentialA, Role.CUSTOMER);
 		Account accountA = new AppleAccount(subjectA);
-		
+
 		Person personB = personService.createPerson("Goerg", "VonVerkauf");
 		Credential credentialB = authenticationService.createCredential(CredentialEnumeration.PASSWORD, "CBA");
 		Subject subjectB = authenticationService.createSubject(personB, credentialB, Role.STAFF);
 		Account accountB = new AppleAccount(subjectB);
-		
+
 		CurrencyAmount currencyAmount = new CurrencyAmount();
 		currencyAmount.setAmount(120);
-		
-		payment = paymentService.payAmount(accountA, accountB, currencyAmount, PaymentType.APPLE_PAY, credentialA);
-		
+
+		try {
+			payment = paymentService.payAmount(accountA, accountB, currencyAmount, PaymentType.APPLE_PAY, credentialA);
+		} catch (Exception err) {
+
+		}
+
 	}
 
 	@Test
@@ -93,17 +94,19 @@ class ContentServiceTest {
 	}
 
 	@Test
-	@Order(2)	
+	@Order(2)
 	public void canBookingBeObtained() {
 		contentService.addContent(booking, ContentType.BOOKING);
-		assertEquals("Booking_ID_Placeholder", contentService.getSelectedContent("/09-2020/Booking_ID_Placeholder").getName());
+		assertEquals("Booking_ID_Placeholder",
+				contentService.getSelectedContent("/09-2020/Booking_ID_Placeholder").getName());
 	}
-	
+
 	@Test
-	@Order(2)	
+	@Order(2)
 	public void canPaymentBeObtained() {
 		contentService.addContent(payment, ContentType.PAYMENT);
-		assertEquals("Payment_"  + payment.getId(), contentService.getSelectedContent("/09-2020/Payment_" + payment.getId()).getName());
+		assertEquals("Payment_" + payment.getId(),
+				contentService.getSelectedContent("/09-2020/Payment_" + payment.getId()).getName());
 	}
 
 	@Test
