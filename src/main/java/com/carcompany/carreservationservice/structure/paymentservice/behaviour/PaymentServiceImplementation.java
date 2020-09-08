@@ -72,6 +72,11 @@ public class PaymentServiceImplementation extends PaymentService {
 		}
 		return null;
 	}
+	public PaymentService getInstance(){
+		if(paymentService == null) paymentService = new PaymentServiceImplementation();
+
+		return paymentService;
+	}
 
 
 }// end PaymentServiceImplementation

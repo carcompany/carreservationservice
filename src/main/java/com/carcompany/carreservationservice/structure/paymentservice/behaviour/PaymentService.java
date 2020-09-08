@@ -3,7 +3,6 @@ package com.carcompany.carreservationservice.structure.paymentservice.behaviour;
 import javax.security.sasl.AuthenticationException;
 
 import com.carcompany.carreservationservice.structure.authenticationservice.structure.credential.Credential;
-import com.carcompany.carreservationservice.structure.bookingservice.behaviour.BookingServiceImplementation;
 import com.carcompany.carreservationservice.structure.paymentservice.domainvalue.CurrencyAmount;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.Payment;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.PaymentType;
@@ -17,7 +16,7 @@ import com.carcompany.carreservationservice.structure.paymentservice.structure.e
  */
 public abstract class PaymentService {
 
-	private static PaymentService paymentService;
+	protected static PaymentService paymentService;
 
 
 
@@ -33,9 +32,5 @@ public abstract class PaymentService {
 	 */
 	public abstract Payment payAmount(Account senderAccount, Account receiverAccount, CurrencyAmount currencyAmount, PaymentType paymentType, Credential secret) throws UnsupportedPaymentTypeException, AuthenticationException;
 
-	public PaymentService getInstance(){
-		if(paymentService == null) paymentService = new PaymentService();
-
-		return paymentService;
-	}
+	public abstract PaymentService getInstance();
 }
