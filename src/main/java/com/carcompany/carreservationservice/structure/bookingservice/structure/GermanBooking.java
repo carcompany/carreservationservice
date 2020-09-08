@@ -6,7 +6,4 @@ package com.carcompany.carreservationservice.structure.bookingservice.structure;
  * @created 28-Aug-2020 17:10:46
  */
 public class GermanBooking extends Booking {
-	protected Head head;
-	protected Body body;
-	protected Footer footer;
 }
