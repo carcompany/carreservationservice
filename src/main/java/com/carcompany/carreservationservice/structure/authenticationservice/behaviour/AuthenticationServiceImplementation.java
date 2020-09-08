@@ -28,6 +28,16 @@ import com.carcompany.carreservationservice.structure.personservice.structure.Pe
  */
 public class AuthenticationServiceImplementation implements AuthenticationService {
 
+	private static AuthenticationService instance;
+
+	public static AuthenticationService getInstance() {
+		if (instance == null) {
+			instance = new AuthenticationServiceImplementation();
+		}
+
+		return instance;
+	};
+
 	private ArrayList<Subject> subjects;
 
 	public AuthenticationServiceImplementation() {
