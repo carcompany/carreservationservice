@@ -3,12 +3,10 @@ package com.carcompany.carresverationservice.structure;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import com.carcompany.carreservationservice.structure.authenticationservice.behaviour.AuthenticationService;
-import com.carcompany.carreservationservice.structure.authenticationservice.behaviour.AuthenticationServiceImplementation;
 import com.carcompany.carreservationservice.structure.authenticationservice.structure.Role;
 import com.carcompany.carreservationservice.structure.authenticationservice.structure.credential.Credential;
 import com.carcompany.carreservationservice.structure.authenticationservice.structure.credential.CredentialEnumeration;
 import com.carcompany.carreservationservice.structure.paymentservice.behaviour.PaymentService;
-import com.carcompany.carreservationservice.structure.paymentservice.behaviour.PaymentServiceImplementation;
 import com.carcompany.carreservationservice.structure.paymentservice.domainvalue.CurrencyAmount;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.PaymentType;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.account.Account;
@@ -48,6 +46,7 @@ class PaymentServiceTest {
 		secret = authenticationService.createCredential(CredentialEnumeration.PASSWORD, "AAAAAAAAAAAA");
 
 		senderAccount = new BankAccount(authenticationService.createSubject(personA, secret, Role.CUSTOMER));
+		receiverAccount = new BankAccount(authenticationService.createSubject(personB, secret, Role.CUSTOMER));
 
 	}
 

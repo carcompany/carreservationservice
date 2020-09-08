@@ -13,10 +13,12 @@ import com.carcompany.carreservationservice.structure.resourceservice.structure.
 public abstract class BookingService {
 
 
-	protected static BookingService bookingService;
+	private static BookingService bookingService;
 
-	public abstract BookingService getInstance();
-
+	public static BookingService getInstance() {
+		if(bookingService == null) bookingService = new BookingServiceImplementation();
+		return bookingService;
+	}
 
 	/**
 	 * 
@@ -25,5 +27,6 @@ public abstract class BookingService {
 	 * @param language
 	 */
 	public abstract Booking createBooking(Person person, Resource resource, Language language);
+	
 
 }

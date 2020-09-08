@@ -16,7 +16,7 @@ import com.carcompany.carreservationservice.structure.paymentservice.structure.e
  */
 public abstract class PaymentService {
 
-	protected static PaymentService paymentService;
+	private static PaymentService paymentService;
 
 
 
@@ -32,5 +32,9 @@ public abstract class PaymentService {
 	 */
 	public abstract Payment payAmount(Account senderAccount, Account receiverAccount, CurrencyAmount currencyAmount, PaymentType paymentType, Credential secret) throws UnsupportedPaymentTypeException, AuthenticationException;
 
-	public abstract PaymentService getInstance();
+	public static PaymentService getInstance(){
+		if(paymentService == null) paymentService = new PaymentServiceImplementation();
+
+		return paymentService;
+	}
 }
