@@ -7,6 +7,7 @@ import com.carcompany.carreservationservice.structure.contentservice.structure.C
 import com.carcompany.carreservationservice.structure.contentservice.structure.ContentType;
 import com.carcompany.carreservationservice.structure.contentservice.structure.File;
 import com.carcompany.carreservationservice.structure.contentservice.structure.Folder;
+import com.carcompany.carreservationservice.structure.contentservice.structure.Report;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.Payment;
 import com.carcompany.carreservationservice.structure.bookingservice.structure.Booking;
 
@@ -47,12 +48,26 @@ public class ContentServiceImplementation extends ContentService {
 			rootFolder.addContent(folder);
 		}
 
+		Report report;
+
+		if (folder.getContents().containsKey("Report")) {
+			report = (Report) folder.getContents().get("Report");
+		} else {
+			report = new Report();
+			report.setName("Report");
+			folder.addContent(report);
+		}
+
 		switch (contentType) {
 			case PAYMENT:
-				fileName = "Payment_" + ((Payment) object).getId();
+				Payment payment = ((Payment) object);
+				fileName = "Payment_" + payment.getId();
+				report.increment(payment.getPaymentType(), payment.getCurrencyAmount());
 				break;
 			case BOOKING:
-				fileName = "Booking_" + ((Booking) object).getId();
+				Booking booking = ((Booking) object);
+				fileName = "Booking_" + booking.getId();
+				report.increment(booking.getFooter().getPayment().getPaymentType());
 				break;
 			default:
 				break;
