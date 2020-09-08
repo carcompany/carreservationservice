@@ -1,5 +1,7 @@
 package com.carcompany.carreservationservice.behaviour;
 
+import com.carcompany.carreservationservice.structure.authenticationservice.structure.Role;
+import com.carcompany.carreservationservice.structure.authenticationservice.structure.credential.Credential;
 import com.carcompany.carreservationservice.structure.bookingservice.structure.Booking;
 import com.carcompany.carreservationservice.structure.bookingservice.structure.Language;
 import com.carcompany.carreservationservice.structure.personservice.structure.Person;
@@ -36,7 +38,7 @@ public interface CarReservationService {
 	 * 
 	 * @param personId
 	 */
-	public void authenticatePerson(int personId);
+	public void authenticateSubject(int personId, Credential credential, Role role);
 
 	public void showStatistics();
 
