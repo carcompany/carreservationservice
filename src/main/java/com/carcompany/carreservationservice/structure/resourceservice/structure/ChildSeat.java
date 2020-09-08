@@ -11,6 +11,7 @@ public class ChildSeat extends ResourceDecorator {
 
 	public ChildSeat(Resource resource) {
 		super(resource);
+		super.setPrice(30);
 	}
 
 	public ChildSeatSize getChildSeatSize() {

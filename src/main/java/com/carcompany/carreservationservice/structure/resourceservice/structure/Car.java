@@ -6,5 +6,7 @@ package com.carcompany.carreservationservice.structure.resourceservice.structure
  * @created 28-Aug-2020 17:10:40
  */
 public class Car extends Resource {
-
+    public Car() {
+        super.setPrice(350);
+    }
 }
