@@ -13,7 +13,6 @@ import com.carcompany.carreservationservice.structure.resourceservice.structure.
  */
 public class CarReservationServiceImplementation implements CarReservationService {
 
-	
 	public CarReservationServiceImplementation() {
 
 	}

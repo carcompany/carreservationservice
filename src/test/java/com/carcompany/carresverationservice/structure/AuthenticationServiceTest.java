@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.carcompany.carreservationservice.structure.authenticationservice.behaviour.AuthenticationService;
-import com.carcompany.carreservationservice.structure.authenticationservice.behaviour.AuthenticationServiceImplementation;
 import com.carcompany.carreservationservice.structure.authenticationservice.structure.Role;
 import com.carcompany.carreservationservice.structure.authenticationservice.structure.credential.CredentialEnumeration;
 import com.carcompany.carreservationservice.structure.authenticationservice.structure.credential.FingerprintCredential;
@@ -32,7 +31,7 @@ public class AuthenticationServiceTest {
 
     @BeforeAll
     static void setUpBeforClass() {
-        authenticationService = AuthenticationServiceImplementation.getInstance();
+        authenticationService = AuthenticationService.getInstance();
 
         person = new Person();
 
