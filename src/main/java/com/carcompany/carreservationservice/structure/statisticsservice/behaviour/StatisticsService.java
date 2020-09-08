@@ -2,23 +2,18 @@ package com.carcompany.carreservationservice.structure.statisticsservice.behavio
 
 import com.carcompany.carreservationservice.structure.statisticsservice.structure.ExternalPaymentService;
 
-/**
- * @author Kevin
- * @version 1.0
- * @created 28-Aug-2020 17:10:54
- */
-public interface StatisticsService {
-
-	/**
-	 * 
-	 * @param externalPaymentService
-	 */
-	public void getGermanBookingsPaidBy(ExternalPaymentService externalPaymentService);
-
-	/**
-	 * 
-	 * @param externalPaymentService
-	 */
-	public void getEnglishBookingsPaidBy(ExternalPaymentService externalPaymentService);
+public abstract class StatisticsService {
+	
+	private static StatisticsServiceImplementation instance;
+	
+	public static StatisticsServiceImplementation getInstance() {
+		if(instance == null) {
+			instance = new StatisticsServiceImplementation();
+		}
+		return instance;
+	}
+	
+	public abstract void getGermanBookingsPaidBy(ExternalPaymentService externalPaymentService);
+	public abstract void getEnglishBookingsPaidBy(ExternalPaymentService externalPaymentService);
 
 }

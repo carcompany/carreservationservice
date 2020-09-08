@@ -1,35 +1,29 @@
 package com.carcompany.carreservationservice.structure.statisticsservice.behaviour;
 
+import com.carcompany.carreservationservice.structure.statisticsservice.structure.BookingVisitor;
+import com.carcompany.carreservationservice.structure.statisticsservice.structure.EnglishBookingVisitor;
 import com.carcompany.carreservationservice.structure.statisticsservice.structure.ExternalPaymentService;
+import com.carcompany.carreservationservice.structure.statisticsservice.structure.GermanBookingVisitor;
 
-/**
- * @author Kevin
- * @version 1.0
- * @created 28-Aug-2020 17:10:54
- */
-public class StatisticsServiceImplementation implements StatisticsService {
+public class StatisticsServiceImplementation extends StatisticsService {
+	
+	private GermanBookingVisitor germanStats;
+	private EnglishBookingVisitor englishStats;
+	
+	
 
-
-	public StatisticsServiceImplementation(){
-
+	public void getGermanBookingsPaidBy(ExternalPaymentService externalPaymentService) {
+		
+		germanStats = new GermanBookingVisitor("22-09");
+		externalPaymentService.accept(germanStats);
 	}
 
-	public void finalize() throws Throwable {
-
+	public void getEnglishBookingsPaidBy(ExternalPaymentService externalPaymentService) {
+		
+		englishStats = new EnglishBookingVisitor();
+		
+		BookingVisitor visitor = new EnglishBookingVisitor();
+		
+		externalPaymentService.accept(germanStats);
 	}
-	/**
-	 * 
-	 * @param externalPaymentService
-	 */
-	public void getGermanBookingsPaidBy(ExternalPaymentService externalPaymentService){
-
-	}
-
-	/**
-	 * 
-	 * @param externalPaymentService
-	 */
-	public void getEnglishBookingsPaidBy(ExternalPaymentService externalPaymentService){
-
-	}
-}//end StatisticsServiceImplementation
+}
