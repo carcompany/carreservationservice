@@ -1,5 +1,10 @@
 package com.carcompany.carreservationservice.structure.statisticsservice.structure;
 
+import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.ApplePayExternalPaymentService;
+import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.BankExternalPaymentService;
+import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.GooglePayExternalPaymentService;
+import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.PayPalExternalPaymentService;
+
 /**
  * This class implements each operation declared by Visitor. Each operation
  * implements a fragment of the algorithm defined for the corresponding class of
@@ -15,16 +20,13 @@ public class EnglishBookingVisitor implements BookingVisitor {
 	public EnglishBookingVisitor(){
 
 	}
-
-	public void finalize() throws Throwable {
-
-	}
+	
 	/**
 	 * 
 	 * @param externalPaymentService
 	 */
 	public void visit(PayPalExternalPaymentService externalPaymentService) {
-
+		externalPaymentService.calculateAccountSum();
 	}
 	
 	/**
@@ -32,7 +34,7 @@ public class EnglishBookingVisitor implements BookingVisitor {
 	 * @param externalPaymentService
 	 */
 	public void visit(ApplePayExternalPaymentService externalPaymentService) {
-
+		externalPaymentService.calculateAccountSum();
 	}
 
 	/**
@@ -40,7 +42,7 @@ public class EnglishBookingVisitor implements BookingVisitor {
 	 * @param externalPaymentService
 	 */
 	public void visit(GooglePayExternalPaymentService externalPaymentService) {
-
+		externalPaymentService.calculateAccountSum();
 	}
 
 	/**
@@ -48,6 +50,6 @@ public class EnglishBookingVisitor implements BookingVisitor {
 	 * @param externalPaymentService
 	 */
 	public void visit(BankExternalPaymentService externalPaymentService) {
-
+		externalPaymentService.calculateAccountSum();
 	}
-}//end EnglishBookingVisitor
+}
