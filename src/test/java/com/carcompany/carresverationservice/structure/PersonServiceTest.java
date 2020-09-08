@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.carcompany.carreservationservice.structure.personservice.behaviour.PersonService;
-import com.carcompany.carreservationservice.structure.personservice.behaviour.PersonServiceImplementation;
 import com.carcompany.carreservationservice.structure.personservice.structure.LegalPerson;
 import com.carcompany.carreservationservice.structure.personservice.structure.NaturalPerson;
 import com.carcompany.carreservationservice.structure.personservice.structure.exception.TooFewOrManyParametersForPersonCreationException;
@@ -23,7 +22,7 @@ public class PersonServiceTest {
 
     @BeforeAll
     static void setupBeforeClass() {
-        personService = new PersonServiceImplementation();
+        personService = PersonService.getInstance();
         firstname = "Jane";
         lastname = "Doe";
         companyName = "CineCar GmbH";

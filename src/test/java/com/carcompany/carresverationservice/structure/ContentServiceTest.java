@@ -23,6 +23,7 @@ import com.carcompany.carreservationservice.structure.bookingservice.structure.B
 import com.carcompany.carreservationservice.structure.bookingservice.structure.Language;
 import com.carcompany.carreservationservice.structure.contentservice.behaviour.ContentService;
 import com.carcompany.carreservationservice.structure.contentservice.behaviour.ContentServiceImplementation;
+import com.carcompany.carreservationservice.structure.contentservice.structure.Content;
 import com.carcompany.carreservationservice.structure.contentservice.structure.ContentType;
 import com.carcompany.carreservationservice.structure.paymentservice.behaviour.PaymentService;
 import com.carcompany.carreservationservice.structure.paymentservice.behaviour.PaymentServiceImplementation;
@@ -54,12 +55,12 @@ class ContentServiceTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		contentService = ContentServiceImplementation.getInstance();
-		paymentService = new PaymentServiceImplementation();
-		bookingService = new BookingServiceImplementation();
-		personService = new PersonServiceImplementation();
-		resourceService = new ResourceServiceImplementation();
-		authenticationService = AuthenticationServiceImplementation.getInstance();
+		contentService = ContentService.getInstance();
+		paymentService = PaymentService.getInstance();
+		bookingService = BookingService.getInstance();
+		personService = PersonService.getInstance();
+		resourceService = ResourceService.getInstance();
+		authenticationService = AuthenticationService.getInstance();
 
 		// CREATE BOOKING
 		Person personA = personService.createPerson("Hans", "KaufGern");

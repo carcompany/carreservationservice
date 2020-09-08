@@ -13,7 +13,7 @@ import com.carcompany.carreservationservice.structure.personservice.structure.ex
  * @version 1.0
  * @created 28-Aug-2020 17:10:51
  */
-public class PersonServiceImplementation implements PersonService {
+public class PersonServiceImplementation extends PersonService {
 
 	private ArrayList<Person> persons;
 

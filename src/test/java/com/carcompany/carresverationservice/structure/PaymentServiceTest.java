@@ -37,8 +37,8 @@ class PaymentServiceTest {
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 
-		paymentService = new PaymentServiceImplementation();
-		authenticationService = AuthenticationServiceImplementation.getInstance();
+		paymentService = PaymentService.getInstance();
+		authenticationService = AuthenticationService.getInstance();
 
 		personA = new PersonServiceImplementation().createPerson("Rainer", "Zufall");
 		personB = new PersonServiceImplementation().createPerson("Renate", "Zufall");

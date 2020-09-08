@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.carcompany.carreservationservice.structure.resourceservice.behaviour.ResourceService;
-import com.carcompany.carreservationservice.structure.resourceservice.behaviour.ResourceServiceImplementation;
 import com.carcompany.carreservationservice.structure.resourceservice.structure.ResourceEnumeration;
 import com.carcompany.carreservationservice.structure.resourceservice.structure.exception.MoreThanOneDecoratableResourceException;
 import com.carcompany.carreservationservice.structure.resourceservice.structure.exception.NoDecoratableResourceException;
@@ -20,7 +19,7 @@ public class ResourceServiceTest {
 
     @BeforeAll
     static void setupBeforeClass() {
-        resourceService = new ResourceServiceImplementation();
+        resourceService = ResourceService.getInstance();
     }
 
     @AfterAll
@@ -36,17 +35,17 @@ public class ResourceServiceTest {
 
         try {
             assertNull(resourceService.getSelectedResource());
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-
         assertThrows(MoreThanOneDecoratableResourceException.class, () -> {
-            resourceService.getSelectedResource(ResourceEnumeration.CAR, ResourceEnumeration.CAR, ResourceEnumeration.CHILD_SEAT);
+            resourceService.getSelectedResource(ResourceEnumeration.CAR, ResourceEnumeration.CAR,
+                    ResourceEnumeration.CHILD_SEAT);
         });
 
         assertThrows(NoDecoratableResourceException.class, () -> {
-            resourceService.getSelectedResource( ResourceEnumeration.CHILD_SEAT);
+            resourceService.getSelectedResource(ResourceEnumeration.CHILD_SEAT);
         });
     }
 }
