@@ -60,7 +60,6 @@ public class PaymentServiceImplementation extends PaymentService {
 		
 
 		if (paymentProcess.authenticateCustomer(senderAccount.getSubject(), secret )) {
-
 			if(paymentProcess.executePayment(senderAccount, receiverAccount, currencyAmount)) {
 
 
@@ -71,11 +70,7 @@ public class PaymentServiceImplementation extends PaymentService {
 			throw new AuthenticationException("Authentication failed");
 		}
 		return null;
-	}
-	public PaymentService getInstance(){
-		if(paymentService == null) paymentService = new PaymentServiceImplementation();
 
-		return paymentService;
 	}
 
 

@@ -3,17 +3,16 @@ package com.carcompany.carresverationservice.structure;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
 import com.carcompany.carreservationservice.structure.bookingservice.behaviour.BookingService;
-import com.carcompany.carreservationservice.structure.bookingservice.behaviour.BookingServiceImplementation;
 import com.carcompany.carreservationservice.structure.bookingservice.structure.Booking;
 import com.carcompany.carreservationservice.structure.bookingservice.structure.Language;
 import com.carcompany.carreservationservice.structure.personservice.structure.Person;
 import com.carcompany.carreservationservice.structure.resourceservice.structure.Car;
 import com.carcompany.carreservationservice.structure.resourceservice.structure.Resource;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 class BookingServiceTest {
 

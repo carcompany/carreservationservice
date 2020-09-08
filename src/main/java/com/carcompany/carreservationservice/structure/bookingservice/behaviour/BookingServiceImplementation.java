@@ -59,13 +59,4 @@ public class BookingServiceImplementation extends BookingService {
 		}
 	}
 
-	@Override
-	public BookingService getInstance() {
-		if(bookingService == null) bookingService = new BookingServiceImplementation();
-		return bookingService;
-	}
-
 }
-
-
-
