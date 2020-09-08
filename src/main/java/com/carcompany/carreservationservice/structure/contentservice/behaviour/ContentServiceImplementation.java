@@ -8,27 +8,27 @@ import com.carcompany.carreservationservice.structure.contentservice.structure.C
 import com.carcompany.carreservationservice.structure.contentservice.structure.File;
 import com.carcompany.carreservationservice.structure.contentservice.structure.Folder;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.Payment;
+import com.carcompany.carreservationservice.structure.bookingservice.structure.Booking;
 
 /**
  * @version 1.1
  * @created 28-Aug-2020 17:10:42
  */
-public class ContentServiceImplementation implements ContentService {
+public class ContentServiceImplementation extends ContentService {
 
 	private static ContentServiceImplementation instance;
 	private Folder rootFolder;
 
-	private ContentServiceImplementation() {
+	public ContentServiceImplementation() {
 		rootFolder = new Folder();
 	}
 
 	public static ContentServiceImplementation getInstance() {
-		if(ContentServiceImplementation.instance == null) {
+		if (ContentServiceImplementation.instance == null) {
 			ContentServiceImplementation.instance = new ContentServiceImplementation();
 		}
 		return ContentServiceImplementation.instance;
 	}
-
 
 	public Boolean addContent(Object object, ContentType contentType) {
 		File file = new File();
@@ -39,25 +39,24 @@ public class ContentServiceImplementation implements ContentService {
 
 		Folder folder;
 
-		if(rootFolder.getContents().containsKey(folderName)) {
+		if (rootFolder.getContents().containsKey(folderName)) {
 			folder = (Folder) rootFolder.getContents().get(folderName);
-		}
-		else {
+		} else {
 			folder = new Folder();
 			folder.setName(folderName);
 			rootFolder.addContent(folder);
 		}
 
 		switch (contentType) {
-		case PAYMENT: 
-			fileName = "Payment_" + ((Payment) object).getId();
-			break;
-		case BOOKING: 
-			fileName = "Booking_ID_Placeholder"; //+ ((Booking) object).getId();
-			break;
-		default:
-			break;
-		}		
+			case PAYMENT:
+				fileName = "Payment_" + ((Payment) object).getId();
+				break;
+			case BOOKING:
+				fileName = "Booking_" + ((Booking) object).getId();
+				break;
+			default:
+				break;
+		}
 
 		file.setName(fileName);
 		file.setObject(object);
@@ -73,8 +72,8 @@ public class ContentServiceImplementation implements ContentService {
 	public Content getSelectedContent(String contentPath) {
 		Content content = rootFolder;
 		String[] contentPathParts = contentPath.split("/");
-		for(String contentPathPart : contentPathParts) {
-			if(contentPathPart.length() > 0) {
+		for (String contentPathPart : contentPathParts) {
+			if (contentPathPart.length() > 0) {
 				content = ((Folder) content).getContents().get(contentPathPart);
 			}
 		}

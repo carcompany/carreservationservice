@@ -20,7 +20,6 @@ import com.carcompany.carreservationservice.structure.statisticsservice.behaviou
  */
 public class CarReservationServiceImplementation implements CarReservationService {
 
-	
 	public CarReservationServiceImplementation() {
 
 	}
@@ -32,7 +31,7 @@ public class CarReservationServiceImplementation implements CarReservationServic
 	public Person createPerson(String... names) {
 
 		return PersonService.getInstance().createPerson(names);
-	
+
 	}
 
 	/**

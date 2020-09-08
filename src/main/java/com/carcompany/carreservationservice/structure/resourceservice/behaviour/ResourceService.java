@@ -10,12 +10,23 @@ import com.carcompany.carreservationservice.structure.resourceservice.structure.
  * @version 1.0
  * @created 28-Aug-2020 17:10:52
  */
-public interface ResourceService {
+public abstract class ResourceService {
+
+	private static ResourceService instance;
+
+	public static ResourceService getInstance() {
+		if (instance == null) {
+			instance = new ResourceServiceImplementation();
+		}
+
+		return instance;
+	}
 
 	/**
 	 * 
 	 * @param resourceEnumeration
 	 */
-	public Resource getSelectedResource(ResourceEnumeration... resourceEnumeration) throws MoreThanOneDecoratableResourceException, NoDecoratableResourceException;
+	public abstract Resource getSelectedResource(ResourceEnumeration... resourceEnumeration)
+			throws MoreThanOneDecoratableResourceException, NoDecoratableResourceException;
 
 }

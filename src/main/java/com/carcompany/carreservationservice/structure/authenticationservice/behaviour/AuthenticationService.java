@@ -11,7 +11,17 @@ import com.carcompany.carreservationservice.structure.personservice.structure.Pe
  * @version 1.0
  * @created 28-Aug-2020 17:10:35
  */
-public interface AuthenticationService {
+public abstract class AuthenticationService {
+
+	private static AuthenticationService instance;
+
+	public static AuthenticationService getInstance() {
+		if (instance == null) {
+			instance = new AuthenticationServiceImplementation();
+		}
+
+		return instance;
+	};
 
 	/**
 	 * 
@@ -19,9 +29,9 @@ public interface AuthenticationService {
 	 * @param credential
 	 * @param role
 	 */
-	public boolean authenticateSubject(int subjectId, Credential credential, Role role);
+	public abstract boolean authenticateSubject(int subjectId, Credential credential, Role role);
 
-	public Subject createSubject(Person person, Credential credential, Role role);
+	public abstract Subject createSubject(Person person, Credential credential, Role role);
 
-	public Credential createCredential(CredentialEnumeration credentialEnumeration, Object secret);
+	public abstract Credential createCredential(CredentialEnumeration credentialEnumeration, Object secret);
 }
