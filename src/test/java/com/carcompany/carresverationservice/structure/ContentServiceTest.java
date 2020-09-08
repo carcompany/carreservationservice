@@ -28,7 +28,7 @@ class ContentServiceTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		contentService = new ContentServiceImplementation();
+		contentService = ContentService.getInstance();
 		receipt = new File();
 	}
 

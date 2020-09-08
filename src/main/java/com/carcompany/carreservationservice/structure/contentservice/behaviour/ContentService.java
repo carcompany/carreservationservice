@@ -9,7 +9,17 @@ import com.carcompany.carreservationservice.structure.contentservice.structure.C
  * @version 1.1
  * @created 28-Aug-2020 17:10:42
  */
-public interface ContentService {
+public abstract class ContentService {
+
+	private static ContentService instance;
+
+	public static ContentService getInstance() {
+		if (instance == null) {
+			instance = new ContentServiceImplementation();
+		}
+
+		return instance;
+	}
 
 	/**
 	 * 
@@ -17,9 +27,9 @@ public interface ContentService {
 	 * @return
 	 * @throws Exception
 	 */
-	public Boolean addContent(Object object, String name);
+	public abstract Boolean addContent(Object object, String name);
 
-	public Map<String, Content> getContents();
+	public abstract Map<String, Content> getContents();
 
-	public Boolean removeContent(String string);
+	public abstract Boolean removeContent(String string);
 }

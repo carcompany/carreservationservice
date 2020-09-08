@@ -11,7 +11,7 @@ import com.carcompany.carreservationservice.structure.contentservice.structure.F
  * @version 1.1
  * @created 28-Aug-2020 17:10:42
  */
-public class ContentServiceImplementation implements ContentService {
+public class ContentServiceImplementation extends ContentService {
 
 	private Folder folder;
 	private File file;
