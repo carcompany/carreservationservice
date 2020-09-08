@@ -18,7 +18,7 @@ public abstract class PaymentProcess {
 	private AuthenticationService authenticationService;
 
 	public boolean authenticateCustomer(Subject subject, Credential secret) {
-		authenticationService = new AuthenticationServiceImplementation();
+		authenticationService = AuthenticationServiceImplementation.getInstance();
 		
 		return authenticationService.authenticateSubject(subject.getId(), secret, Role.CUSTOMER);
 

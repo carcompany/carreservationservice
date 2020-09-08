@@ -1,8 +1,7 @@
 package com.carcompany.carreservationservice.structure.contentservice.behaviour;
 
-import java.util.Map;
-
 import com.carcompany.carreservationservice.structure.contentservice.structure.Content;
+import com.carcompany.carreservationservice.structure.contentservice.structure.ContentType;
 
 /**
  * @author Kevin, Benjamin
@@ -13,13 +12,10 @@ public interface ContentService {
 
 	/**
 	 * 
-	 * @param object
+	 * @param object, contentType
 	 * @return
-	 * @throws Exception
 	 */
-	public Boolean addContent(Object object, String name);
-
-	public Map<String, Content> getContents();
-
+	public Boolean addContent(Object object, ContentType contentType);
 	public Boolean removeContent(String string);
+	public Content getSelectedContent(String contentPath);
 }
