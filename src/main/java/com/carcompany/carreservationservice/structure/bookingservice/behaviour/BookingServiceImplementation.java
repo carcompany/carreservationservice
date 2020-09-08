@@ -22,7 +22,9 @@ public class BookingServiceImplementation implements BookingService {
 
 
 
-	private Booking();
+	private BookingServiceImplementation(){
+
+	}
 
 	/**
 	 * 
