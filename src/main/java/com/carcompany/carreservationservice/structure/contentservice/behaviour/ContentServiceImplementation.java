@@ -8,6 +8,7 @@ import com.carcompany.carreservationservice.structure.contentservice.structure.C
 import com.carcompany.carreservationservice.structure.contentservice.structure.File;
 import com.carcompany.carreservationservice.structure.contentservice.structure.Folder;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.Payment;
+import com.carcompany.carreservationservice.structure.bookingservice.structure.Booking;
 
 /**
  * @version 1.1
@@ -51,7 +52,7 @@ public class ContentServiceImplementation extends ContentService {
 				fileName = "Payment_" + ((Payment) object).getId();
 				break;
 			case BOOKING:
-				fileName = "Booking_ID_Placeholder"; // + ((Booking) object).getId();
+				fileName = "Booking_" + ((Booking) object).getId();
 				break;
 			default:
 				break;
