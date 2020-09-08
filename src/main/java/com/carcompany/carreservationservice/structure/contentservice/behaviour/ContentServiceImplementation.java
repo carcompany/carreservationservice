@@ -1,52 +1,81 @@
 package com.carcompany.carreservationservice.structure.contentservice.behaviour;
 
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import com.carcompany.carreservationservice.structure.contentservice.structure.Content;
+import com.carcompany.carreservationservice.structure.contentservice.structure.ContentType;
 import com.carcompany.carreservationservice.structure.contentservice.structure.File;
 import com.carcompany.carreservationservice.structure.contentservice.structure.Folder;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.Payment;
 
 /**
- * @author Kevin, Benjamin
  * @version 1.1
  * @created 28-Aug-2020 17:10:42
  */
 public class ContentServiceImplementation extends ContentService {
 
-	private Folder folder;
-	private File file;
+	private static ContentServiceImplementation instance;
+	private Folder rootFolder;
 
 	public ContentServiceImplementation() {
-		folder = new Folder();
+		rootFolder = new Folder();
 	}
 
-	/**
-	 * 
-	 * @param object
-	 * @throws Exception
-	 */
-	public Boolean addContent(Object object, String name) {
-		file = new File();
-		file.setName(name);
-		file.setObject(object);
-		folder.addContent(file);
-		if (folder.addContent(file) == true) {
-			return true;
-		} else {
-			return false;
+	public static ContentServiceImplementation getInstance() {
+		if (ContentServiceImplementation.instance == null) {
+			ContentServiceImplementation.instance = new ContentServiceImplementation();
 		}
+		return ContentServiceImplementation.instance;
+	}
+
+	public Boolean addContent(Object object, ContentType contentType) {
+		File file = new File();
+		String fileName = null;
+
+		SimpleDateFormat format1 = new SimpleDateFormat("MM-yyyy");
+		String folderName = format1.format(Calendar.getInstance().getTime());
+
+		Folder folder;
+
+		if (rootFolder.getContents().containsKey(folderName)) {
+			folder = (Folder) rootFolder.getContents().get(folderName);
+		} else {
+			folder = new Folder();
+			folder.setName(folderName);
+			rootFolder.addContent(folder);
+		}
+
+		switch (contentType) {
+			case PAYMENT:
+				fileName = "Payment_" + ((Payment) object).getId();
+				break;
+			case BOOKING:
+				fileName = "Booking_ID_Placeholder"; // + ((Booking) object).getId();
+				break;
+			default:
+				break;
+		}
+
+		file.setName(fileName);
+		file.setObject(object);
+
+		return folder.addContent(file);
 	}
 
 	public Boolean removeContent(String key) {
-		folder.removeContent(key);
-		if (folder.removeContent(key) == true) {
-			return true;
-		} else {
-			return false;
-		}
+		return rootFolder.removeContent(key);
 	}
 
-	public Map<String, Content> getContents() {
-		return folder.getContents();
+	@Override
+	public Content getSelectedContent(String contentPath) {
+		Content content = rootFolder;
+		String[] contentPathParts = contentPath.split("/");
+		for (String contentPathPart : contentPathParts) {
+			if (contentPathPart.length() > 0) {
+				content = ((Folder) content).getContents().get(contentPathPart);
+			}
+		}
+		return content;
 	}
 }

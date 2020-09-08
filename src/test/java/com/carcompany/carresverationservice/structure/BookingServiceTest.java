@@ -23,7 +23,7 @@ class BookingServiceTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		bookingService = new BookingServiceImplementation();
+		bookingService = BookingService.getInstance();
 		person = new Person();
 		resource = new Car();
 	}

@@ -15,7 +15,16 @@ import com.carcompany.carreservationservice.structure.resourceservice.structure.
  */
 public class BookingServiceImplementation implements BookingService {
 
+	private static BookingServiceImplementation bookingServiceImplementation;
+
 	public BookingDirector bookingDirector;
+
+
+
+
+	private BookingServiceImplementation(){
+
+	}
 
 	/**
 	 * 
@@ -23,6 +32,7 @@ public class BookingServiceImplementation implements BookingService {
 	 * @param resource
 	 * @param language
 	 */
+	
 	public Booking createBooking(Person person, Resource resource, Language language) {
 
 		if (person != null && resource != null) {
@@ -50,4 +60,13 @@ public class BookingServiceImplementation implements BookingService {
 			}
 		}
 	}
+
+	public BookingServiceImplementation getInstance(){
+		if(bookingServiceImplementation == null) bookingServiceImplementation = new BookingServiceImplementation();
+
+		return bookingServiceImplementation;
+	}
 }
+
+
+

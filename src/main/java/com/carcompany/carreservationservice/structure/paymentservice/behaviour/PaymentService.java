@@ -1,8 +1,13 @@
 package com.carcompany.carreservationservice.structure.paymentservice.behaviour;
 
+import javax.security.sasl.AuthenticationException;
+
+import com.carcompany.carreservationservice.structure.authenticationservice.structure.credential.Credential;
 import com.carcompany.carreservationservice.structure.paymentservice.domainvalue.CurrencyAmount;
-import com.carcompany.carreservationservice.structure.paymentservice.structure.Account;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.Payment;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.PaymentType;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.account.Account;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.exception.UnsupportedPaymentTypeException;
 
 /**
  * @author Sebastian
@@ -17,7 +22,9 @@ public interface PaymentService {
 	 * @param receiverAccount
 	 * @param currencyAmount
 	 * @param paymentType
+	 * @throws UnsupportedPaymentTypeException 
+	 * @throws AuthenticationException 
 	 */
-	public void payAmount(Account senderAccount, Account receiverAccount, CurrencyAmount currencyAmount, PaymentType paymentType);
+	public Payment payAmount(Account senderAccount, Account receiverAccount, CurrencyAmount currencyAmount, PaymentType paymentType, Credential secret) throws UnsupportedPaymentTypeException, AuthenticationException;
 
 }
