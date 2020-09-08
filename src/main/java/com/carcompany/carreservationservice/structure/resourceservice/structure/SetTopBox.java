@@ -11,6 +11,7 @@ public class SetTopBox extends ResourceDecorator {
 
 	public SetTopBox(Resource resource) {
 		super(resource);
+		super.setPrice(50);
 	}
 
 	public double getVolume() {
