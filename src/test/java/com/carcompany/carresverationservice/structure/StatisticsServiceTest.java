@@ -39,8 +39,6 @@ import com.carcompany.carreservationservice.structure.resourceservice.structure.
 import com.carcompany.carreservationservice.structure.statisticsservice.behaviour.StatisticsService;
 import com.carcompany.carreservationservice.structure.statisticsservice.behaviour.StatisticsServiceImplementation;
 import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.ApplePayExternalPaymentService;
-import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.BankExternalPaymentService;
-import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.GooglePayExternalPaymentService;
 import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.PayPalExternalPaymentService;
 
 @TestMethodOrder(OrderAnnotation.class)
@@ -54,26 +52,20 @@ class StatisticsServiceTest {
 	private static AuthenticationService authenticationService;
 	private static ContentService contentService;
 
-	private static GooglePayExternalPaymentService googlePay;
 	private static ApplePayExternalPaymentService applePay;
 	private static PayPalExternalPaymentService payPal;
-	private static BankExternalPaymentService bank;
-
 
 	private static Booking bookingWithPayPal;
 	private static Booking bookingWithPayPal2;
-	
+
 	private static Booking bookingWithApplePay;
 	private static Booking bookingWithApplePay2;
 
 	private static Payment paymentWithPayPal;
 	private static Payment paymentWithPayPal2;
 
-
 	private static Payment paymentWithApplePay;
 	private static Payment paymentWithApplePay2;
-	
-	
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -87,21 +79,21 @@ class StatisticsServiceTest {
 		contentService = ContentServiceImplementation.getInstance();
 
 		/** ------------------------------------------------ **/
-		
+
 		// CREATE BOOKING (PAYPAL, GERMAN)
 		Person personA = personService.createPerson("Hans", "KaufGern");
 		Resource resourceA = resourceService.getSelectedResource(ResourceEnumeration.CAR);
 		bookingWithPayPal = bookingService.createBooking(personA, resourceA, Language.GERMAN);
 
 		/** ------------------------------------------------ **/
-		
+
 		// CREATE BOOKING2 (PAYPAL, GERMAN)
 		Person personA2 = personService.createPerson("Peter", "KaufAuchGern");
 		Resource resourceA2 = resourceService.getSelectedResource(ResourceEnumeration.CAR);
 		bookingWithPayPal2 = bookingService.createBooking(personA2, resourceA2, Language.GERMAN);
 
 		/** ------------------------------------------------ **/
-		
+
 		// CREATE PAYMENT (PAYPAL, GERMAN)
 		Credential credentialA = authenticationService.createCredential(CredentialEnumeration.PASSWORD, "ABC");
 		Subject subjectA = authenticationService.createSubject(personA, credentialA, Role.CUSTOMER);
@@ -115,11 +107,12 @@ class StatisticsServiceTest {
 		CurrencyAmount currencyAmount = new CurrencyAmount();
 		currencyAmount.setAmount(120);
 
-		paymentWithPayPal = paymentService.payAmount(accountA, accountB, currencyAmount, PaymentType.PAYPAL, credentialA);
+		paymentWithPayPal = paymentService.payAmount(accountA, accountB, currencyAmount, PaymentType.PAYPAL,
+				credentialA);
 		bookingWithPayPal.getFooter().setPayment(paymentWithPayPal);
 
 		/** ------------------------------------------------ **/
-		
+
 		// CREATE PAYMENT2 (PAYPAL, GERMAN)
 		Credential credentialA2 = authenticationService.createCredential(CredentialEnumeration.PASSWORD, "ABC");
 		Subject subjectA2 = authenticationService.createSubject(personA2, credentialA2, Role.CUSTOMER);
@@ -133,29 +126,30 @@ class StatisticsServiceTest {
 		CurrencyAmount currencyAmount2 = new CurrencyAmount();
 		currencyAmount2.setAmount(120);
 
-		paymentWithPayPal2 = paymentService.payAmount(accountA2, accountB2, currencyAmount2, PaymentType.PAYPAL, credentialA2);
+		paymentWithPayPal2 = paymentService.payAmount(accountA2, accountB2, currencyAmount2, PaymentType.PAYPAL,
+				credentialA2);
 		bookingWithPayPal2.getFooter().setPayment(paymentWithPayPal2);
-		
+
 		/** ------------------------------------------------ **/
-		
+
 		// below creation of english accounts
-		
+
 		/** ------------------------------------------------ **/
-		
+
 		// CREATE BOOKING (ApplePay, English)
 		Person personA3 = personService.createPerson("James", "LoveBuy");
 		Resource resourceA3 = resourceService.getSelectedResource(ResourceEnumeration.CAR);
 		bookingWithApplePay = bookingService.createBooking(personA3, resourceA3, Language.ENGLISH);
 
 		/** ------------------------------------------------ **/
-		
+
 		// CREATE BOOKING2 (ApplePay, English)
 		Person personA4 = personService.createPerson("Jonathan", "LosesMoney");
 		Resource resourceA4 = resourceService.getSelectedResource(ResourceEnumeration.CAR);
 		bookingWithApplePay2 = bookingService.createBooking(personA4, resourceA4, Language.ENGLISH);
 
 		/** ------------------------------------------------ **/
-		
+
 		// CREATE PAYMENT (ApplePay, English)
 		Credential credentialA3 = authenticationService.createCredential(CredentialEnumeration.PASSWORD, "ABC");
 		Subject subjectA3 = authenticationService.createSubject(personA3, credentialA3, Role.CUSTOMER);
@@ -169,11 +163,12 @@ class StatisticsServiceTest {
 		CurrencyAmount currencyAmount3 = new CurrencyAmount();
 		currencyAmount3.setAmount(120);
 
-		paymentWithApplePay = paymentService.payAmount(accountA3, accountB3, currencyAmount3, PaymentType.APPLE_PAY, credentialA3);
+		paymentWithApplePay = paymentService.payAmount(accountA3, accountB3, currencyAmount3, PaymentType.APPLE_PAY,
+				credentialA3);
 		bookingWithApplePay.getFooter().setPayment(paymentWithApplePay);
 
 		/** ------------------------------------------------ **/
-		
+
 		// CREATE PAYMENT2 (ApplePay, English)
 		Credential credentialA4 = authenticationService.createCredential(CredentialEnumeration.PASSWORD, "ABC");
 		Subject subjectA4 = authenticationService.createSubject(personA4, credentialA4, Role.CUSTOMER);
@@ -187,15 +182,14 @@ class StatisticsServiceTest {
 		CurrencyAmount currencyAmount4 = new CurrencyAmount();
 		currencyAmount4.setAmount(120);
 
-		paymentWithApplePay2 = paymentService.payAmount(accountA4, accountB4, currencyAmount4, PaymentType.APPLE_PAY, credentialA4);
+		paymentWithApplePay2 = paymentService.payAmount(accountA4, accountB4, currencyAmount4, PaymentType.APPLE_PAY,
+				credentialA4);
 		bookingWithApplePay2.getFooter().setPayment(paymentWithApplePay2);
-		
+
 		/** ------------------------------------------------ **/
 
-		googlePay = new GooglePayExternalPaymentService();
 		applePay = new ApplePayExternalPaymentService();
 		payPal = new PayPalExternalPaymentService();
-		bank = new BankExternalPaymentService();
 	}
 
 	@Test
@@ -231,7 +225,6 @@ class StatisticsServiceTest {
 		assertEquals(2, applePay.getBookingSum());
 		assertEquals(240.0, applePay.getPaymentSum());
 	}
-
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
