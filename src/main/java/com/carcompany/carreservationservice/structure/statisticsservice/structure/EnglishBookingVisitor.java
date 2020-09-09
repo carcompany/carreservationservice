@@ -1,5 +1,8 @@
 package com.carcompany.carreservationservice.structure.statisticsservice.structure;
 
+import com.carcompany.carreservationservice.structure.contentservice.behaviour.ContentServiceImplementation;
+import com.carcompany.carreservationservice.structure.contentservice.structure.Report;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.PaymentType;
 import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.ApplePayExternalPaymentService;
 import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.BankExternalPaymentService;
 import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.GooglePayExternalPaymentService;
@@ -11,14 +14,14 @@ import com.carcompany.carreservationservice.structure.statisticsservice.structur
  * object in the structure. ConcreteVisitor provides the context for the algorithm
  * and stores its local state. This state often accumulates results during the
  * traversal of the structure.
- * @author Sebastian, Kevin
- * @version 1.1
- * @created 28-Aug-2020 17:10:47
  */
 public class EnglishBookingVisitor implements BookingVisitor {
+	
+	private String selectedFolder;
+	private ContentServiceImplementation contentService = ContentServiceImplementation.getInstance();
 
-	public EnglishBookingVisitor(){
-
+	public EnglishBookingVisitor(String selectedFolder) {
+		this.selectedFolder = selectedFolder;
 	}
 	
 	/**
@@ -26,7 +29,11 @@ public class EnglishBookingVisitor implements BookingVisitor {
 	 * @param externalPaymentService
 	 */
 	public void visit(PayPalExternalPaymentService externalPaymentService) {
-		externalPaymentService.calculateAccountSum();
+		
+		String path =  selectedFolder + "/Report";
+		Report report = (Report) contentService.getSelectedContent(path);
+		externalPaymentService.setPaymentSum(report.getPaymentNumbers(PaymentType.PAYPAL));
+		externalPaymentService.setBookingSum(report.getBookingNumbers(PaymentType.PAYPAL));
 	}
 	
 	/**
@@ -34,7 +41,11 @@ public class EnglishBookingVisitor implements BookingVisitor {
 	 * @param externalPaymentService
 	 */
 	public void visit(ApplePayExternalPaymentService externalPaymentService) {
-		externalPaymentService.calculateAccountSum();
+
+		String path =  selectedFolder + "/Report";
+		Report report = (Report) contentService.getSelectedContent(path);
+		externalPaymentService.setPaymentSum(report.getPaymentNumbers(PaymentType.APPLE_PAY));
+		externalPaymentService.setBookingSum(report.getBookingNumbers(PaymentType.APPLE_PAY));
 	}
 
 	/**
@@ -42,7 +53,11 @@ public class EnglishBookingVisitor implements BookingVisitor {
 	 * @param externalPaymentService
 	 */
 	public void visit(GooglePayExternalPaymentService externalPaymentService) {
-		externalPaymentService.calculateAccountSum();
+
+		String path =  selectedFolder + "/Report";
+		Report report = (Report) contentService.getSelectedContent(path);
+		externalPaymentService.setPaymentSum(report.getPaymentNumbers(PaymentType.GOOGLE_PAY));
+		externalPaymentService.setBookingSum(report.getBookingNumbers(PaymentType.GOOGLE_PAY));
 	}
 
 	/**
@@ -50,6 +65,10 @@ public class EnglishBookingVisitor implements BookingVisitor {
 	 * @param externalPaymentService
 	 */
 	public void visit(BankExternalPaymentService externalPaymentService) {
-		externalPaymentService.calculateAccountSum();
+		
+		String path =  selectedFolder + "/Report";
+		Report report = (Report) contentService.getSelectedContent(path);
+		externalPaymentService.setPaymentSum(report.getPaymentNumbers(PaymentType.BANK));
+		externalPaymentService.setBookingSum(report.getBookingNumbers(PaymentType.BANK));
 	}
 }
