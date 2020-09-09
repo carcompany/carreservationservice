@@ -2,14 +2,23 @@ package com.carcompany.carreservationservice.structure.statisticsservice.structu
 
 public abstract class Statistics {
 	
-	private double accountSum;
+	private double paymentSum;
+	private int bookingSum;
 	
-	public double getAccountSum() {
-		return accountSum;
+	public int getBookingSum() {
+		return bookingSum;
 	}
 	
-	public void setAccountSum(double accountSum) {
-		this.accountSum = accountSum;
+	public void setBookingSum(int bookingSum) {
+		this.bookingSum = bookingSum;
+	}
+	
+	public double getPaymentSum() {
+		return paymentSum;
+	}
+	
+	public void setPaymentSum(double paymentSum) {
+		this.paymentSum = paymentSum;
 	}
 
 }

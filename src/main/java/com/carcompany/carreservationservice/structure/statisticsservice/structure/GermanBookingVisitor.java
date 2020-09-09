@@ -1,5 +1,8 @@
 package com.carcompany.carreservationservice.structure.statisticsservice.structure;
 
+import com.carcompany.carreservationservice.structure.contentservice.behaviour.ContentServiceImplementation;
+import com.carcompany.carreservationservice.structure.contentservice.structure.Report;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.PaymentType;
 import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.ApplePayExternalPaymentService;
 import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.BankExternalPaymentService;
 import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.GooglePayExternalPaymentService;
@@ -15,8 +18,9 @@ import com.carcompany.carreservationservice.structure.statisticsservice.structur
 public class GermanBookingVisitor implements BookingVisitor {
 
 	private String selectedFolder;
+	private ContentServiceImplementation contentService = ContentServiceImplementation.getInstance();
 	
-	public GermanBookingVisitor(String selectedFolder){
+	public GermanBookingVisitor(String selectedFolder) {
 		this.selectedFolder = selectedFolder;
 	}
 
@@ -26,10 +30,10 @@ public class GermanBookingVisitor implements BookingVisitor {
 	 */
 	public void visit(PayPalExternalPaymentService externalPaymentService) {
 		
-		String path = selectedFolder + "/Report";
-		
-		
-		externalPaymentService.setAccountSum(accountSum);
+		String path =  selectedFolder + "/Report";
+		Report report = (Report) contentService.getSelectedContent(path);
+		externalPaymentService.setPaymentSum(report.getPaymentNumbers(PaymentType.PAYPAL));
+		externalPaymentService.setBookingSum(report.getBookingNumbers(PaymentType.PAYPAL));
 	}
 	
 	/**
@@ -38,8 +42,10 @@ public class GermanBookingVisitor implements BookingVisitor {
 	 */
 	public void visit(ApplePayExternalPaymentService externalPaymentService) {
 
-
-		externalPaymentService.setAccountSum(accountSum);
+		String path =  selectedFolder + "/Report";
+		Report report = (Report) contentService.getSelectedContent(path);
+		externalPaymentService.setPaymentSum(report.getPaymentNumbers(PaymentType.APPLE_PAY));
+		externalPaymentService.setBookingSum(report.getBookingNumbers(PaymentType.APPLE_PAY));
 	}
 
 	/**
@@ -48,8 +54,10 @@ public class GermanBookingVisitor implements BookingVisitor {
 	 */
 	public void visit(GooglePayExternalPaymentService externalPaymentService) {
 
-
-		externalPaymentService.setAccountSum(accountSum);
+		String path =  selectedFolder + "/Report";
+		Report report = (Report) contentService.getSelectedContent(path);
+		externalPaymentService.setPaymentSum(report.getPaymentNumbers(PaymentType.GOOGLE_PAY));
+		externalPaymentService.setBookingSum(report.getBookingNumbers(PaymentType.GOOGLE_PAY));
 	}
 
 	/**
@@ -57,8 +65,10 @@ public class GermanBookingVisitor implements BookingVisitor {
 	 * @param externalPaymentService
 	 */
 	public void visit(BankExternalPaymentService externalPaymentService) {
-
-
-		externalPaymentService.setAccountSum(accountSum);
+		
+		String path =  selectedFolder + "/Report";
+		Report report = (Report) contentService.getSelectedContent(path);
+		externalPaymentService.setPaymentSum(report.getPaymentNumbers(PaymentType.BANK));
+		externalPaymentService.setBookingSum(report.getBookingNumbers(PaymentType.BANK));
 	}
 }
