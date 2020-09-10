@@ -3,13 +3,13 @@ package com.carcompany.carreservationservice.structure.statisticsservice.structu
 import com.carcompany.carreservationservice.structure.statisticsservice.structure.BookingVisitor;
 import com.carcompany.carreservationservice.structure.statisticsservice.structure.ExternalPaymentService;
 
-public class BankExternalPaymentService extends Statistics implements ExternalPaymentService {
+public class BankExternalPaymentService extends ExternalPaymentService {
 
-	public BankExternalPaymentService(){
+	public BankExternalPaymentService() {
 
 	}
 
-	public void accept(BookingVisitor bookingVisitor){
+	public void accept(BookingVisitor bookingVisitor) {
 		bookingVisitor.visit(this);
 	}
 }

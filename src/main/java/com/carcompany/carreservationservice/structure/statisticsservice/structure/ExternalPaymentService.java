@@ -1,8 +1,9 @@
 package com.carcompany.carreservationservice.structure.statisticsservice.structure;
 
+import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.Statistic;
 
-public interface ExternalPaymentService {
+public abstract class ExternalPaymentService extends Statistic {
 
-	public void accept(BookingVisitor bookingVisitor);
+	public abstract void accept(BookingVisitor bookingVisitor);
 
 }

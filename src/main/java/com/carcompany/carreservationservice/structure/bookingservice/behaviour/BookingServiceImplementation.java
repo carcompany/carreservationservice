@@ -15,14 +15,7 @@ import com.carcompany.carreservationservice.structure.resourceservice.structure.
  */
 public class BookingServiceImplementation extends BookingService {
 
-
-
 	public BookingDirector bookingDirector;
-
-
-
-
-	
 
 	/**
 	 * 
@@ -30,7 +23,7 @@ public class BookingServiceImplementation extends BookingService {
 	 * @param resource
 	 * @param language
 	 */
-	
+
 	public Booking createBooking(Person person, Resource resource, Language language) {
 
 		if (person != null && resource != null) {

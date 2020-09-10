@@ -1,13 +1,24 @@
 package com.carcompany.carresverationservice;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.carcompany.carreservationservice.behaviour.CarReservationService;
 import com.carcompany.carreservationservice.behaviour.CarReservationServiceImplementation;
+import com.carcompany.carreservationservice.structure.authenticationservice.structure.credential.Credential;
+import com.carcompany.carreservationservice.structure.authenticationservice.structure.credential.CredentialEnumeration;
 import com.carcompany.carreservationservice.structure.bookingservice.structure.Booking;
 import com.carcompany.carreservationservice.structure.bookingservice.structure.Language;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.PaymentType;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.account.Account;
+import com.carcompany.carreservationservice.structure.personservice.structure.LegalPerson;
+import com.carcompany.carreservationservice.structure.personservice.structure.NaturalPerson;
 import com.carcompany.carreservationservice.structure.personservice.structure.Person;
 import com.carcompany.carreservationservice.structure.resourceservice.structure.Resource;
+import com.carcompany.carreservationservice.structure.resourceservice.structure.ResourceEnumeration;
+import com.carcompany.carreservationservice.structure.resourceservice.structure.exception.MoreThanOneDecoratableResourceException;
+import com.carcompany.carreservationservice.structure.resourceservice.structure.exception.NoDecoratableResourceException;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -18,9 +29,9 @@ public class CarReservationServiceTest {
 
 	public static CarReservationService carReservationService;
 
-	public static Person testPerson;
-	public static Resource testResource;
-	public static Booking testBooking;
+	public static Person person;
+	public static Resource resource;
+	public static Booking booking;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -34,15 +45,38 @@ public class CarReservationServiceTest {
 
 	@Test
 	@Order(1)
-	public void canBookingBeCreated() {
-		assertDoesNotThrow(() -> carReservationService.createBooking(testPerson, testResource, Language.GERMAN));
+	public void canPersonBeCreated() {
+		assertTrue(carReservationService.createPerson("CineCar GmbH") instanceof LegalPerson);
+		assertTrue(carReservationService.createPerson("Jane", "Doe") instanceof NaturalPerson);
 	}
 
 	@Test
 	@Order(2)
-	public void canBookingsBeShown() {
-		assertDoesNotThrow(() -> carReservationService.showBookings());
+	public void canResourceBeCreated() throws MoreThanOneDecoratableResourceException, NoDecoratableResourceException {
+		assertNotNull(carReservationService.createResource(ResourceEnumeration.CAR, ResourceEnumeration.CHILD_SEAT));
 	}
 
-	
+	@Test
+	@Order(3)
+	public void canBookingBeCreated() throws MoreThanOneDecoratableResourceException, NoDecoratableResourceException {
+		person = carReservationService.createPerson("CineCar GmbH");
+		resource = carReservationService.createResource(ResourceEnumeration.CAR, ResourceEnumeration.CHILD_SEAT,
+				ResourceEnumeration.SET_TOP_BOX);
+		assertDoesNotThrow(() -> carReservationService.createBooking(person, resource, Language.GERMAN));
+	}
+
+	@Test
+	@Order(4)
+	public void canBookingBePaid() throws MoreThanOneDecoratableResourceException, NoDecoratableResourceException {
+		person = carReservationService.createPerson("CineCar GmbH");
+		Credential credential = carReservationService.createCredential(CredentialEnumeration.PASSWORD, "test");
+		Account account = carReservationService.createAccount(person, CredentialEnumeration.PASSWORD, "test",
+				PaymentType.BANK);
+		resource = carReservationService.createResource(ResourceEnumeration.CAR, ResourceEnumeration.CHILD_SEAT,
+				ResourceEnumeration.SET_TOP_BOX);
+		Booking booking = carReservationService.createBooking(person, resource, Language.GERMAN);
+
+		assertDoesNotThrow(() -> carReservationService.payBooking(booking, PaymentType.BANK, account, credential));
+
+	}
 }

@@ -35,8 +35,8 @@ public class ContentServiceImplementation extends ContentService {
 		File file = new File();
 		String fileName = null;
 
-		SimpleDateFormat format1 = new SimpleDateFormat("MM-yyyy");
-		String folderName = format1.format(Calendar.getInstance().getTime());
+		SimpleDateFormat format = new SimpleDateFormat("MM-yyyy");
+		String folderName = format.format(Calendar.getInstance().getTime());
 
 		Folder folder;
 

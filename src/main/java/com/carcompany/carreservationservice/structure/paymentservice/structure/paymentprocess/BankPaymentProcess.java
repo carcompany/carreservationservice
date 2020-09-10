@@ -10,11 +10,21 @@ import com.carcompany.carreservationservice.structure.paymentservice.structure.a
  */
 public class BankPaymentProcess extends PaymentProcess {
 
-
 	@Override
 	public boolean executePayment(Account senderAccount, Account receiverAccount, CurrencyAmount currencyAmount) {
-		
-		// PAYMENT DUMMY
+		CurrencyAmount senderAccountBalance = senderAccount.getBalance();
+		CurrencyAmount receiverAccountBalance = senderAccount.getBalance();
+
+		// cannot go beyond 0
+		if (senderAccountBalance.getAmount() < currencyAmount.getAmount())
+			return false;
+
+		receiverAccountBalance.setAmount(receiverAccountBalance.getAmount() + currencyAmount.getAmount());
+		senderAccountBalance.setAmount(senderAccountBalance.getAmount() - currencyAmount.getAmount());
+
+		senderAccount.setBalance(senderAccountBalance);
+		receiverAccount.setBalance(receiverAccountBalance);
+
 		return true;
 	}
-}//end BankPaymentProcess
+}// end BankPaymentProcess

@@ -1,6 +1,7 @@
 package com.carcompany.carreservationservice.structure.paymentservice.structure.account;
 
 import com.carcompany.carreservationservice.structure.authenticationservice.structure.subject.Subject;
+import com.carcompany.carreservationservice.structure.paymentservice.domainvalue.CurrencyAmount;
 
 /**
  * @author Sebastian
@@ -9,14 +10,24 @@ import com.carcompany.carreservationservice.structure.authenticationservice.stru
  */
 public abstract class Account {
 
-	protected Subject subject;
+	private Subject subject;
+	private CurrencyAmount balance;
 
 	public Account(Subject subject) {
 		this.subject = subject;
-		
+		this.balance = new CurrencyAmount();
+		this.balance.setAmount(1000);
 	}
 
 	public Subject getSubject() {
 		return this.subject;
 	}
-}// end Account
+
+	public void setBalance(CurrencyAmount balance) {
+		this.balance = balance;
+	}
+
+	public CurrencyAmount getBalance() {
+		return this.balance;
+	}
+}

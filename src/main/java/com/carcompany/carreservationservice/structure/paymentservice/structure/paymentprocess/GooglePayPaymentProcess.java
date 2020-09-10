@@ -12,8 +12,17 @@ public class GooglePayPaymentProcess extends PaymentProcess {
 
 	@Override
 	public boolean executePayment(Account senderAccount, Account receiverAccount, CurrencyAmount currencyAmount) {
-		
-		// PAYMENT DUMMY
+		CurrencyAmount senderAccountBalance = senderAccount.getBalance();
+		CurrencyAmount receiverAccountBalance = senderAccount.getBalance();
+
+		receiverAccountBalance.setAmount(receiverAccountBalance.getAmount() + currencyAmount.getAmount());
+
+		// 10% processing fee
+		senderAccountBalance.setAmount(senderAccountBalance.getAmount() - currencyAmount.getAmount() * 1.1);
+
+		senderAccount.setBalance(senderAccountBalance);
+		receiverAccount.setBalance(receiverAccountBalance);
+
 		return true;
 	}
-}//end GooglePayPaymentProcess
+}

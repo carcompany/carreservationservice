@@ -10,12 +10,18 @@ import com.carcompany.carreservationservice.structure.paymentservice.structure.a
  */
 public class PayPalPaymentProcess extends PaymentProcess {
 
-	
-
 	@Override
 	public boolean executePayment(Account senderAccount, Account receiverAccount, CurrencyAmount currencyAmount) {
-		
-		// PAYMENT DUMMY
+		CurrencyAmount senderAccountBalance = senderAccount.getBalance();
+		CurrencyAmount receiverAccountBalance = senderAccount.getBalance();
+
+		receiverAccountBalance.setAmount(receiverAccountBalance.getAmount() + currencyAmount.getAmount());
+		// transaction gift
+		senderAccountBalance.setAmount(senderAccountBalance.getAmount() - currencyAmount.getAmount() * 0.99);
+
+		senderAccount.setBalance(senderAccountBalance);
+		receiverAccount.setBalance(receiverAccountBalance);
+
 		return true;
 	}
-}//end PayPalPaymentProcess
+}

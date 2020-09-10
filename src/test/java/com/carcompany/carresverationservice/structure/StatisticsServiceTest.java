@@ -38,8 +38,8 @@ import com.carcompany.carreservationservice.structure.resourceservice.structure.
 import com.carcompany.carreservationservice.structure.resourceservice.structure.ResourceEnumeration;
 import com.carcompany.carreservationservice.structure.statisticsservice.behaviour.StatisticsService;
 import com.carcompany.carreservationservice.structure.statisticsservice.behaviour.StatisticsServiceImplementation;
-import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.ApplePayExternalPaymentService;
-import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.PayPalExternalPaymentService;
+import com.carcompany.carreservationservice.structure.statisticsservice.structure.ExternalPaymentServiceEnumeration;
+import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.Statistic;
 
 @TestMethodOrder(OrderAnnotation.class)
 class StatisticsServiceTest {
@@ -51,9 +51,6 @@ class StatisticsServiceTest {
 	private static ResourceService resourceService;
 	private static AuthenticationService authenticationService;
 	private static ContentService contentService;
-
-	private static ApplePayExternalPaymentService applePay;
-	private static PayPalExternalPaymentService payPal;
 
 	private static Booking bookingWithPayPal;
 	private static Booking bookingWithPayPal2;
@@ -185,11 +182,6 @@ class StatisticsServiceTest {
 		paymentWithApplePay2 = paymentService.payAmount(accountA4, accountB4, currencyAmount4, PaymentType.APPLE_PAY,
 				credentialA4);
 		bookingWithApplePay2.getFooter().setPayment(paymentWithApplePay2);
-
-		/** ------------------------------------------------ **/
-
-		applePay = new ApplePayExternalPaymentService();
-		payPal = new PayPalExternalPaymentService();
 	}
 
 	@Test
@@ -198,15 +190,15 @@ class StatisticsServiceTest {
 
 		contentService.addContent(bookingWithPayPal, ContentType.BOOKING);
 		contentService.addContent(paymentWithPayPal, ContentType.PAYMENT);
-		statisticsService.getGermanBookingsPaidBy(payPal);
-		assertEquals(1, payPal.getBookingSum());
-		assertEquals(120.0, payPal.getPaymentSum());
+		Statistic statistic = statisticsService.getGermanBookingsPaidBy(ExternalPaymentServiceEnumeration.PAYPAL);
+		assertEquals(1, statistic.getBookingSum());
+		assertEquals(120.0, statistic.getPaymentSum());
 
 		contentService.addContent(bookingWithPayPal2, ContentType.BOOKING);
 		contentService.addContent(paymentWithPayPal2, ContentType.PAYMENT);
-		statisticsService.getGermanBookingsPaidBy(payPal);
-		assertEquals(2, payPal.getBookingSum());
-		assertEquals(240.0, payPal.getPaymentSum());
+		statistic = statisticsService.getGermanBookingsPaidBy(ExternalPaymentServiceEnumeration.PAYPAL);
+		assertEquals(2, statistic.getBookingSum());
+		assertEquals(240.0, statistic.getPaymentSum());
 	}
 
 	@Test
@@ -215,15 +207,15 @@ class StatisticsServiceTest {
 
 		contentService.addContent(bookingWithApplePay, ContentType.BOOKING);
 		contentService.addContent(paymentWithApplePay, ContentType.PAYMENT);
-		statisticsService.getGermanBookingsPaidBy(applePay);
-		assertEquals(1, applePay.getBookingSum());
-		assertEquals(120.0, applePay.getPaymentSum());
+		Statistic statistic = statisticsService.getEnglishBookingsPaidBy(ExternalPaymentServiceEnumeration.APPLE_PAY);
+		assertEquals(1, statistic.getBookingSum());
+		assertEquals(120.0, statistic.getPaymentSum());
 
 		contentService.addContent(bookingWithApplePay2, ContentType.BOOKING);
 		contentService.addContent(paymentWithApplePay2, ContentType.PAYMENT);
-		statisticsService.getGermanBookingsPaidBy(applePay);
-		assertEquals(2, applePay.getBookingSum());
-		assertEquals(240.0, applePay.getPaymentSum());
+		statistic = statisticsService.getEnglishBookingsPaidBy(ExternalPaymentServiceEnumeration.APPLE_PAY);
+		assertEquals(2, statistic.getBookingSum());
+		assertEquals(240.0, statistic.getPaymentSum());
 	}
 
 	@AfterAll
