@@ -124,7 +124,7 @@ public class CarReservationServiceTest {
 	@Order(9)
 	public void canStatisticsBeObtained() {
 		assertNotNull(
-				carReservationService.showStatistics(Language.ENGLISH, ExternalPaymentServiceEnumeration.APPLE_PAY));
+				carReservationService.showStatistics(Language.ENGLISH, ExternalPaymentServiceEnumeration.GOOGLE_PAY));
 	}
 
 	@Test

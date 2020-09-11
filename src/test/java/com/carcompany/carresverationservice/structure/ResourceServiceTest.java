@@ -31,13 +31,13 @@ public class ResourceServiceTest {
     public void canSelectResource() {
         assertDoesNotThrow(() -> {
             resourceService.getSelectedResource(ResourceEnumeration.CAR, ResourceEnumeration.CHILD_SEAT);
-        });
 
-        try {
-            assertNull(resourceService.getSelectedResource());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            try {
+                assertNull(resourceService.getSelectedResource());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
 
         assertThrows(MoreThanOneDecoratableResourceException.class, () -> {
             resourceService.getSelectedResource(ResourceEnumeration.CAR, ResourceEnumeration.CAR,
