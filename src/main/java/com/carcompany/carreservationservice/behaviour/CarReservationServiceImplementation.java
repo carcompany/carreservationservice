@@ -1,5 +1,7 @@
 package com.carcompany.carreservationservice.behaviour;
 
+import java.util.Map;
+
 import javax.security.sasl.AuthenticationException;
 
 import com.carcompany.carreservationservice.structure.authenticationservice.behaviour.AuthenticationService;
@@ -47,12 +49,18 @@ public class CarReservationServiceImplementation implements CarReservationServic
 		this.receiverAccount = PaymentService.getInstance().createAccount(subject, PaymentType.BANK);
 	}
 
-	/**
-	 * 
-	 * @param names
-	 */
 	public Person createPerson(String... names) {
 		return PersonService.getInstance().createPerson(names);
+	}
+
+	@Override
+	public Person showPerson(int id) throws Exception {
+		return PersonService.getInstance().getPerson(id);
+	}
+
+	@Override
+	public void deletePerson(int id) throws Exception {
+		PersonService.getInstance().deletePerson(id);
 	}
 
 	public Account createAccount(Person person, CredentialEnumeration credentialEnumeration, Object secret,
@@ -63,12 +71,6 @@ public class CarReservationServiceImplementation implements CarReservationServic
 		return PaymentService.getInstance().createAccount(subject, paymentType);
 	}
 
-	/**
-	 * 
-	 * @param resourceEnumeration
-	 * @throws NoDecoratableResourceException
-	 * @throws MoreThanOneDecoratableResourceException
-	 */
 	public Resource createResource(ResourceEnumeration... resourceEnumeration)
 			throws MoreThanOneDecoratableResourceException, NoDecoratableResourceException {
 		return ResourceService.getInstance().getSelectedResource(resourceEnumeration);
@@ -80,10 +82,10 @@ public class CarReservationServiceImplementation implements CarReservationServic
 
 		switch (language) {
 			case ENGLISH:
-				StatisticsService.getInstance().getEnglishBookingsPaidBy(externalPaymentServiceEnumeration);
+				statistic = StatisticsService.getInstance().getEnglishBookingsPaidBy(externalPaymentServiceEnumeration);
 				break;
 			case GERMAN:
-				StatisticsService.getInstance().getEnglishBookingsPaidBy(externalPaymentServiceEnumeration);
+				statistic = StatisticsService.getInstance().getEnglishBookingsPaidBy(externalPaymentServiceEnumeration);
 				break;
 
 		}
@@ -91,12 +93,6 @@ public class CarReservationServiceImplementation implements CarReservationServic
 		return statistic;
 	}
 
-	/**
-	 * 
-	 * @param bookingId
-	 * @throws UnsupportedPaymentTypeException
-	 * @throws AuthenticationException
-	 */
 	public Booking payBooking(Booking booking, PaymentType paymentType, Account senderAccount, Credential credential)
 			throws AuthenticationException, UnsupportedPaymentTypeException {
 		CurrencyAmount currencyAmount = new CurrencyAmount();
@@ -114,14 +110,16 @@ public class CarReservationServiceImplementation implements CarReservationServic
 
 	}
 
-	/**
-	 * 
-	 * @param personId
-	 * @param resourceId
-	 * @param language
-	 */
 	public Booking createBooking(Person person, Resource resource, Language language) {
 		return BookingService.getInstance().createBooking(person, resource, language);
+	}
+
+	public Booking showBooking(int id) {
+		return BookingService.getInstance().getBooking(id);
+	}
+
+	public Map<Integer, Booking> showBookings() {
+		return BookingService.getInstance().getBookings();
 	}
 
 	@Override

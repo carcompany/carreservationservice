@@ -1,6 +1,7 @@
 package com.carcompany.carreservationservice.structure.authenticationservice.behaviour;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.carcompany.carreservationservice.structure.authenticationservice.structure.Role;
 import com.carcompany.carreservationservice.structure.authenticationservice.structure.credential.Credential;
@@ -28,10 +29,10 @@ import com.carcompany.carreservationservice.structure.personservice.structure.Pe
  */
 public class AuthenticationServiceImplementation extends AuthenticationService {
 
-	private ArrayList<Subject> subjects;
+	private Map<Integer, Subject> subjects;
 
 	public AuthenticationServiceImplementation() {
-		this.subjects = new ArrayList<>();
+		this.subjects = new HashMap<>();
 	}
 
 	/**
@@ -68,7 +69,7 @@ public class AuthenticationServiceImplementation extends AuthenticationService {
 		subjectDirector.setSubjectBuilder(new SubjectPersonBuilder());
 
 		Subject subject = subjectDirector.build(person, credential, role);
-		subjects.add(subject);
+		subjects.put(subject.getId(), subject);
 
 		return subject;
 	}

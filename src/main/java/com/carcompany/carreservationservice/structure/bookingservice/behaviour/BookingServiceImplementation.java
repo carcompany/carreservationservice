@@ -1,5 +1,8 @@
 package com.carcompany.carreservationservice.structure.bookingservice.behaviour;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.carcompany.carreservationservice.structure.bookingservice.structure.Booking;
 import com.carcompany.carreservationservice.structure.bookingservice.structure.BookingDirector;
 import com.carcompany.carreservationservice.structure.bookingservice.structure.EnglishBookingBuilder;
@@ -16,6 +19,11 @@ import com.carcompany.carreservationservice.structure.resourceservice.structure.
 public class BookingServiceImplementation extends BookingService {
 
 	public BookingDirector bookingDirector;
+	public Map<Integer, Booking> bookings;
+
+	public BookingServiceImplementation() {
+		this.bookings = new HashMap<>();
+	}
 
 	/**
 	 * 
@@ -41,7 +49,11 @@ public class BookingServiceImplementation extends BookingService {
 					throw new IllegalArgumentException("Unsupported Language: " + language);
 			}
 
-			return bookingDirector.build(person, resource);
+			Booking booking = bookingDirector.build(person, resource);
+
+			this.bookings.put(booking.getId(), booking);
+
+			return booking;
 
 		} else {
 			if (person == null) {
@@ -50,6 +62,15 @@ public class BookingServiceImplementation extends BookingService {
 				throw new IllegalArgumentException("Resource is null");
 			}
 		}
+	}
+
+	public Map<Integer, Booking> getBookings() {
+		return this.bookings;
+	}
+
+	@Override
+	public Booking getBooking(int id) {
+		return this.bookings.get(id);
 	}
 
 }
