@@ -19,6 +19,7 @@ import com.carcompany.carreservationservice.structure.resourceservice.structure.
 import com.carcompany.carreservationservice.structure.resourceservice.structure.ResourceEnumeration;
 import com.carcompany.carreservationservice.structure.resourceservice.structure.exception.MoreThanOneDecoratableResourceException;
 import com.carcompany.carreservationservice.structure.resourceservice.structure.exception.NoDecoratableResourceException;
+import com.carcompany.carreservationservice.structure.statisticsservice.structure.ExternalPaymentServiceEnumeration;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -52,12 +53,21 @@ public class CarReservationServiceTest {
 
 	@Test
 	@Order(2)
+	public void canGetNaturalPerson() throws MoreThanOneDecoratableResourceException, NoDecoratableResourceException {
+		assertDoesNotThrow(() -> {
+			Person person = carReservationService.createPerson("Jane", "Doe");
+			assertNotNull(carReservationService.showPerson(person.getId()));
+		});
+	}
+
+	@Test
+	@Order(3)
 	public void canResourceBeCreated() throws MoreThanOneDecoratableResourceException, NoDecoratableResourceException {
 		assertNotNull(carReservationService.createResource(ResourceEnumeration.CAR, ResourceEnumeration.CHILD_SEAT));
 	}
 
 	@Test
-	@Order(3)
+	@Order(4)
 	public void canBookingBeCreated() throws MoreThanOneDecoratableResourceException, NoDecoratableResourceException {
 		person = carReservationService.createPerson("CineCar GmbH");
 		resource = carReservationService.createResource(ResourceEnumeration.CAR, ResourceEnumeration.CHILD_SEAT,
@@ -66,7 +76,37 @@ public class CarReservationServiceTest {
 	}
 
 	@Test
-	@Order(4)
+	@Order(5)
+	public void canBookingBeObtained() throws MoreThanOneDecoratableResourceException, NoDecoratableResourceException {
+		person = carReservationService.createPerson("CineCar GmbH");
+		resource = carReservationService.createResource(ResourceEnumeration.CAR, ResourceEnumeration.CHILD_SEAT,
+				ResourceEnumeration.SET_TOP_BOX);
+		assertDoesNotThrow(() -> {
+			Booking booking = carReservationService.createBooking(person, resource, Language.GERMAN);
+			assertNotNull(carReservationService.showBooking(booking.getId()));
+		});
+	}
+
+	@Test
+	@Order(6)
+	public void canBookingsBeObtained() throws MoreThanOneDecoratableResourceException, NoDecoratableResourceException {
+		person = carReservationService.createPerson("CineCar GmbH");
+		resource = carReservationService.createResource(ResourceEnumeration.CAR, ResourceEnumeration.CHILD_SEAT,
+				ResourceEnumeration.SET_TOP_BOX);
+		assertDoesNotThrow(() -> {
+			carReservationService.createBooking(person, resource, Language.GERMAN);
+			assertNotNull(carReservationService.showBookings().size() > 0);
+		});
+	}
+
+	@Test
+	@Order(7)
+	public void canCredentialBeCreated() {
+		assertNotNull(carReservationService.createCredential(CredentialEnumeration.PASSWORD, "test"));
+	}
+
+	@Test
+	@Order(8)
 	public void canBookingBePaid() throws MoreThanOneDecoratableResourceException, NoDecoratableResourceException {
 		person = carReservationService.createPerson("CineCar GmbH");
 		Credential credential = carReservationService.createCredential(CredentialEnumeration.PASSWORD, "test");
@@ -78,5 +118,30 @@ public class CarReservationServiceTest {
 
 		assertDoesNotThrow(() -> carReservationService.payBooking(booking, PaymentType.BANK, account, credential));
 
+	}
+
+	@Test
+	@Order(9)
+	public void canStatisticsBeObtained() {
+		assertNotNull(
+				carReservationService.showStatistics(Language.ENGLISH, ExternalPaymentServiceEnumeration.APPLE_PAY));
+	}
+
+	@Test
+	@Order(10)
+	public void canPersonBeDeleted() {
+		assertDoesNotThrow(() -> {
+			Person person = carReservationService.createPerson("CineCar");
+			assertDoesNotThrow(() -> carReservationService.deletePerson(person.getId()));
+		});
+	}
+
+	@Test
+	@Order(11)
+	public void canPersonBeShown() {
+		assertDoesNotThrow(() -> {
+			Person person = carReservationService.createPerson("CineCar");
+			assertNotNull(carReservationService.showPerson(person.getId()));
+		});
 	}
 }

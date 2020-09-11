@@ -1,6 +1,7 @@
 package com.carcompany.carreservationservice.structure.personservice.behaviour;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.carcompany.carreservationservice.structure.personservice.structure.LegalPersonFactory;
 import com.carcompany.carreservationservice.structure.personservice.structure.NaturalPersonFactory;
@@ -15,10 +16,10 @@ import com.carcompany.carreservationservice.structure.personservice.structure.ex
  */
 public class PersonServiceImplementation extends PersonService {
 
-	private ArrayList<Person> persons;
+	private Map<Integer, Person> persons;
 
 	public PersonServiceImplementation() {
-		this.persons = new ArrayList<>();
+		this.persons = new HashMap<>();
 	}
 
 	/**
@@ -43,27 +44,21 @@ public class PersonServiceImplementation extends PersonService {
 
 		person = personFactory.create(parameters);
 
-		persons.add(person);
+		persons.put(person.getId(), person);
 
 		return person;
 	}
 
 	@Override
-	public void deletePerson(int id) throws Exception{
-		Person person = getPerson(id);
-
-		persons.remove(person);
-
+	public void deletePerson(int id) throws Exception {
+		persons.remove(id);
 	}
 
 	@Override
 	public Person getPerson(int id) throws Exception {
-		int index = -1;
-		for(int i = 0; i > persons.size() || index != -1; i++){
-			if(persons.get(i).getId() == id) index = i;
-		}
-		
-		if(index != -1) return persons.get(index);
-		else throw new Exception("A person with the ID "+ id + " does not exist.");
+		if (persons.containsKey(id))
+			return persons.get(id);
+		else
+			throw new Exception("A person with the ID " + id + " does not exist.");
 	}
 }

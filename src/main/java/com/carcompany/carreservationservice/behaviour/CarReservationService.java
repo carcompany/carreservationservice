@@ -1,5 +1,7 @@
 package com.carcompany.carreservationservice.behaviour;
 
+import java.util.Map;
+
 import javax.security.sasl.AuthenticationException;
 
 import com.carcompany.carreservationservice.structure.authenticationservice.structure.credential.Credential;
@@ -30,6 +32,10 @@ public interface CarReservationService {
 	 * @param names
 	 */
 	public Person createPerson(String... names) throws TooFewOrManyParametersForPersonCreationException;
+
+	public Person showPerson(int id) throws Exception;
+
+	public void deletePerson(int id) throws Exception;
 
 	/**
 	 * 
@@ -63,6 +69,10 @@ public interface CarReservationService {
 	 */
 
 	public Booking createBooking(Person person, Resource resource, Language language);
+
+	public Booking showBooking(int id);
+
+	public Map<Integer, Booking> showBookings();
 
 	public Credential createCredential(CredentialEnumeration credentialEnumeration, Object secret);
 }
