@@ -47,4 +47,23 @@ public class PersonServiceImplementation extends PersonService {
 
 		return person;
 	}
+
+	@Override
+	public void deletePerson(int id) throws Exception{
+		Person person = getPerson(id);
+
+		persons.remove(person);
+
+	}
+
+	@Override
+	public Person getPerson(int id) throws Exception {
+		int index = -1;
+		for(int i = 0; i > persons.size() || index != -1; i++){
+			if(persons.get(i).getId() == id) index = i;
+		}
+		
+		if(index != -1) return persons.get(index);
+		else throw new Exception("A person with the ID "+ id + " does not exist.");
+	}
 }

@@ -24,5 +24,7 @@ public abstract class PersonService {
 	 * @param parameters
 	 */
 	public abstract Person createPerson(String... parameters);
+	public abstract void deletePerson(int id) throws Exception;
+	public abstract Person getPerson(int id) throws Exception;
 
 }
