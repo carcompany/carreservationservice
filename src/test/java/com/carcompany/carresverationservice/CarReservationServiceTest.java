@@ -12,8 +12,6 @@ import com.carcompany.carreservationservice.structure.authenticationservice.stru
 import com.carcompany.carreservationservice.structure.authenticationservice.structure.credential.CredentialEnumeration;
 import com.carcompany.carreservationservice.structure.bookingservice.structure.Booking;
 import com.carcompany.carreservationservice.structure.bookingservice.structure.Language;
-import com.carcompany.carreservationservice.structure.contentservice.behaviour.ContentService;
-import com.carcompany.carreservationservice.structure.contentservice.structure.Report;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.PaymentType;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.account.Account;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.exception.PaymentExecutionException;
@@ -24,8 +22,6 @@ import com.carcompany.carreservationservice.structure.resourceservice.structure.
 import com.carcompany.carreservationservice.structure.resourceservice.structure.ResourceEnumeration;
 import com.carcompany.carreservationservice.structure.resourceservice.structure.exception.MoreThanOneDecoratableResourceException;
 import com.carcompany.carreservationservice.structure.resourceservice.structure.exception.NoDecoratableResourceException;
-import com.carcompany.carreservationservice.structure.statisticsservice.behaviour.StatisticsService;
-import com.carcompany.carreservationservice.structure.statisticsservice.behaviour.StatisticsServiceImplementation;
 import com.carcompany.carreservationservice.structure.statisticsservice.structure.ExternalPaymentServiceEnumeration;
 import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.ExternalPaymentStatistic;
 
@@ -126,9 +122,6 @@ public class CarReservationServiceTest {
 		Booking booking = carReservationService.createBooking(person, resource, Language.GERMAN);
 
 		carReservationService.payBooking(booking, PaymentType.BANK, account, credential);
-
-		ExternalPaymentStatistic statistic = StatisticsService.getInstance()
-				.getEnglishBookingsPaidBy(ExternalPaymentServiceEnumeration.BANK);
 	}
 
 	@Test
