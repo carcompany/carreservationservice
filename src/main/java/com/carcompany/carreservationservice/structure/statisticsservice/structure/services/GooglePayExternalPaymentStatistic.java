@@ -3,9 +3,9 @@ package com.carcompany.carreservationservice.structure.statisticsservice.structu
 import com.carcompany.carreservationservice.structure.statisticsservice.structure.BookingVisitor;
 import com.carcompany.carreservationservice.structure.statisticsservice.structure.ExternalPaymentService;
 
-public class PayPalExternalPaymentService extends ExternalPaymentService {
+public class GooglePayExternalPaymentStatistic extends ExternalPaymentService {
 
-	public PayPalExternalPaymentService() {
+	public GooglePayExternalPaymentStatistic() {
 
 	}
 
@@ -16,4 +16,5 @@ public class PayPalExternalPaymentService extends ExternalPaymentService {
 	public void accept(BookingVisitor bookingVisitor) {
 		bookingVisitor.visit(this);
 	}
+
 }

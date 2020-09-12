@@ -13,7 +13,7 @@ public class PayPalPaymentProcess extends PaymentProcess {
 	@Override
 	public boolean executePayment(Account senderAccount, Account receiverAccount, CurrencyAmount currencyAmount) {
 		CurrencyAmount senderAccountBalance = senderAccount.getBalance();
-		CurrencyAmount receiverAccountBalance = senderAccount.getBalance();
+		CurrencyAmount receiverAccountBalance = receiverAccount.getBalance();
 
 		receiverAccountBalance.setAmount(receiverAccountBalance.getAmount() + currencyAmount.getAmount());
 		// transaction gift

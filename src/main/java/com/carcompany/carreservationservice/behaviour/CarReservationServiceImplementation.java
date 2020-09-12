@@ -19,17 +19,18 @@ import com.carcompany.carreservationservice.structure.paymentservice.domainvalue
 import com.carcompany.carreservationservice.structure.paymentservice.structure.Payment;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.PaymentType;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.account.Account;
-import com.carcompany.carreservationservice.structure.paymentservice.structure.exception.UnsupportedPaymentTypeException;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.exception.PaymentExecutionException;
 import com.carcompany.carreservationservice.structure.personservice.behaviour.PersonService;
 import com.carcompany.carreservationservice.structure.personservice.structure.Person;
 import com.carcompany.carreservationservice.structure.resourceservice.behaviour.ResourceService;
 import com.carcompany.carreservationservice.structure.resourceservice.structure.Resource;
+import com.carcompany.carreservationservice.structure.resourceservice.structure.ResourceDecorator;
 import com.carcompany.carreservationservice.structure.resourceservice.structure.ResourceEnumeration;
 import com.carcompany.carreservationservice.structure.resourceservice.structure.exception.MoreThanOneDecoratableResourceException;
 import com.carcompany.carreservationservice.structure.resourceservice.structure.exception.NoDecoratableResourceException;
 import com.carcompany.carreservationservice.structure.statisticsservice.behaviour.StatisticsService;
 import com.carcompany.carreservationservice.structure.statisticsservice.structure.ExternalPaymentServiceEnumeration;
-import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.Statistic;
+import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.ExternalPaymentStatistic;
 
 /**
  * @author Kevin
@@ -76,16 +77,16 @@ public class CarReservationServiceImplementation implements CarReservationServic
 		return ResourceService.getInstance().getSelectedResource(resourceEnumeration);
 	}
 
-	public Statistic showStatistics(Language language,
+	public ExternalPaymentStatistic showStatistics(Language language,
 			ExternalPaymentServiceEnumeration externalPaymentServiceEnumeration) {
-		Statistic statistic = null;
+		ExternalPaymentStatistic statistic = null;
 
 		switch (language) {
 			case ENGLISH:
 				statistic = StatisticsService.getInstance().getEnglishBookingsPaidBy(externalPaymentServiceEnumeration);
 				break;
 			case GERMAN:
-				statistic = StatisticsService.getInstance().getEnglishBookingsPaidBy(externalPaymentServiceEnumeration);
+				statistic = StatisticsService.getInstance().getGermanBookingsPaidBy(externalPaymentServiceEnumeration);
 				break;
 
 		}
@@ -94,9 +95,23 @@ public class CarReservationServiceImplementation implements CarReservationServic
 	}
 
 	public Booking payBooking(Booking booking, PaymentType paymentType, Account senderAccount, Credential credential)
-			throws AuthenticationException, UnsupportedPaymentTypeException {
+			throws AuthenticationException, PaymentExecutionException {
 		CurrencyAmount currencyAmount = new CurrencyAmount();
-		currencyAmount.setAmount(booking.getBody().getResource().getPrice());
+
+		double totalPrice = 0;
+		Resource resource = booking.getBody().getResource();
+
+		while (resource != null) {
+			totalPrice += resource.getPrice();
+
+			if (resource instanceof ResourceDecorator) {
+				resource = ((ResourceDecorator) resource).getResource();
+			} else {
+				resource = null;
+			}
+		}
+
+		currencyAmount.setAmount(totalPrice);
 
 		Payment payment = PaymentService.getInstance().payAmount(senderAccount, receiverAccount, currencyAmount,
 				paymentType, credential);

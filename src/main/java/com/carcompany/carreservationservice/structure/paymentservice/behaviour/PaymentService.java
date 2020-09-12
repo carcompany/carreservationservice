@@ -8,7 +8,7 @@ import com.carcompany.carreservationservice.structure.paymentservice.domainvalue
 import com.carcompany.carreservationservice.structure.paymentservice.structure.Payment;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.PaymentType;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.account.Account;
-import com.carcompany.carreservationservice.structure.paymentservice.structure.exception.UnsupportedPaymentTypeException;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.exception.PaymentExecutionException;
 
 /**
  * @author Sebastian
@@ -36,7 +36,7 @@ public abstract class PaymentService {
 	 * @throws AuthenticationException
 	 */
 	public abstract Payment payAmount(Account senderAccount, Account receiverAccount, CurrencyAmount currencyAmount,
-			PaymentType paymentType, Credential secret) throws UnsupportedPaymentTypeException, AuthenticationException;
+			PaymentType paymentType, Credential secret) throws PaymentExecutionException, AuthenticationException;
 
 	public abstract Account createAccount(Subject subject, PaymentType paymentType);
 

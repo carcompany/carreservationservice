@@ -4,14 +4,19 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import javax.security.sasl.AuthenticationException;
+
 import com.carcompany.carreservationservice.behaviour.CarReservationService;
 import com.carcompany.carreservationservice.behaviour.CarReservationServiceImplementation;
 import com.carcompany.carreservationservice.structure.authenticationservice.structure.credential.Credential;
 import com.carcompany.carreservationservice.structure.authenticationservice.structure.credential.CredentialEnumeration;
 import com.carcompany.carreservationservice.structure.bookingservice.structure.Booking;
 import com.carcompany.carreservationservice.structure.bookingservice.structure.Language;
+import com.carcompany.carreservationservice.structure.contentservice.behaviour.ContentService;
+import com.carcompany.carreservationservice.structure.contentservice.structure.Report;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.PaymentType;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.account.Account;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.exception.PaymentExecutionException;
 import com.carcompany.carreservationservice.structure.personservice.structure.LegalPerson;
 import com.carcompany.carreservationservice.structure.personservice.structure.NaturalPerson;
 import com.carcompany.carreservationservice.structure.personservice.structure.Person;
@@ -19,7 +24,10 @@ import com.carcompany.carreservationservice.structure.resourceservice.structure.
 import com.carcompany.carreservationservice.structure.resourceservice.structure.ResourceEnumeration;
 import com.carcompany.carreservationservice.structure.resourceservice.structure.exception.MoreThanOneDecoratableResourceException;
 import com.carcompany.carreservationservice.structure.resourceservice.structure.exception.NoDecoratableResourceException;
+import com.carcompany.carreservationservice.structure.statisticsservice.behaviour.StatisticsService;
+import com.carcompany.carreservationservice.structure.statisticsservice.behaviour.StatisticsServiceImplementation;
 import com.carcompany.carreservationservice.structure.statisticsservice.structure.ExternalPaymentServiceEnumeration;
+import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.ExternalPaymentStatistic;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -107,7 +115,8 @@ public class CarReservationServiceTest {
 
 	@Test
 	@Order(8)
-	public void canBookingBePaid() throws MoreThanOneDecoratableResourceException, NoDecoratableResourceException {
+	public void canBookingBePaid() throws MoreThanOneDecoratableResourceException, NoDecoratableResourceException,
+			AuthenticationException, PaymentExecutionException {
 		person = carReservationService.createPerson("CineCar GmbH");
 		Credential credential = carReservationService.createCredential(CredentialEnumeration.PASSWORD, "test");
 		Account account = carReservationService.createAccount(person, CredentialEnumeration.PASSWORD, "test",
@@ -116,15 +125,31 @@ public class CarReservationServiceTest {
 				ResourceEnumeration.SET_TOP_BOX);
 		Booking booking = carReservationService.createBooking(person, resource, Language.GERMAN);
 
-		assertDoesNotThrow(() -> carReservationService.payBooking(booking, PaymentType.BANK, account, credential));
+		carReservationService.payBooking(booking, PaymentType.BANK, account, credential);
 
+		ExternalPaymentStatistic statistic = StatisticsService.getInstance()
+				.getEnglishBookingsPaidBy(ExternalPaymentServiceEnumeration.BANK);
 	}
 
 	@Test
 	@Order(9)
-	public void canStatisticsBeObtained() {
-		assertNotNull(
-				carReservationService.showStatistics(Language.ENGLISH, ExternalPaymentServiceEnumeration.GOOGLE_PAY));
+	public void canStatisticsBeObtained() throws MoreThanOneDecoratableResourceException,
+			NoDecoratableResourceException, AuthenticationException, PaymentExecutionException {
+		person = carReservationService.createPerson("CineCar", "GmbH");
+		Credential credential = carReservationService.createCredential(CredentialEnumeration.PASSWORD, "test");
+		Account account = carReservationService.createAccount(person, CredentialEnumeration.PASSWORD, "test",
+				PaymentType.BANK);
+		resource = carReservationService.createResource(ResourceEnumeration.CAR, ResourceEnumeration.CHILD_SEAT,
+				ResourceEnumeration.SET_TOP_BOX);
+
+		booking = carReservationService.createBooking(person, resource, Language.GERMAN);
+
+		carReservationService.payBooking(booking, PaymentType.BANK, account, credential);
+
+		ExternalPaymentStatistic statistic = carReservationService.showStatistics(Language.GERMAN,
+				ExternalPaymentServiceEnumeration.BANK);
+
+		assertTrue(statistic.getBookingSum() > 0);
 	}
 
 	@Test

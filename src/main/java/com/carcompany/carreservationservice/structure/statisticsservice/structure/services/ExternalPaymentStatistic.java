@@ -1,12 +1,12 @@
 package com.carcompany.carreservationservice.structure.statisticsservice.structure.services;
 
-public abstract class Statistic {
+public abstract class ExternalPaymentStatistic {
 
 	private double paymentSum;
 	private int bookingSum;
 
 	public int getBookingSum() {
-		return bookingSum;
+		return this.bookingSum;
 	}
 
 	public void setBookingSum(int bookingSum) {
@@ -14,7 +14,7 @@ public abstract class Statistic {
 	}
 
 	public double getPaymentSum() {
-		return paymentSum;
+		return this.paymentSum;
 	}
 
 	public void setPaymentSum(double paymentSum) {

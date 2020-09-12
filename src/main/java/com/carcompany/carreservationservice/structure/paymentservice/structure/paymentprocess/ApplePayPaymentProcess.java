@@ -13,7 +13,7 @@ public class ApplePayPaymentProcess extends PaymentProcess {
 	@Override
 	public boolean executePayment(Account senderAccount, Account receiverAccount, CurrencyAmount currencyAmount) {
 		CurrencyAmount senderAccountBalance = senderAccount.getBalance();
-		CurrencyAmount receiverAccountBalance = senderAccount.getBalance();
+		CurrencyAmount receiverAccountBalance = receiverAccount.getBalance();
 
 		// cannot go beyond 0
 		if (senderAccountBalance.getAmount() < currencyAmount.getAmount())

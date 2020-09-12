@@ -3,18 +3,13 @@ package com.carcompany.carreservationservice.structure.statisticsservice.structu
 import com.carcompany.carreservationservice.structure.statisticsservice.structure.BookingVisitor;
 import com.carcompany.carreservationservice.structure.statisticsservice.structure.ExternalPaymentService;
 
-public class GooglePayExternalPaymentService extends ExternalPaymentService {
+public class ApplePayExternalPaymentStatistic extends ExternalPaymentService {
 
-	public GooglePayExternalPaymentService() {
+	public ApplePayExternalPaymentStatistic() {
 
 	}
 
-	/**
-	 * 
-	 * @param bookingVisitor
-	 */
 	public void accept(BookingVisitor bookingVisitor) {
 		bookingVisitor.visit(this);
 	}
-
 }

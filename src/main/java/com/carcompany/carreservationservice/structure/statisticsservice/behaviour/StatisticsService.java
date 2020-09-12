@@ -1,7 +1,7 @@
 package com.carcompany.carreservationservice.structure.statisticsservice.behaviour;
 
 import com.carcompany.carreservationservice.structure.statisticsservice.structure.ExternalPaymentServiceEnumeration;
-import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.Statistic;
+import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.ExternalPaymentStatistic;
 
 public abstract class StatisticsService {
 
@@ -14,10 +14,10 @@ public abstract class StatisticsService {
 		return instance;
 	}
 
-	public abstract Statistic getGermanBookingsPaidBy(
+	public abstract ExternalPaymentStatistic getGermanBookingsPaidBy(
 			ExternalPaymentServiceEnumeration externalPaymentServiceEnumeration);
 
-	public abstract Statistic getEnglishBookingsPaidBy(
+	public abstract ExternalPaymentStatistic getEnglishBookingsPaidBy(
 			ExternalPaymentServiceEnumeration externalPaymentServiceEnumeration);
 
 }

@@ -12,8 +12,9 @@ import com.carcompany.carreservationservice.structure.paymentservice.structure.a
 import com.carcompany.carreservationservice.structure.paymentservice.structure.account.BankAccount;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.account.GoogleAccount;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.account.PayPalAccount;
-import com.carcompany.carreservationservice.structure.paymentservice.structure.exception.UnsupportedPaymentTypeException;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.exception.PaymentExecutionException;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.paymentprocess.ApplePayPaymentProcess;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.paymentprocess.BankPaymentProcess;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.paymentprocess.GooglePayPaymentProcess;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.paymentprocess.PayPalPaymentProcess;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.paymentprocess.PaymentProcess;
@@ -32,13 +33,13 @@ public class PaymentServiceImplementation extends PaymentService {
 	 * @param currencyAmount
 	 * @param paymentType
 	 * @return
-	 * @throws UnsupportedPaymentTypeException
+	 * @throws PaymentExecutionException
 	 * @throws AuthenticationException
 	 */
 	public Payment payAmount(Account senderAccount, Account receiverAccount, CurrencyAmount currencyAmount,
-			PaymentType paymentType, Credential secret)
-			throws UnsupportedPaymentTypeException, AuthenticationException {
-		PaymentProcess paymentProcess;
+			PaymentType paymentType, Credential secret) throws PaymentExecutionException, AuthenticationException {
+		PaymentProcess paymentProcess = null;
+
 		switch (paymentType) {
 			case APPLE_PAY:
 				paymentProcess = new ApplePayPaymentProcess();
@@ -46,28 +47,23 @@ public class PaymentServiceImplementation extends PaymentService {
 			case GOOGLE_PAY:
 				paymentProcess = new GooglePayPaymentProcess();
 				break;
-
 			case PAYPAL:
 				paymentProcess = new PayPalPaymentProcess();
 				break;
 			case BANK:
-				paymentProcess = new ApplePayPaymentProcess();
+				paymentProcess = new BankPaymentProcess();
 				break;
-
-			default:
-				throw new UnsupportedPaymentTypeException();
 		}
 
 		if (paymentProcess.authenticateCustomer(senderAccount.getSubject(), secret)) {
 			if (paymentProcess.executePayment(senderAccount, receiverAccount, currencyAmount)) {
 				return paymentProcess.getPayment(senderAccount, receiverAccount, currencyAmount, paymentType);
-			}
+			} else
+				throw new PaymentExecutionException("Payment did not get through");
 
 		} else {
 			throw new AuthenticationException("Authentication failed");
 		}
-
-		return null;
 	}
 
 	@Override

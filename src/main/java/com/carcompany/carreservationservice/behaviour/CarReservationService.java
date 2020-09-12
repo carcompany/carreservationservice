@@ -10,7 +10,7 @@ import com.carcompany.carreservationservice.structure.bookingservice.structure.B
 import com.carcompany.carreservationservice.structure.bookingservice.structure.Language;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.PaymentType;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.account.Account;
-import com.carcompany.carreservationservice.structure.paymentservice.structure.exception.UnsupportedPaymentTypeException;
+import com.carcompany.carreservationservice.structure.paymentservice.structure.exception.PaymentExecutionException;
 import com.carcompany.carreservationservice.structure.personservice.structure.Person;
 import com.carcompany.carreservationservice.structure.personservice.structure.exception.TooFewOrManyParametersForPersonCreationException;
 import com.carcompany.carreservationservice.structure.resourceservice.structure.Resource;
@@ -18,7 +18,7 @@ import com.carcompany.carreservationservice.structure.resourceservice.structure.
 import com.carcompany.carreservationservice.structure.resourceservice.structure.exception.MoreThanOneDecoratableResourceException;
 import com.carcompany.carreservationservice.structure.resourceservice.structure.exception.NoDecoratableResourceException;
 import com.carcompany.carreservationservice.structure.statisticsservice.structure.ExternalPaymentServiceEnumeration;
-import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.Statistic;
+import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.ExternalPaymentStatistic;
 
 /**
  * @author Kevin
@@ -51,7 +51,7 @@ public interface CarReservationService {
 	public Resource createResource(ResourceEnumeration... resourceEnumeration)
 			throws MoreThanOneDecoratableResourceException, NoDecoratableResourceException;
 
-	public Statistic showStatistics(Language language,
+	public ExternalPaymentStatistic showStatistics(Language language,
 			ExternalPaymentServiceEnumeration externalPaymentServiceEnumeration);
 
 	/**
@@ -59,7 +59,7 @@ public interface CarReservationService {
 	 * @param bookingId
 	 */
 	public Booking payBooking(Booking booking, PaymentType paymentType, Account senderAccount, Credential credential)
-			throws AuthenticationException, UnsupportedPaymentTypeException;
+			throws AuthenticationException, PaymentExecutionException;
 
 	/**
 	 * 

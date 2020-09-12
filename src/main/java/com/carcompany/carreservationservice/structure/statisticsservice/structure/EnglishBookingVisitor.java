@@ -1,12 +1,13 @@
 package com.carcompany.carreservationservice.structure.statisticsservice.structure;
 
+import com.carcompany.carreservationservice.structure.contentservice.behaviour.ContentService;
 import com.carcompany.carreservationservice.structure.contentservice.behaviour.ContentServiceImplementation;
 import com.carcompany.carreservationservice.structure.contentservice.structure.Report;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.PaymentType;
-import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.ApplePayExternalPaymentService;
-import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.BankExternalPaymentService;
-import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.GooglePayExternalPaymentService;
-import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.PayPalExternalPaymentService;
+import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.ApplePayExternalPaymentStatistic;
+import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.BankExternalPaymentStatistic;
+import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.GooglePayExternalPaymentStatistic;
+import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.PayPalExternalPaymentStatistic;
 
 /**
  * This class implements each operation declared by Visitor. Each operation
@@ -18,7 +19,6 @@ import com.carcompany.carreservationservice.structure.statisticsservice.structur
 public class EnglishBookingVisitor implements BookingVisitor {
 
 	private String selectedFolder;
-	private ContentServiceImplementation contentService = ContentServiceImplementation.getInstance();
 
 	public EnglishBookingVisitor(String selectedFolder) {
 		this.selectedFolder = selectedFolder;
@@ -28,10 +28,10 @@ public class EnglishBookingVisitor implements BookingVisitor {
 	 * 
 	 * @param externalPaymentService
 	 */
-	public void visit(PayPalExternalPaymentService externalPaymentService) {
+	public void visit(PayPalExternalPaymentStatistic externalPaymentService) {
 		try {
 			String path = selectedFolder + "/Report";
-			Report report = (Report) contentService.getSelectedContent(path);
+			Report report = (Report) ContentService.getInstance().getSelectedContent(path);
 			externalPaymentService.setPaymentSum(report.getPaymentNumbers(PaymentType.PAYPAL));
 			externalPaymentService.setBookingSum(report.getBookingNumbers(PaymentType.PAYPAL));
 		} catch (Exception err) {
@@ -44,10 +44,10 @@ public class EnglishBookingVisitor implements BookingVisitor {
 	 * 
 	 * @param externalPaymentService
 	 */
-	public void visit(ApplePayExternalPaymentService externalPaymentService) {
+	public void visit(ApplePayExternalPaymentStatistic externalPaymentService) {
 		try {
 			String path = selectedFolder + "/Report";
-			Report report = (Report) contentService.getSelectedContent(path);
+			Report report = (Report) ContentService.getInstance().getSelectedContent(path);
 			externalPaymentService.setPaymentSum(report.getPaymentNumbers(PaymentType.APPLE_PAY));
 			externalPaymentService.setBookingSum(report.getBookingNumbers(PaymentType.APPLE_PAY));
 		} catch (Exception err) {
@@ -60,10 +60,10 @@ public class EnglishBookingVisitor implements BookingVisitor {
 	 * 
 	 * @param externalPaymentService
 	 */
-	public void visit(GooglePayExternalPaymentService externalPaymentService) {
+	public void visit(GooglePayExternalPaymentStatistic externalPaymentService) {
 		try {
 			String path = selectedFolder + "/Report";
-			Report report = (Report) contentService.getSelectedContent(path);
+			Report report = (Report) ContentService.getInstance().getSelectedContent(path);
 			externalPaymentService.setPaymentSum(report.getPaymentNumbers(PaymentType.GOOGLE_PAY));
 			externalPaymentService.setBookingSum(report.getBookingNumbers(PaymentType.GOOGLE_PAY));
 		} catch (Exception err) {
@@ -76,10 +76,10 @@ public class EnglishBookingVisitor implements BookingVisitor {
 	 * 
 	 * @param externalPaymentService
 	 */
-	public void visit(BankExternalPaymentService externalPaymentService) {
+	public void visit(BankExternalPaymentStatistic externalPaymentService) {
 		try {
 			String path = selectedFolder + "/Report";
-			Report report = (Report) contentService.getSelectedContent(path);
+			Report report = (Report) ContentService.getInstance().getSelectedContent(path);
 			externalPaymentService.setPaymentSum(report.getPaymentNumbers(PaymentType.BANK));
 			externalPaymentService.setBookingSum(report.getBookingNumbers(PaymentType.BANK));
 		} catch (Exception err) {

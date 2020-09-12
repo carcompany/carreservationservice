@@ -7,37 +7,38 @@ import com.carcompany.carreservationservice.structure.statisticsservice.structur
 import com.carcompany.carreservationservice.structure.statisticsservice.structure.ExternalPaymentService;
 import com.carcompany.carreservationservice.structure.statisticsservice.structure.ExternalPaymentServiceEnumeration;
 import com.carcompany.carreservationservice.structure.statisticsservice.structure.GermanBookingVisitor;
-import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.ApplePayExternalPaymentService;
-import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.BankExternalPaymentService;
-import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.GooglePayExternalPaymentService;
-import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.PayPalExternalPaymentService;
-import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.Statistic;
+import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.ApplePayExternalPaymentStatistic;
+import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.BankExternalPaymentStatistic;
+import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.GooglePayExternalPaymentStatistic;
+import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.PayPalExternalPaymentStatistic;
+import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.ExternalPaymentStatistic;
 
 public class StatisticsServiceImplementation extends StatisticsService {
 
 	private GermanBookingVisitor germanStats;
 	private EnglishBookingVisitor englishStats;
 
-	public Statistic getGermanBookingsPaidBy(ExternalPaymentServiceEnumeration externalPaymentServiceEnumeration) {
+	public ExternalPaymentStatistic getGermanBookingsPaidBy(
+			ExternalPaymentServiceEnumeration externalPaymentServiceEnumeration) {
 		ExternalPaymentService externalPaymentService = null;
 
 		switch (externalPaymentServiceEnumeration) {
 			case BANK:
-				externalPaymentService = new BankExternalPaymentService();
+				externalPaymentService = new BankExternalPaymentStatistic();
 				break;
 			case PAYPAL:
-				externalPaymentService = new PayPalExternalPaymentService();
+				externalPaymentService = new PayPalExternalPaymentStatistic();
 				break;
 			case APPLE_PAY:
-				externalPaymentService = new ApplePayExternalPaymentService();
+				externalPaymentService = new ApplePayExternalPaymentStatistic();
 				break;
 			case GOOGLE_PAY:
-				externalPaymentService = new GooglePayExternalPaymentService();
+				externalPaymentService = new GooglePayExternalPaymentStatistic();
 				break;
 		}
 
 		SimpleDateFormat format = new SimpleDateFormat("MM-yyyy");
-		String folderName = format.format(Calendar.getInstance().getTime());
+		String folderName = "/" + format.format(Calendar.getInstance().getTime());
 
 		germanStats = new GermanBookingVisitor(folderName);
 		externalPaymentService.accept(germanStats);
@@ -45,26 +46,27 @@ public class StatisticsServiceImplementation extends StatisticsService {
 		return externalPaymentService;
 	}
 
-	public Statistic getEnglishBookingsPaidBy(ExternalPaymentServiceEnumeration externalPaymentServiceEnumeration) {
+	public ExternalPaymentStatistic getEnglishBookingsPaidBy(
+			ExternalPaymentServiceEnumeration externalPaymentServiceEnumeration) {
 		ExternalPaymentService externalPaymentService = null;
 
 		switch (externalPaymentServiceEnumeration) {
 			case BANK:
-				externalPaymentService = new BankExternalPaymentService();
+				externalPaymentService = new BankExternalPaymentStatistic();
 				break;
 			case PAYPAL:
-				externalPaymentService = new PayPalExternalPaymentService();
+				externalPaymentService = new PayPalExternalPaymentStatistic();
 				break;
 			case APPLE_PAY:
-				externalPaymentService = new ApplePayExternalPaymentService();
+				externalPaymentService = new ApplePayExternalPaymentStatistic();
 				break;
 			case GOOGLE_PAY:
-				externalPaymentService = new GooglePayExternalPaymentService();
+				externalPaymentService = new GooglePayExternalPaymentStatistic();
 				break;
 		}
 
 		SimpleDateFormat format = new SimpleDateFormat("MM-yyyy");
-		String folderName = format.format(Calendar.getInstance().getTime());
+		String folderName = "/" + format.format(Calendar.getInstance().getTime());
 
 		englishStats = new EnglishBookingVisitor(folderName);
 		externalPaymentService.accept(englishStats);

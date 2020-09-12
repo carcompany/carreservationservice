@@ -3,9 +3,9 @@ package com.carcompany.carreservationservice.structure.statisticsservice.structu
 import com.carcompany.carreservationservice.structure.statisticsservice.structure.BookingVisitor;
 import com.carcompany.carreservationservice.structure.statisticsservice.structure.ExternalPaymentService;
 
-public class BankExternalPaymentService extends ExternalPaymentService {
+public class BankExternalPaymentStatistic extends ExternalPaymentService {
 
-	public BankExternalPaymentService() {
+	public BankExternalPaymentStatistic() {
 
 	}
 
