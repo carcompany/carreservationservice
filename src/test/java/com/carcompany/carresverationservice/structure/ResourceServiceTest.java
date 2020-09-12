@@ -1,7 +1,6 @@
 package com.carcompany.carresverationservice.structure;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.carcompany.carreservationservice.structure.resourceservice.behaviour.ResourceService;
@@ -31,12 +30,6 @@ public class ResourceServiceTest {
     public void canSelectResource() {
         assertDoesNotThrow(() -> {
             resourceService.getSelectedResource(ResourceEnumeration.CAR, ResourceEnumeration.CHILD_SEAT);
-
-            try {
-                assertNull(resourceService.getSelectedResource());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         });
 
         assertThrows(MoreThanOneDecoratableResourceException.class, () -> {

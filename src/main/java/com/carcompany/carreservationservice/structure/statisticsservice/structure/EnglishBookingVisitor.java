@@ -1,7 +1,6 @@
 package com.carcompany.carreservationservice.structure.statisticsservice.structure;
 
 import com.carcompany.carreservationservice.structure.contentservice.behaviour.ContentService;
-import com.carcompany.carreservationservice.structure.contentservice.behaviour.ContentServiceImplementation;
 import com.carcompany.carreservationservice.structure.contentservice.structure.Report;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.PaymentType;
 import com.carcompany.carreservationservice.structure.statisticsservice.structure.services.ApplePayExternalPaymentStatistic;

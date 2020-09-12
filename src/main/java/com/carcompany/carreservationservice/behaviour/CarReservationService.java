@@ -41,8 +41,10 @@ public interface CarReservationService {
 	 * 
 	 * @param names
 	 */
-	public Account createAccount(Person person, CredentialEnumeration credentialEnumeration, Object secret,
-			PaymentType paymentType) throws TooFewOrManyParametersForPersonCreationException;
+	public Account createAccount(int personId, CredentialEnumeration credentialEnumeration, Object secret,
+			PaymentType paymentType) throws Exception;
+
+	public Account showAccount(int accountId);
 
 	/**
 	 * 
@@ -58,7 +60,7 @@ public interface CarReservationService {
 	 * 
 	 * @param bookingId
 	 */
-	public Booking payBooking(Booking booking, PaymentType paymentType, Account senderAccount, Credential credential)
+	public Booking payBooking(int bookingId, PaymentType paymentType, int senderAccountId, Credential credential)
 			throws AuthenticationException, PaymentExecutionException;
 
 	/**
@@ -68,7 +70,7 @@ public interface CarReservationService {
 	 * @param language
 	 */
 
-	public Booking createBooking(Person person, Resource resource, Language language);
+	public Booking createBooking(int personId, Resource resource, Language language) throws Exception;
 
 	public Booking showBooking(int id);
 

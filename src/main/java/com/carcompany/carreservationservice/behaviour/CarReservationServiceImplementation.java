@@ -64,12 +64,17 @@ public class CarReservationServiceImplementation implements CarReservationServic
 		PersonService.getInstance().deletePerson(id);
 	}
 
-	public Account createAccount(Person person, CredentialEnumeration credentialEnumeration, Object secret,
-			PaymentType paymentType) {
+	public Account createAccount(int personId, CredentialEnumeration credentialEnumeration, Object secret,
+			PaymentType paymentType) throws Exception {
+		Person person = PersonService.getInstance().getPerson(personId);
 		Credential credential = AuthenticationService.getInstance().createCredential(credentialEnumeration, secret);
 		Subject subject = AuthenticationService.getInstance().createSubject(person, credential, Role.CUSTOMER);
 
 		return PaymentService.getInstance().createAccount(subject, paymentType);
+	}
+
+	public Account showAccount(int accountId) {
+		return PaymentService.getInstance().getAccount(accountId);
 	}
 
 	public Resource createResource(ResourceEnumeration... resourceEnumeration)
@@ -94,11 +99,12 @@ public class CarReservationServiceImplementation implements CarReservationServic
 		return statistic;
 	}
 
-	public Booking payBooking(Booking booking, PaymentType paymentType, Account senderAccount, Credential credential)
+	public Booking payBooking(int bookingId, PaymentType paymentType, int senderAccountId, Credential credential)
 			throws AuthenticationException, PaymentExecutionException {
 		CurrencyAmount currencyAmount = new CurrencyAmount();
 
 		double totalPrice = 0;
+		Booking booking = BookingService.getInstance().getBooking(bookingId);
 		Resource resource = booking.getBody().getResource();
 
 		while (resource != null) {
@@ -113,6 +119,7 @@ public class CarReservationServiceImplementation implements CarReservationServic
 
 		currencyAmount.setAmount(totalPrice);
 
+		Account senderAccount = PaymentService.getInstance().getAccount(senderAccountId);
 		Payment payment = PaymentService.getInstance().payAmount(senderAccount, receiverAccount, currencyAmount,
 				paymentType, credential);
 
@@ -125,7 +132,8 @@ public class CarReservationServiceImplementation implements CarReservationServic
 
 	}
 
-	public Booking createBooking(Person person, Resource resource, Language language) {
+	public Booking createBooking(int personId, Resource resource, Language language) throws Exception {
+		Person person = PersonService.getInstance().getPerson(personId);
 		return BookingService.getInstance().createBooking(person, resource, language);
 	}
 

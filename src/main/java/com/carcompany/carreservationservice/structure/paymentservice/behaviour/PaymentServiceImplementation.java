@@ -1,5 +1,8 @@
 package com.carcompany.carreservationservice.structure.paymentservice.behaviour;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.security.sasl.AuthenticationException;
 
 import com.carcompany.carreservationservice.structure.authenticationservice.structure.credential.Credential;
@@ -25,6 +28,12 @@ import com.carcompany.carreservationservice.structure.paymentservice.structure.p
  * @created 28-Aug-2020 17:10:50
  */
 public class PaymentServiceImplementation extends PaymentService {
+
+	private Map<Integer, Account> accounts;
+
+	public PaymentServiceImplementation() {
+		this.accounts = new HashMap<>();
+	}
 
 	/**
 	 * 
@@ -84,7 +93,14 @@ public class PaymentServiceImplementation extends PaymentService {
 				account = new PayPalAccount(subject);
 				break;
 		}
+
+		this.accounts.put(account.getId(), account);
+
 		return account;
+	}
+
+	public Account getAccount(int accountId) {
+		return this.accounts.get(accountId);
 	}
 
 }

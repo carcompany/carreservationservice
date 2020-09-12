@@ -40,4 +40,6 @@ public abstract class PaymentService {
 
 	public abstract Account createAccount(Subject subject, PaymentType paymentType);
 
+	public abstract Account getAccount(int accountId);
+
 }

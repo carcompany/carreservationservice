@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import javax.security.sasl.AuthenticationException;
-
 import com.carcompany.carreservationservice.behaviour.CarReservationService;
 import com.carcompany.carreservationservice.behaviour.CarReservationServiceImplementation;
 import com.carcompany.carreservationservice.structure.authenticationservice.structure.credential.Credential;
@@ -14,7 +12,6 @@ import com.carcompany.carreservationservice.structure.bookingservice.structure.B
 import com.carcompany.carreservationservice.structure.bookingservice.structure.Language;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.PaymentType;
 import com.carcompany.carreservationservice.structure.paymentservice.structure.account.Account;
-import com.carcompany.carreservationservice.structure.paymentservice.structure.exception.PaymentExecutionException;
 import com.carcompany.carreservationservice.structure.personservice.structure.LegalPerson;
 import com.carcompany.carreservationservice.structure.personservice.structure.NaturalPerson;
 import com.carcompany.carreservationservice.structure.personservice.structure.Person;
@@ -76,17 +73,38 @@ public class CarReservationServiceTest {
 		person = carReservationService.createPerson("CineCar GmbH");
 		resource = carReservationService.createResource(ResourceEnumeration.CAR, ResourceEnumeration.CHILD_SEAT,
 				ResourceEnumeration.SET_TOP_BOX);
-		assertDoesNotThrow(() -> carReservationService.createBooking(person, resource, Language.GERMAN));
+		assertDoesNotThrow(() -> carReservationService.createBooking(person.getId(), resource, Language.GERMAN));
 	}
 
 	@Test
 	@Order(5)
+	public void canAccountBeCreated() {
+		assertDoesNotThrow(() -> {
+			Person person = carReservationService.createPerson("CineCar");
+			carReservationService.createAccount(person.getId(), CredentialEnumeration.PASSWORD, "test",
+					PaymentType.APPLE_PAY);
+		});
+	}
+
+	@Test
+	@Order(5)
+	public void canAccountBeShown() {
+		assertDoesNotThrow(() -> {
+			Person person = carReservationService.createPerson("CineCar");
+
+			assertNotNull(carReservationService.createAccount(person.getId(), CredentialEnumeration.PASSWORD, "test",
+					PaymentType.APPLE_PAY));
+		});
+	}
+
+	@Test
+	@Order(7)
 	public void canBookingBeObtained() throws MoreThanOneDecoratableResourceException, NoDecoratableResourceException {
 		person = carReservationService.createPerson("CineCar GmbH");
 		resource = carReservationService.createResource(ResourceEnumeration.CAR, ResourceEnumeration.CHILD_SEAT,
 				ResourceEnumeration.SET_TOP_BOX);
 		assertDoesNotThrow(() -> {
-			Booking booking = carReservationService.createBooking(person, resource, Language.GERMAN);
+			Booking booking = carReservationService.createBooking(person.getId(), resource, Language.GERMAN);
 			assertNotNull(carReservationService.showBooking(booking.getId()));
 		});
 	}
@@ -98,7 +116,7 @@ public class CarReservationServiceTest {
 		resource = carReservationService.createResource(ResourceEnumeration.CAR, ResourceEnumeration.CHILD_SEAT,
 				ResourceEnumeration.SET_TOP_BOX);
 		assertDoesNotThrow(() -> {
-			carReservationService.createBooking(person, resource, Language.GERMAN);
+			carReservationService.createBooking(person.getId(), resource, Language.GERMAN);
 			assertNotNull(carReservationService.showBookings().size() > 0);
 		});
 	}
@@ -111,33 +129,31 @@ public class CarReservationServiceTest {
 
 	@Test
 	@Order(8)
-	public void canBookingBePaid() throws MoreThanOneDecoratableResourceException, NoDecoratableResourceException,
-			AuthenticationException, PaymentExecutionException {
+	public void canBookingBePaid() throws Exception {
 		person = carReservationService.createPerson("CineCar GmbH");
 		Credential credential = carReservationService.createCredential(CredentialEnumeration.PASSWORD, "test");
-		Account account = carReservationService.createAccount(person, CredentialEnumeration.PASSWORD, "test",
+		Account account = carReservationService.createAccount(person.getId(), CredentialEnumeration.PASSWORD, "test",
 				PaymentType.BANK);
 		resource = carReservationService.createResource(ResourceEnumeration.CAR, ResourceEnumeration.CHILD_SEAT,
 				ResourceEnumeration.SET_TOP_BOX);
-		Booking booking = carReservationService.createBooking(person, resource, Language.GERMAN);
+		Booking booking = carReservationService.createBooking(person.getId(), resource, Language.GERMAN);
 
-		carReservationService.payBooking(booking, PaymentType.BANK, account, credential);
+		carReservationService.payBooking(booking.getId(), PaymentType.BANK, account.getId(), credential);
 	}
 
 	@Test
 	@Order(9)
-	public void canStatisticsBeObtained() throws MoreThanOneDecoratableResourceException,
-			NoDecoratableResourceException, AuthenticationException, PaymentExecutionException {
+	public void canStatisticsBeObtained() throws Exception {
 		person = carReservationService.createPerson("CineCar", "GmbH");
 		Credential credential = carReservationService.createCredential(CredentialEnumeration.PASSWORD, "test");
-		Account account = carReservationService.createAccount(person, CredentialEnumeration.PASSWORD, "test",
+		Account account = carReservationService.createAccount(person.getId(), CredentialEnumeration.PASSWORD, "test",
 				PaymentType.BANK);
 		resource = carReservationService.createResource(ResourceEnumeration.CAR, ResourceEnumeration.CHILD_SEAT,
 				ResourceEnumeration.SET_TOP_BOX);
 
-		booking = carReservationService.createBooking(person, resource, Language.GERMAN);
+		booking = carReservationService.createBooking(person.getId(), resource, Language.GERMAN);
 
-		carReservationService.payBooking(booking, PaymentType.BANK, account, credential);
+		carReservationService.payBooking(booking.getId(), PaymentType.BANK, account.getId(), credential);
 
 		ExternalPaymentStatistic statistic = carReservationService.showStatistics(Language.GERMAN,
 				ExternalPaymentServiceEnumeration.BANK);

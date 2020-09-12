@@ -10,13 +10,21 @@ import com.carcompany.carreservationservice.structure.paymentservice.domainvalue
  */
 public abstract class Account {
 
+	private static int instanceCount = 0;
+
+	private int id;
 	private Subject subject;
 	private CurrencyAmount balance;
 
 	public Account(Subject subject) {
+		this.id = instanceCount++;
 		this.subject = subject;
 		this.balance = new CurrencyAmount();
 		this.balance.setAmount(1000);
+	}
+
+	public int getId() {
+		return this.id;
 	}
 
 	public Subject getSubject() {
